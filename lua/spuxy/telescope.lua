@@ -20,7 +20,7 @@ function registerKeys()
 end
 
 function M.config()
-  registerKeys() 
+  registerKeys()
 
   local icons = require("spuxy.icons")
   local actions = require("telescope.actions")
@@ -28,6 +28,9 @@ function M.config()
 
   require("telescope").setup {
     defaults = {
+      layout_config = {
+        vertical = { width = 3.0 },
+      },
       prompt_prefix = icons.ui.Telescope .. " ",
       selection_caret = icons.ui.Forward .. " ",
       entry_prefix = "   ",

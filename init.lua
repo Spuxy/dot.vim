@@ -1,14 +1,27 @@
-require("spuxy.remap")
+require("spuxy.keymaps")
 require("spuxy.launch")
 require("spuxy.options")
---require("spuxy.keymaps")
 
-spec "spuxy.alpha"
-spec "spuxy.neotree"
-spec "spuxy.autopairs"
-spec "spuxy.whichkey"
-spec "spuxy.colorscheme"
-spec "spuxy.telescope"
-spec "spuxy.neotree"
+spec("spuxy.autopairs")
+spec("spuxy.devicons")
+spec("spuxy.treesitter")
+spec("spuxy.alpha")
+spec("spuxy.neotree")
+spec("spuxy.whichkey")
+spec("spuxy.colorscheme")
+spec("spuxy.telescope")
+spec("spuxy.neotree")
+spec("spuxy.lualine")
+spec("spuxy.toggleterm")
+spec("spuxy.comment")
+spec("spuxy.project")
+spec("spuxy.breadcrumbs")
+spec("spuxy.navic")
+spec("spuxy.cmp")
+spec("spuxy.lspconfig")
+spec("spuxy.none-ls")
+spec("spuxy.mason")
+spec("spuxy.indentline")
+spec("spuxy.rainbow")
 
 require("spuxy.lazy")

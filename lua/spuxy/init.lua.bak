@@ -1,9 +1,0 @@
-require("spuxy.remap")
-require("spuxy.launch")
-require("spuxy.options")
-
-spec "spuxy.alpha"
-spec "spuxy.neotree"
-spec "spuxy.autopairs"
-
-require("spuxy.lazy")
