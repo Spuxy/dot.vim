@@ -1,6 +1,6 @@
-require("spuxy.keymaps")
-require("spuxy.launch")
-require("spuxy.options")
+require("spuxy.core.keymaps")
+require("spuxy.core.launch")
+require("spuxy.core.options")
 
 spec("spuxy.autopairs")
 spec("spuxy.devicons")
@@ -28,5 +28,6 @@ spec("spuxy.todo-comments")
 spec("spuxy.lspsaga")
 spec("spuxy.lsp_signature")
 spec("spuxy.gitsigns")
+spec("spuxy.bqf")
 
 require("spuxy.lazy")
