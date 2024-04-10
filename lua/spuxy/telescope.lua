@@ -16,6 +16,19 @@ function registerKeys()
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+
+    ["<leader>sb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    ["<leader>sc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    ["<leader>sf"] = { "<cmd>Telescope find_files<cr>", "Find File" },
+    ["<leader>sh"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    ["<leader>sH"] = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
+    ["<leader>sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    ["<leader>sr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+    ["<leader>sR"] = { "<cmd>Telescope registers<cr>", "Registers" },
+    ["<leader>st"] = { "<cmd>Telescope live_grep<cr>", "Text" },
+    ["<leader>sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    ["<leader>sC"] = { "<cmd>Telescope commands<cr>", "Commands" },
+    ["<leader>sl"] = { "<cmd>Telescope resume<cr>", "Resume last search" },
   }
 end
 
@@ -78,6 +91,7 @@ function M.config()
       find_files = {
         theme = "dropdown",
         previewer = false,
+        path_display = { "absolute" },
       },
 
       buffers = {

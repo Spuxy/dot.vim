@@ -27,5 +27,6 @@ spec("spuxy.bufferline")
 spec("spuxy.todo-comments")
 spec("spuxy.lspsaga")
 spec("spuxy.lsp_signature")
+spec("spuxy.gitsigns")
 
 require("spuxy.lazy")
