@@ -30,13 +30,13 @@ function M.config()
   }
 
   ---@diagnostic disable: missing-fields
+  ---require "neotest-zig",
   require("neotest").setup {
     adapters = {
       require "neotest-python" {
         dap = { justMyCode = false },
       },
       require "neotest-vitest",
-      require "neotest-zig",
       require "neotest-vim-test" {
         ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
       },

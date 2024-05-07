@@ -72,6 +72,24 @@ function M.config()
     }
   })
   lspconfig.gopls.setup({})
+  lspconfig.yamlls.setup({
+    settings = {
+      yaml = {
+        validate = true,
+        schemaStore = {
+          enable = false,
+          url = "",
+        },
+        schemas = require('schemastore').yaml.schemas {
+          -- select subset from the JSON schema catalog
+          select = {
+            'kustomization.yaml',
+            'docker-compose.yml',
+          },
+        }
+      }
+    }
+  })
 
   local icons = require("spuxy.icons")
 
@@ -87,6 +105,8 @@ function M.config()
     "jsonls",
     "yamlls",
     "gopls",
+    "rust_analyzer",
+    "clangd",
   }
 
   local default_diagnostic_config = {
@@ -94,9 +114,9 @@ function M.config()
       active = true,
       values = {
         { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+        { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+        { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
       },
     },
     virtual_text = false,

@@ -15,6 +15,7 @@ spec("spuxy.indentline")
 spec("spuxy.bufferline")
 spec("spuxy.telescope")
 spec("spuxy.whichkey")
+spec("spuxy.surround")
 
 -- FILESYSTEM
 spec("spuxy.neotree")
@@ -36,6 +37,7 @@ spec("spuxy.lspconfig")
 spec("spuxy.none-ls")
 spec("spuxy.mason")
 spec("spuxy.treesitter")
+spec("spuxy.yamlcompanion")
 
 -- GIT
 spec("spuxy.gitsigns")

@@ -16,6 +16,8 @@ function M.config()
     "bashls",
     "jsonls",
     "gopls",
+    "rust_analyzer",
+    "clangd",
   }
 
   require("mason").setup {

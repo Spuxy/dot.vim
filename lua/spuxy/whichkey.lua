@@ -60,6 +60,7 @@ function M.config()
         f = { ":Lspsaga finder<CR>", "Finder" },
         -- i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
       },
+      y = { "<cmd>:Telescope yaml_schema<cr>", "+ Yaml Schema store" },
     },
     n = { name = "Todos" },
     p = { name = "Plugins" },
