@@ -5,8 +5,11 @@ require("spuxy.core.options")
 -- MISC
 spec("spuxy.alpha")
 spec("spuxy.devicons")
-spec("spuxy.colorscheme")
 spec("spuxy.breadcrumbs")
+
+-- COLORSCHEMES
+-- spec("spuxy.colorschemes.gruvbox")
+spec("spuxy.colorschemes.serenade")
 
 -- MOVEMENTS
 spec("spuxy.autopairs")
