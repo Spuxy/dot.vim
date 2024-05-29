@@ -35,6 +35,7 @@ function M.config()
       name = "LSP",
       -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       a = { "<cmd>:Lspsaga code_action<cr>", "Code Action" },
+      A = { "<cmd>:Lspsaga code_action<cr>", "Code Action" },
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
       w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
       f = { "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>", "Format" },
@@ -59,6 +60,14 @@ function M.config()
         d = { "<cmd>lua require('lvim.lsp.peek').Peek('definition')<cr>", "Definition" },
         f = { ":Lspsaga finder<CR>", "Finder" },
         -- i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
+      },
+      g = {
+        name = "Go",
+        f = {
+          name = "fill",
+          s = { "<cmd>:GoFillStruct<cr>", "Struct" },
+          e = { "<cmd>:GoFillErr<cr>", "Errors" },
+        },
       },
       y = { "<cmd>:Telescope yaml_schema<cr>", "+ Yaml Schema store" },
     },

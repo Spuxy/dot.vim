@@ -1,26 +1,28 @@
 local M = {
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons'
+	"akinsho/bufferline.nvim",
+	version = "*",
+	dependencies = "nvim-tree/nvim-web-devicons",
 }
 
 function M.config()
-    require("bufferline").setup()
+	require("bufferline").setup({
+		options = {
+			diagnostics = "nvim_lsp",
+			diagnostics_indicator = function(count, level, diagnostics_dict, context)
+				local icon = level:match("error") and " " or " "
+				return " " .. icon .. count
+			end,
+		},
+	})
 
-    local wk = require "which-key"
-    wk.register {
-      ["<leader>bb"] = { "<cmd>BufferLinePick<cr>", "Jump" },
-      ["<leader>bf"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-      ["<leader>bj"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-      ["<leader>bk"] = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-      ["<leader>bw"] = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
-      -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
-      ["<leader>be"] = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
-      ["<leader>bh"] = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
-      ["<leader>bl"] = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
-      ["<leader>bD"] = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
-      ["<leader>bL"] = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
-    }
+	require("which-key").register({
+		["<leader>bb"] = { "<cmd>BufferLinePick<cr>", "Jump" },
+		["<leader>bf"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+		["<leader>bj"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+		["<leader>bk"] = { "<cmd>BufferLineCycleNext<cr>", "Next" },
+		["<leader>bp"] = { "<cmd>BufferLineTogglePin<cr>", "Pin" },
+		["<leader>be"] = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
+	})
 end
 
 return M

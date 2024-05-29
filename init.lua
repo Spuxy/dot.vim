@@ -8,22 +8,21 @@ spec("spuxy.devicons")
 spec("spuxy.breadcrumbs")
 
 -- COLORSCHEMES
--- spec("spuxy.colorschemes.gruvbox")
-spec("spuxy.colorschemes.serenade")
+spec("spuxy.colorschemes.gruvbox-nvim")
 
 -- MOVEMENTS
-spec("spuxy.autopairs")
-spec("spuxy.comment")
+spec("spuxy.autopairs") -- own keymaps
+spec("spuxy.comment") -- own keymaps
 spec("spuxy.indentline")
-spec("spuxy.bufferline")
+spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
 spec("spuxy.whichkey")
-spec("spuxy.surround")
+spec("spuxy.surround") -- own keymaps
+spec("spuxy.window-picker") -- own keymaps
 
 -- FILESYSTEM
-spec("spuxy.neotree")
+spec("spuxy.neotree") -- own keymaps
 spec("spuxy.lualine")
-
 
 -- TERM
 spec("spuxy.toggleterm")
@@ -40,7 +39,10 @@ spec("spuxy.lspconfig")
 spec("spuxy.none-ls")
 spec("spuxy.mason")
 spec("spuxy.treesitter")
+spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
+-- spec("spuxy.navigator")
+spec("spuxy.go-nvim")
 
 -- GIT
 spec("spuxy.gitsigns")
@@ -52,6 +54,7 @@ spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
 spec("spuxy.lsp_signature")
 spec("spuxy.rainbow")
+-- spec("spuxy.guihua")
 
 spec("spuxy.illuminate")
 spec("spuxy.schemastore")

@@ -1,5 +1,5 @@
 local M = {
-  'nvim-telescope/telescope.nvim', tag = '0.1.6',
+  'nvim-telescope/telescope.nvim', tag = '0.1.7',
   requires = { {'nvim-lua/plenary.nvim'} },
   dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } }
 }
@@ -18,7 +18,7 @@ function registerKeys()
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
 
     ["<leader>sb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    ["<leader>sc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    -- ["<leader>sc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" }, -- because of treesitter selection
     ["<leader>sf"] = { "<cmd>Telescope find_files<cr>", "Find File" },
     ["<leader>sh"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
     ["<leader>sH"] = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
@@ -147,5 +147,5 @@ function M.config()
     },
   }
 end
-
+-- https://github.com/nvim-telescope/telescope.nvim/issues/3070
 return M

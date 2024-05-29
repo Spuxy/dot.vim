@@ -24,4 +24,12 @@ function M.config()
   require('Comment').setup()
 end
 
+-- keymaps
+-- `gc[count]{motion}` - (Op-pending) go current comment
+-- `gb[count]{motion}` - (Op-pending) go block comment
+-- `gco` - Insert comment to the next line and enters INSERT mode
+-- `gcO` - Insert comment to the previous line and enters INSERT mode
+-- `gcA` - Insert comment to end of the current line and enters INSERT mode
+-- supports treesitter textobjects eg. gcaf go comment around function
+
 return M
