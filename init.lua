@@ -8,7 +8,8 @@ spec("spuxy.devicons")
 spec("spuxy.breadcrumbs")
 
 -- COLORSCHEMES
-spec("spuxy.colorschemes.gruvbox-nvim")
+--spec("spuxy.colorschemes.gruvbox-nvim")
+spec("spuxy.colorschemes.pywal-nvim")
 
 -- MOVEMENTS
 spec("spuxy.autopairs") -- own keymaps
