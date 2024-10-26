@@ -6,6 +6,8 @@ require("spuxy.core.options")
 spec("spuxy.alpha")
 spec("spuxy.devicons")
 spec("spuxy.breadcrumbs")
+spec("spuxy.noice")
+spec("spuxy.trouble")
 
 -- COLORSCHEMES
 -- spec("spuxy.colorschemes.gruvbox-nvim")
@@ -14,13 +16,13 @@ spec("spuxy.breadcrumbs")
 spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
-spec("spuxy.autopairs") -- own keymaps
-spec("spuxy.comment") -- own keymaps
+spec("spuxy.autopairs")  -- own keymaps
+spec("spuxy.comment")    -- own keymaps
 spec("spuxy.indentline")
 spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
 spec("spuxy.whichkey")
-spec("spuxy.surround") -- own keymaps
+spec("spuxy.surround")      -- own keymaps
 spec("spuxy.window-picker") -- own keymaps
 spec("spuxy.smart-splits")
 
@@ -45,7 +47,7 @@ spec("spuxy.mason")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
--- spec("spuxy.navigator")
+spec("spuxy.navigator")
 
 -- GIT
 spec("spuxy.gitsigns")
@@ -57,16 +59,22 @@ spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
 spec("spuxy.lsp_signature")
 spec("spuxy.rainbow")
--- spec("spuxy.guihua")
+spec("spuxy.guihua")
 
 spec("spuxy.illuminate")
 spec("spuxy.schemastore")
 
 -- Debuging
-spec("spuxy.neotest")
-spec("spuxy.dap")
+-- spec("spuxy.neotest")
+spec("spuxy.debug.dap")
+spec("spuxy.debug.ui")
+spec("spuxy.debug.telescope")
+spec("spuxy.debug.virtual-text")
+spec("spuxy.debug.mason")
+spec("spuxy.debug.go")
+spec("spuxy.debug.python")
 
 -- Languages
-spec("spuxy.go-nvim")
+spec("spuxy.language.go-nvim")
 
 require("spuxy.lazy")

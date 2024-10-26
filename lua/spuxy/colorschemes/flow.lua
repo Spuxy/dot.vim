@@ -10,4 +10,4 @@ function M.config()
   vim.cmd.colorscheme("flow")
 end
 
-return M
+turn M
