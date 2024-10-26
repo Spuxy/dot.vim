@@ -9,6 +9,7 @@ function M.config()
 		ignore_install = {},
 		auto_install = true,
 		sync_install = false,
+    autopairs = { enable = true },
 		ensure_installed = {
 			"lua",
 			"markdown",
@@ -18,7 +19,10 @@ function M.config()
 			"go",
 		},
 		highlight = { enable = true },
-		indent = { enable = true },
+		indent = { 
+      enable = true,
+      disable = { "yaml" },
+    },
 		incremental_selection = {
 			enable = true,
 			keymaps = {

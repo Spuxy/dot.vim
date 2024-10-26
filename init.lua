@@ -8,9 +8,10 @@ spec("spuxy.devicons")
 spec("spuxy.breadcrumbs")
 
 -- COLORSCHEMES
---spec("spuxy.colorschemes.gruvbox-nvim")
+-- spec("spuxy.colorschemes.gruvbox-nvim")
 -- spec("spuxy.colorschemes.pywal-nvim")
-spec("spuxy.colorschemes.flow")
+-- spec("spuxy.colorschemes.flow")
+spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
 spec("spuxy.autopairs") -- own keymaps
@@ -21,6 +22,7 @@ spec("spuxy.telescope")
 spec("spuxy.whichkey")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- own keymaps
+spec("spuxy.smart-splits")
 
 -- FILESYSTEM
 spec("spuxy.neotree") -- own keymaps
@@ -44,7 +46,6 @@ spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
 -- spec("spuxy.navigator")
-spec("spuxy.go-nvim")
 
 -- GIT
 spec("spuxy.gitsigns")
@@ -60,13 +61,12 @@ spec("spuxy.rainbow")
 
 spec("spuxy.illuminate")
 spec("spuxy.schemastore")
+
 -- Debuging
 spec("spuxy.neotest")
+spec("spuxy.dap")
 
-spec("spuxy.nvim-dap")
-spec("spuxy.nvim-dap-go")
-spec("spuxy.dapui")
-
-spec("spuxy.smart-splits")
+-- Languages
+spec("spuxy.go-nvim")
 
 require("spuxy.lazy")

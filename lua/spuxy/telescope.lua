@@ -42,15 +42,18 @@ function M.config()
   require("telescope").setup {
     defaults = {
       layout_config = {
-        vertical = { width = 3.0 },
+        vertical = { width = 7.0 },
       },
       prompt_prefix = icons.ui.Telescope .. " ",
-      selection_caret = icons.ui.Forward .. " ",
+      selection_caret = icons.ui.Forward .. "  ",
       entry_prefix = "   ",
       initial_mode = "insert",
       selection_strategy = "reset",
       path_display = { "smart" },
       color_devicons = true,
+      set_env = { ["COLORTERM"] = "truecolor" },
+      sorting_strategy = nil,
+      layout_strategy = nil,
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -59,7 +62,7 @@ function M.config()
         "--line-number",
         "--column",
         "--smart-case",
-        "--hidden",
+        -- "--hidden",
         "--glob=!.git/",
       },
 
@@ -90,7 +93,7 @@ function M.config()
 
       find_files = {
         theme = "dropdown",
-        previewer = false,
+        previewer = true,
         path_display = { "absolute" },
       },
 
