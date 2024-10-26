@@ -16,13 +16,13 @@ spec("spuxy.trouble")
 spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
-spec("spuxy.autopairs")  -- own keymaps
-spec("spuxy.comment")    -- own keymaps
+spec("spuxy.autopairs") -- own keymaps
+spec("spuxy.comment") -- own keymaps
 spec("spuxy.indentline")
 spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
 spec("spuxy.whichkey")
-spec("spuxy.surround")      -- own keymaps
+spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- own keymaps
 spec("spuxy.smart-splits")
 
