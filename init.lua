@@ -9,7 +9,8 @@ spec("spuxy.breadcrumbs")
 
 -- COLORSCHEMES
 --spec("spuxy.colorschemes.gruvbox-nvim")
-spec("spuxy.colorschemes.pywal-nvim")
+-- spec("spuxy.colorschemes.pywal-nvim")
+spec("spuxy.colorschemes.flow")
 
 -- MOVEMENTS
 spec("spuxy.autopairs") -- own keymaps
@@ -65,5 +66,7 @@ spec("spuxy.neotest")
 spec("spuxy.nvim-dap")
 spec("spuxy.nvim-dap-go")
 spec("spuxy.dapui")
+
+spec("spuxy.smart-splits")
 
 require("spuxy.lazy")

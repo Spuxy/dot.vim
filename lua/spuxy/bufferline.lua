@@ -22,6 +22,9 @@ function M.config()
 		["<leader>bk"] = { "<cmd>BufferLineCycleNext<cr>", "Next" },
 		["<leader>bp"] = { "<cmd>BufferLineTogglePin<cr>", "Pin" },
 		["<leader>be"] = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
+		["<leader>bW"] = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
+		["<leader>bD"] = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
+		["<leader>bL"] = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
 	})
 end
 

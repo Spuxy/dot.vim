@@ -5,7 +5,7 @@ local M = {
 }
 
 function M.config()
-	vim.o.background = "light"
+	vim.o.background = "dark"
 	vim.cmd.colorscheme("gruvbox")
 	require("gruvbox").setup({
 		transparent_mode = true,
