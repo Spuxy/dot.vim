@@ -30,6 +30,7 @@ M.on_attach = function(client, bufnr)
 	if client.supports_method("textDocument/inlayHint") then
 		vim.lsp.inlay_hint.enable(true)
 	end
+	require("lsp_signature").on_attach(signature_setup, bufnr)
 end
 
 function M.common_capabilities()
@@ -41,7 +42,7 @@ end
 M.toggle_inlay_hints = function()
 	-- local bufnr = vim.api.nvim_get_current_buf()
 	-- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
-  vim.lsp.inlay_hint.enable(true)
+	vim.lsp.inlay_hint.enable(true)
 end
 
 function M.config()

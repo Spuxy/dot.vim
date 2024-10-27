@@ -59,7 +59,6 @@ spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
 spec("spuxy.lsp_signature")
 spec("spuxy.rainbow")
-spec("spuxy.guihua")
 
 spec("spuxy.illuminate")
 spec("spuxy.schemastore")
