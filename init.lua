@@ -18,23 +18,20 @@ spec("spuxy.treesj")
 spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
-spec("spuxy.autopairs")  -- own keymaps
-spec("spuxy.comment")    -- own keymaps
+spec("spuxy.autopairs") -- own keymaps
+spec("spuxy.comment") -- own keymaps
 spec("spuxy.indentline")
 spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
 spec("spuxy.whichkey")
-spec("spuxy.surround")      -- own keymaps
+spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- own keymaps
-spec("spuxy.smart-splits")
+-- spec("spuxy.smart-splits")
 spec("spuxy.spectre")
 
 -- FILESYSTEM
 spec("spuxy.neotree") -- own keymaps
 spec("spuxy.lualine")
-
--- TERM
-spec("spuxy.toggleterm")
 
 -- Projects manipulation
 spec("spuxy.project")
@@ -76,9 +73,10 @@ spec("spuxy.debug.virtual-text")
 spec("spuxy.debug.mason")
 spec("spuxy.debug.go")
 spec("spuxy.debug.python")
--- spec("spuxy.debug.mapping")
 
 -- Languages
 spec("spuxy.language.go-nvim")
 
+-- TERM
+spec("spuxy.toggleterm")
 require("spuxy.lazy")

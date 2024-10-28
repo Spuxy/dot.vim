@@ -35,19 +35,19 @@ function M.config()
 
   local exec_toggle = function(opts)
     local Terminal = require("toggleterm.terminal").Terminal
-    local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
+    local term = Terminal:new({ cmd = opts.cmd, count = opts.count, direction = opts.direction })
     term:toggle(opts.size, opts.direction)
   end
 
   local add_exec = function(opts)
-    local binary = opts.cmd:match "(%S+)"
+    local binary = opts.cmd:match("(%S+)")
     if vim.fn.executable(binary) ~= 1 then
       vim.notify("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
       return
     end
 
     vim.keymap.set({ "n", "t" }, opts.keymap, function()
-      exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() }
+      exec_toggle({ cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() })
     end, { desc = opts.label, noremap = true, silent = true })
   end
 
@@ -68,19 +68,19 @@ function M.config()
     add_exec(opts)
   end
 
-  require("toggleterm").setup {
+  require("toggleterm").setup({
     size = 20,
     open_mapping = [[<c-\>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
     shade_filetypes = {},
     shade_terminals = true,
-    shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+    shading_factor = 2,   -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
     start_in_insert = true,
     insert_mappings = true, -- whether or not the open mapping applies in insert mode
     persist_size = false,
     direction = "float",
     close_on_exit = true, -- close the terminal window when the process exits
-    shell = nil, -- change the default shell
+    shell = nil,        -- change the default shell
     float_opts = {
       border = "rounded",
       winblend = 0,
@@ -95,18 +95,18 @@ function M.config()
         return term.count
       end,
     },
-  }
-  vim.cmd [[
+  })
+  vim.cmd([[
   augroup terminal_setup | au!
   autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
   autocmd TermEnter * startinsert!
   augroup end
-  ]]
+  ]])
 
   vim.api.nvim_create_autocmd({ "TermEnter" }, {
     pattern = { "*" },
     callback = function()
-      vim.cmd "startinsert"
+      vim.cmd("startinsert")
       _G.set_terminal_keymaps()
     end,
   })
