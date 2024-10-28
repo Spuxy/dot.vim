@@ -1,21 +1,18 @@
 local M = {
-	"nvim-treesitter/nvim-treesitter-textobjects",
-}
-
-function M.config()
-	require("nvim-treesitter.configs").setup({
-		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true,
-				keymaps = {
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  opts = {
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
           ["at"] = "@class.outer",
           ["it"] = "@class.inner",
-					["ac"] = "@class.outer",
-					["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-					["aS"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+          ["ac"] = "@class.outer",
+          ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+          ["aS"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
           ["aa"] = "@parameter.outer",
           ["ia"] = "@parameter.inner",
           ["al"] = "@loop.outer",
@@ -32,16 +29,19 @@ function M.config()
           ["iA"] = "@attribute.inner",
           ["aF"] = "@frame.outer",
           ["iF"] = "@frame.inner",
-				},
-				selection_modes = {
-					["@parameter.outer"] = "v", -- charwise
-					["@function.outer"] = "V", -- linewise
-					["@class.outer"] = "<c-v>", -- blockwise
-				},
-				include_surrounding_whitespace = false,
-			},
-		},
-	})
-end
+        },
+        selection_modes = {
+          ["@parameter.outer"] = "v", -- charwise
+          ["@function.outer"] = "V", -- linewise
+          ["@class.outer"] = "<c-v>", -- blockwise
+        },
+        include_surrounding_whitespace = false,
+      },
+    },
+  },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
+}
 
 return M

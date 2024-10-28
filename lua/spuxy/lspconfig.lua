@@ -83,7 +83,7 @@ function M.config()
 	lspconfig.yamlls.setup({
 		settings = {
 			yaml = {
-				validate = true,
+				validate = { enable = true },
 				schemaStore = {
 					enable = false,
 					url = "",
