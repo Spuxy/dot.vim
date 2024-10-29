@@ -2,20 +2,111 @@ local M = {
   -- DAP (Debug Adapter Protocol) for Go
   "mfussenegger/nvim-dap",
   keys = {
-    { "<leader>dt", "<cmd>lua require'dap'.toggle_breakpoint()<cr>",      desc = "Toggle Breakpoint" },
-    { "<leader>db", "<cmd>lua require'dap'.step_back()<cr>",              desc = "Step Back" },
-    { "<leader>dc", "<cmd>lua require'dap'.continue()<cr>",               desc = "Continue" },
-    { "<leader>dC", "<cmd>lua require'dap'.run_to_cursor()<cr>",          desc = "Run To Cursor" },
-    { "<leader>dd", "<cmd>lua require'dap'.disconnect()<cr>",             desc = "Disconnect" },
-    { "<leader>dg", "<cmd>lua require'dap'.session()<cr>",                desc = "Get Session" },
-    { "<leader>di", "<cmd>lua require'dap'.step_into()<cr>",              desc = "Step Into" },
-    { "<leader>do", "<cmd>lua require'dap'.step_over()<cr>",              desc = "Step Over" },
-    { "<leader>du", "<cmd>lua require'dap'.step_out()<cr>",               desc = "Step Out" },
-    { "<leader>dp", "<cmd>lua require'dap'.pause()<cr>",                  desc = "Pause" },
-    { "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>",            desc = "Toggle Repl" },
-    { "<leader>ds", "<cmd>lua require'dap'.continue()<cr>",               desc = "Start" },
-    { "<leader>dq", "<cmd>lua require'dap'.close()<cr>",                  desc = "Quit" },
-    { "<leader>dU", "<cmd>lua require'dapui'.toggle({reset = true})<cr>", desc = "Toggle UI" },
+    {
+      "<leader>dt",
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      desc = "Toggle Breakpoint",
+    },
+    {
+      "<leader>db",
+      function()
+        require("dap").step_back()
+      end,
+      desc = "Step Back",
+    },
+    {
+      "<leader>dc",
+      function()
+        require("dap").continue()
+      end,
+      desc = "Continue",
+    },
+    {
+      "<leader>dC",
+      function()
+        require("dap").run_to_cursor()
+      end,
+      desc = "Run To Cursor",
+    },
+    {
+      "<leader>dd",
+      function()
+        require("dap").disconnect()
+      end,
+      desc = "Disconnect",
+    },
+    {
+      "<leader>dg",
+      function()
+        require("dap").session()
+      end,
+      desc = "Get Session",
+    },
+    {
+      "<leader>di",
+      function()
+        require("dap").step_into()
+      end,
+      desc = "Step Into",
+    },
+    {
+      "<leader>do",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "Step Over",
+    },
+    {
+      "<leader>du",
+      function()
+        require("dap").step_out()
+      end,
+      desc = "Step Out",
+    },
+    {
+      "<leader>dp",
+      function()
+        require("dap").pause()
+      end,
+      desc = "Pause",
+    },
+    {
+      "<leader>dr",
+      function()
+        require("dap").repl.toggle()
+      end,
+      desc = "Toggle Repl",
+    },
+    {
+      "<leader>ds",
+      function()
+        require("dap").continue()
+      end,
+      desc = "Start",
+    },
+    {
+      "<leader>dq",
+      function()
+        require("dap").close()
+      end,
+      desc = "Quit",
+    },
+    {
+      "<leader>dU",
+      function()
+        require("dapui").toggle({ reset = true })
+      end,
+      desc = "Toggle UI",
+    },
+    {
+      "<leader>dK",
+      function()
+        require("dap.ui.widgets").hover()
+      end,
+      desc = "Widgets",
+    },
   },
 }
 

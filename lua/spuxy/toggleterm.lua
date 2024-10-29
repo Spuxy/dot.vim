@@ -1,3 +1,4 @@
+local utils = require("spuxy.core.functions")
 local M = {
   "akinsho/toggleterm.nvim",
   event = "VeryLazy",
@@ -7,25 +8,14 @@ function M.config()
   local execs = {
     { nil, "<C-t>", "Horizontal Terminal", "horizontal", 0.3 },
     -- { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
-    -- { nil, "<C-y>", "Float Terminal", "float", nil },
+    { nil, "<C-y>", "Float Terminal", "float", nil },
   }
-
-  local function get_buf_size()
-    local cbuf = vim.api.nvim_get_current_buf()
-    local bufinfo = vim.tbl_filter(function(buf)
-      return buf.bufnr == cbuf
-    end, vim.fn.getwininfo(vim.api.nvim_get_current_win()))[1]
-    if bufinfo == nil then
-      return { width = -1, height = -1 }
-    end
-    return { width = bufinfo.width, height = bufinfo.height }
-  end
 
   local function get_dynamic_terminal_size(direction, size)
     size = size
     if direction ~= "float" and tostring(size):find(".", 1, true) then
       size = math.min(size, 1.0)
-      local buf_sizes = get_buf_size()
+      local buf_sizes = utils.get_buf_size()
       local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
       return buf_size * size
     else

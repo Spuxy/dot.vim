@@ -93,6 +93,10 @@ function M.config()
 					select = {
 						"kustomization.yaml",
 						"docker-compose.yml",
+						"Golangci-lint Configuration",
+						"go-feature-flag Flag Configuration",
+						"GitHub Workflow",
+						"gitlab-ci",
 					},
 				}),
 			},

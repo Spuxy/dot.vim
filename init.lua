@@ -10,6 +10,7 @@ spec("spuxy.breadcrumbs")
 spec("spuxy.noice")
 spec("spuxy.trouble")
 spec("spuxy.treesj")
+spec("spuxy.markdown")
 
 -- COLORSCHEMES
 -- spec("spuxy.colorschemes.gruvbox-nvim")
@@ -26,7 +27,6 @@ spec("spuxy.telescope")
 spec("spuxy.whichkey")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- own keymaps
--- spec("spuxy.smart-splits")
 spec("spuxy.spectre")
 
 -- FILESYSTEM
@@ -42,13 +42,14 @@ spec("spuxy.navic")
 spec("spuxy.cmp")
 spec("spuxy.neodev")
 spec("spuxy.lspconfig")
-spec("spuxy.none-ls")
-spec("spuxy.mason")
+spec("spuxy.lsp.none-ls")
+spec("spuxy.lsp.mason")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
 spec("spuxy.navigator")
 spec("spuxy.symbol-usage")
+spec("spuxy.luasnip")
 
 -- GIT
 spec("spuxy.gitsigns")
@@ -75,8 +76,9 @@ spec("spuxy.debug.go")
 spec("spuxy.debug.python")
 
 -- Languages
-spec("spuxy.language.go-nvim")
+spec("spuxy.lsp.go.go-nvim")
 
 -- TERM
 spec("spuxy.toggleterm")
+spec("spuxy.smart-splits")
 require("spuxy.lazy")
