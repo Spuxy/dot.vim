@@ -8,8 +8,13 @@ end
 local M = {
 	"Wansmer/symbol-usage.nvim",
 	event = event, -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-	config = function()
-		require("symbol-usage").setup()
+	opts = {
+		references = { enabled = true },
+		definition = { enabled = true },
+		implementation = { enabled = true },
+	},
+	config = function(_, opts)
+		require("symbol-usage").setup(opts)
 	end,
 }
 

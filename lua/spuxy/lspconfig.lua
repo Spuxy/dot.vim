@@ -30,7 +30,6 @@ M.on_attach = function(client, bufnr)
 	if client.supports_method("textDocument/inlayHint") then
 		vim.lsp.inlay_hint.enable(true)
 	end
-	require("lsp_signature").on_attach(signature_setup, bufnr)
 end
 
 function M.common_capabilities()

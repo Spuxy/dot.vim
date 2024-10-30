@@ -10,20 +10,8 @@ local M = {
 		{ "<leader>mx", "", desc = "Trouble" },
 		{ "<leader>mxq", "<cmd>Trouble qflist toggle<cr>", desc = "Toggle" },
 		{ "<leader>mxl", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-		{
-			"<leader>mxj",
-			function()
-				require("trouble").next({ skip_groups = true, jump = true })
-			end,
-			desc = "Next",
-		},
-		{
-			"<leader>mxk",
-			function()
-				require("trouble").prev({ skip_groups = true, jump = true })
-			end,
-			desc = "Prev",
-		},
+		{ "<leader>mxj", function() require("trouble").next({ skip_groups = true, jump = true }) end, desc = "Next" },
+		{ "<leader>mxk", function() require("trouble").prev({ skip_groups = true, jump = true }) end, desc = "Prev" },
 	},
 	config = function(_, opts)
 		require("trouble").setup(opts)

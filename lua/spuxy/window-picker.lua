@@ -8,8 +8,4 @@ local M = {
 	end,
 }
 
-function M.config()
-	require("window-picker").setup({})
-end
-
 return M

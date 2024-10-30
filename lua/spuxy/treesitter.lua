@@ -1,3 +1,4 @@
+local language_providers = require("spuxy.defaults.languages")
 local M = {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPost", "BufNewFile" },
@@ -7,14 +8,7 @@ local M = {
     auto_install = true,
     sync_install = false,
     autopairs = { enable = true },
-    ensure_installed = {
-      "lua",
-      "markdown",
-      "markdown_inline",
-      "bash",
-      "python",
-      "go",
-    },
+    ensure_installed = language_providers,
     highlight = { enable = true },
     indent = {
       enable = true,

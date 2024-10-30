@@ -1,3 +1,4 @@
+local utils = require("spuxy.defaults.ignored_files")
 local M = {
   'nvim-telescope/telescope.nvim', tag = '0.1.7',
   requires = { {'nvim-lua/plenary.nvim'} },
@@ -13,6 +14,7 @@ function registerKeys()
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+    ["<leader>fT"] = { "<cmd>Telescope grep_string<cr>", "Find Text" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
@@ -44,7 +46,8 @@ function M.config()
       layout_config = {
         vertical = { width = 7.0 },
       },
-      prompt_prefix = icons.ui.Telescope .. " ",
+      file_ignore_patterns = utils.ignored_files,
+      prompt_prefix = " " .. icons.ui.Telescope .. " ",
       selection_caret = icons.ui.Forward .. "  ",
       entry_prefix = "   ",
       initial_mode = "insert",
@@ -62,7 +65,7 @@ function M.config()
         "--line-number",
         "--column",
         "--smart-case",
-        -- "--hidden",
+        "--hidden",
         "--glob=!.git/",
       },
 
@@ -101,6 +104,8 @@ function M.config()
         theme = "dropdown",
         previewer = false,
         initial_mode = "normal",
+        ignore_current_buffer = true,
+        sort_lastused = true,
         mappings = {
           i = {
             ["<C-d>"] = actions.delete_buffer,
@@ -111,34 +116,10 @@ function M.config()
         },
       },
 
-      planets = {
-        show_pluto = true,
-        show_moon = true,
-      },
-
       colorscheme = {
         enable_preview = true,
       },
 
-      lsp_references = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-
-      lsp_definitions = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-
-      lsp_declarations = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-
-      lsp_implementations = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
     },
     extensions = {
       fzf = {
