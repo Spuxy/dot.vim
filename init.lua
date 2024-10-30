@@ -3,6 +3,10 @@ require("spuxy.core.launch")
 require("spuxy.core.options")
 require("spuxy.core.functions")
 
+-- AI
+spec("spuxy.ai.copilot")
+spec("spuxy.ai.tabnine")
+
 -- MISC
 spec("spuxy.alpha")
 spec("spuxy.devicons")
@@ -26,8 +30,9 @@ spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
 spec("spuxy.whichkey")
 spec("spuxy.surround") -- own keymaps
-spec("spuxy.window-picker") -- own keymaps
+spec("spuxy.window-picker") -- pickign window - own keymaps
 spec("spuxy.spectre")
+spec("spuxy.smart-splits") -- spliting and moving cursor and buffers
 
 -- FILESYSTEM
 spec("spuxy.neotree") -- own keymaps
@@ -39,7 +44,7 @@ spec("spuxy.harpoon")
 
 -- LSP
 spec("spuxy.navic")
-spec("spuxy.cmp")
+spec("spuxy.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
 spec("spuxy.neodev")
 spec("spuxy.lspconfig")
 spec("spuxy.lsp.none-ls")
@@ -80,5 +85,4 @@ spec("spuxy.lsp.go.go-nvim")
 
 -- TERM
 spec("spuxy.toggleterm")
-spec("spuxy.smart-splits")
 require("spuxy.lazy")

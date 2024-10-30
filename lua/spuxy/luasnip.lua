@@ -10,7 +10,8 @@ function M.config()
 	require("luasnip.loaders.from_vscode").lazy_load()
 	local ls = require("luasnip")
 
-	vim.keymap.set({ "i" }, "<C-K>", function()
+  -- TODO: check how these keys works
+	vim.keymap.set({ "i" }, "<C-L>", function()
 		ls.expand()
 	end, { silent = true })
 	vim.keymap.set({ "i", "s" }, "<C-L>", function()

@@ -37,7 +37,6 @@ vim.cmd([[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<C
 -- vim.cmd [[:amenu 10.120 mousemenu.-sep- *]]
 
 keymap("n", "<RightMouse>", "<cmd>:popup mousemenu<CR>")
-keymap("n", "<Tab>", "<cmd>:popup mousemenu<CR>")
 
 -- more good
 keymap({ "n", "o", "x" }, "<s-h>", "^", opts)
