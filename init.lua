@@ -10,7 +10,7 @@ spec("spuxy.ai.tabnine")
 -- MISC
 spec("spuxy.alpha")
 spec("spuxy.devicons")
-spec("spuxy.breadcrumbs")
+spec("spuxy.barbecue")
 spec("spuxy.noice")
 spec("spuxy.trouble")
 spec("spuxy.treesj")
