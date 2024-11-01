@@ -1,39 +1,20 @@
+local utils = require("spuxy.core.functions")
 local M = {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons", "AndreM222/copilot-lualine" },
 	-- https://github.com/folke/trouble.nvim?tab=readme-ov-file#statusline-component
-	opts = function(_, opts)
-		local trouble = require("trouble")
-		local symbols = trouble.statusline({
-			mode = "lsp_document_symbols",
-			groups = {},
-			title = false,
-			filter = { range = true },
-			format = "{kind_icon}{symbol.name:Normal}",
-			-- The following line is needed to fix the background color
-			-- Set it to the lualine section you want to use
-			hl_group = "lualine_c_normal",
-		})
-		-- table.insert(opts.sections.lualine_c, {
-		--   symbols.get,
-		--   cond = symbols.has,
-		-- })
-	end,
-}
-
-function M.config()
-	require("lualine").setup({
+	opts = {
 		options = {
 			ignore_focus = { "NvimTree" },
 			icons_enabled = true,
-			theme = "gruvbox",
+			theme = "pywal-nvim",
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
 			disabled_filetypes = {
 				statusline = {},
 				winbar = {},
 			},
-			ignore_focus = {},
+			-- ignore_focus = {},
 			always_divide_middle = true,
 			globalstatus = false,
 			refresh = {
@@ -46,7 +27,7 @@ function M.config()
 			lualine_a = { "mode" },
 			lualine_b = { "branch", "diff" },
 			lualine_c = { "diagnostics" },
-			lualine_x = { "copilot", "filetype" },
+			lualine_x = { "copilot", "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},
@@ -62,7 +43,13 @@ function M.config()
 		winbar = {},
 		inactive_winbar = {},
 		extensions = { "quickfix", "man", "fugitive" },
-	})
-end
+	},
+	config = function(_, opts)
+		local neopywal_lualine = utils.get_neopywal()
+		neopywal_lualine.setup()
+		opts.options.theme = "neopywal"
+		require("lualine").setup(opts)
+	end
+}
 
 return M
