@@ -2,10 +2,7 @@ local M = {
 	"akinsho/bufferline.nvim",
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
-}
-
-function M.config()
-	require("bufferline").setup({
+	opts = {
 		options = {
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -13,19 +10,11 @@ function M.config()
 				return " " .. icon .. count
 			end,
 		},
-	})
-
-	require("which-key").register({
-		["<leader>bb"] = { "<cmd>BufferLinePick<cr>", "Jump" },
-		["<leader>bf"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-		["<leader>bj"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-		["<leader>bk"] = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-		["<leader>bp"] = { "<cmd>BufferLineTogglePin<cr>", "Pin" },
-		["<leader>be"] = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
-		["<leader>bW"] = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
-		["<leader>bD"] = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
-		["<leader>bL"] = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
-	})
-end
+	},
+	config = function(_, opts)
+		require("spuxy.defaults.mappings.bufferline")
+		require("bufferline").setup(opts)
+	end
+}
 
 return M
