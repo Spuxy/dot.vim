@@ -1,25 +1,66 @@
-return {
-    mappings = {
-        { "<leader>bb", function() require("telescope.builtin").buffers({previewer=false}) end, desc = "Find" },
-        { "<leader>fc", function() require("telescope.builtin").colorscheme() end, desc= "Colorscheme" },
-        { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
-        { "<leader>ft", function() require("telescope.builtint").live_grep() end, desc = "Find (Grep)" },
-        { "<leader>fT", function() require("telescope.builtint").grep_string() end, desc = "Find (Text)" },
-        { "<leader>fh", function() require("telescope.builtint").help_tags() end, desc = "Help" },
-        { "<leader>fl", function() require("telescope.builtint").resume() end, desc = "Last Search" },
-        { "<leader>fr", function() require("telescope.builtint").oldfiles() end, desc = "Recent File" },
+local actions = require("telescope.actions")
+local action_layout = require("telescope.actions.layout")
 
-        -- ["<leader>sc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" }, -- because of treesitter selection
+M = {
+    whichkey = {
+        ["<leader>sb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+
         ["<leader>sf"] = { "<cmd>Telescope find_files<cr>", "Find File" },
-        ["<leader>sh"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
         ["<leader>sH"] = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
-        { "<leader>sM", function() require("telescope.builtint").man_pages() end, "Man Pages" },
-        { "<leader>fr", function() require("telescope.builtint").oldfiles() end, desc = "Recent File" },
-        { "<leader>sr", function() require("telescope.builtint").oldfiles() end, desc = "Recent File" },
-        { "<leader>sR", function() require("telescope.builtint").registers() end, desc = "Registers" },
-        { "<leader>st", function() require("telescope.builtint").live_grep() end, desc = "Find (Grep)" },
-        { "<leader>sk", function() require("telescope.builtint").keymaps() end, desc = "Keymaps" },
-        { "<leader>sC", function() require("telescope.builtint").commands() end, desc = "Commands" },
-        { "<leader>sl", function() require("telescope.builtint").resume() end, desc = "Resume last search" },
+        ["<leader>st"] = { "<cmd>Telescope live_grep<cr>", "Text" },
+        ["<leader>sT"] = { "<cmd>Telescope grep_string<cr>", "Find (grep)" },
+
+        ["<leader>sh"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+        ["<leader>sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+        ["<leader>sR"] = { "<cmd>Telescope registers<cr>", "Registers" },
+        ["<leader>sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+        ["<leader>sC"] = { "<cmd>Telescope commands<cr>", "Commands" },
+
+        ["<leader>sr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+        ["<leader>sl"] = { "<cmd>Telescope resume<cr>", "Resume last search" },
+
+        ["<leader>sZ"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" }, -- because of treesitter selection
+    },
+
+    default = {
+        i = {
+            ["<C-n>"] = actions.cycle_history_next,
+            ["<C-p>"] = actions.cycle_history_prev,
+
+            ["<C-u>"] = actions.preview_scrolling_up,
+            ["<C-d>"] = actions.preview_scrolling_down,
+
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+
+            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+
+            ["<CR>"] = actions.select_default,
+
+            ["<C-v>"] = actions.select_vertical,
+            ["<C-h>"] = actions.select_horizontal,
+            ["<C-t>"] = actions.select_tab,
+            ["<C-?>"] = actions.which_key,
+
+            -- ["<C-P>"] = action_layout.toggle_preview,
+            -- ["<C-M>"] = action_layout.toggle_mirror,
+        },
+        n = {
+            ["<esc>"] = actions.close,
+            ["j"] = actions.move_selection_next,
+            ["k"] = actions.move_selection_previous,
+            ["q"] = actions.close,
+        },
+    },
+
+    buffer = {
+        i = {
+            ["<C-d>"] = actions.delete_buffer,
+        },
+        n = {
+            ["dd"] = actions.delete_buffer,
+        },
     }
 }
+return M

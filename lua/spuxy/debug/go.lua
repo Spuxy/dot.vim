@@ -2,7 +2,7 @@ local M = {
   -- Adapter for Go
   "leoluz/nvim-dap-go",
 }
-
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#Go
 function M.config()
   require("dap-go").setup()
 

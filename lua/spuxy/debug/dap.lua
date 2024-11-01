@@ -1,3 +1,4 @@
+local utils = require("spuxy.core.functions")
 local M = {
   -- DAP (Debug Adapter Protocol) for Go
   "mfussenegger/nvim-dap",
@@ -14,8 +15,10 @@ local M = {
     { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
     { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle Repl" },
     { "<leader>ds", function() require("dap").continue() end, desc = "Start" },
+    { "<leader>dS", function() require("dap").continue({ before = utils.get_args }) end, desc = "Run with Args" },
     { "<leader>dq", function() require("dap").close() end, desc = "Quit" },
     { "<leader>dU", function() require("dapui").toggle({ reset = true }) end, desc = "Toggle UI" },
+    { "<leader>dE", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
     { "<leader>dK", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     { "<leader>dC", function() require('telescope').extensions.dap.configurations() end, desc = "Configurations" },
   },

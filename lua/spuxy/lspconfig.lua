@@ -82,22 +82,22 @@ function M.config()
 	lspconfig.yamlls.setup({
 		settings = {
 			yaml = {
-				validate = { enable = true },
+				-- validate = { enable = true },
 				schemaStore = {
 					enable = false,
 					url = "",
 				},
-				schemas = require("schemastore").yaml.schemas({
+				schemas = require("schemastore").yaml.schemas()
 					-- select subset from the JSON schema catalog
-					select = {
-						"kustomization.yaml",
-						"docker-compose.yml",
-						"Golangci-lint Configuration",
-						"go-feature-flag Flag Configuration",
-						"GitHub Workflow",
-						"gitlab-ci",
-					},
-				}),
+					-- select = {
+					-- 	"kustomization.yaml",
+					-- 	"docker-compose.yml",
+					-- 	"Golangci-lint Configuration",
+					-- 	"go-feature-flag Flag Configuration",
+					-- 	"GitHub Workflow",
+					-- 	"gitlab-ci",
+					-- },
+				-- }),
 			},
 		},
 	})

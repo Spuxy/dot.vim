@@ -1,4 +1,5 @@
-local M = {
+return {
+    require("which-key").register({
     l = {
         name = "LSP",
         -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -42,5 +43,5 @@ local M = {
         },
         y = { "<cmd>:Telescope yaml_schema<cr>", "+ Yaml Schema store" },
     },
+    })
 }
-return M

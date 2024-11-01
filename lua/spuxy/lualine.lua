@@ -1,7 +1,6 @@
-local utils = require("spuxy.core.functions")
 local M = {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", "AndreM222/copilot-lualine" },
+	dependencies = { "nvim-tree/nvim-web-devicons", "AndreM222/copilot-lualine", "RedsXDD/neopywal.nvim" },
 	-- https://github.com/folke/trouble.nvim?tab=readme-ov-file#statusline-component
 	opts = {
 		options = {
@@ -45,8 +44,7 @@ local M = {
 		extensions = { "quickfix", "man", "fugitive" },
 	},
 	config = function(_, opts)
-		local neopywal_lualine = utils.get_neopywal()
-		neopywal_lualine.setup()
+		require("neopywal.theme.plugins.lualine").setup()
 		opts.options.theme = "neopywal"
 		require("lualine").setup(opts)
 	end
