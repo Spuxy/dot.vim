@@ -53,7 +53,7 @@ spec("spuxy.lsp.mason")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
--- spec("spuxy.navigator")
+spec("spuxy.navigator")
 spec("spuxy.symbol-usage")
 spec("spuxy.luasnip")
 spec("spuxy.conform")
@@ -84,6 +84,8 @@ spec("spuxy.debug.python")
 
 -- Languages
 spec("spuxy.lsp.go.go-nvim")
+
+spec("spuxy.lint")
 
 -- TERM
 spec("spuxy.toggleterm")

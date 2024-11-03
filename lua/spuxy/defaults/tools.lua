@@ -40,51 +40,36 @@ return {
     },
 
     linters = {
-        -- go
-        "gospel",
-        "golangci-lint",
-        "staticcheck",
-        "revive",
+        dockerfile = { "hadolint" },
+        go = { "revive", "golangcilint" },
+        lua = { "selene" },
+        sh = { "shellcheck" },
+        yaml = { "yamllint" },
+        puppet = { "puppet-lint"},
+        python = { "pylint", "pydocstyle", "pycodestyle" },
+        markdown = {'write-good', "markdownlint"}
+    },
 
-        -- markdown
-        "textlint",
-        "markdownlint",
-        "write-good",
-
-        -- git
-        "actionlint",
-
-        -- declerative
-        "ansible-lint",
-        "jsonlint",
-        "yamllint",
-
-        -- c
-        "cpplint",
-        "checkmake",
-        "cmakelint",
-
-        -- html
-        "djlint",
-
-        -- containers
-        "hadolint",
-        "snyk",
-        "sonarlint-language-server",
-
-        -- python
-        "flake8",
-        "pylint",
-        "ruff",
-        "pydocstyle",
-        "pyflakes",
-
-        -- shells
-        "shellcheck",
-
-        -- lua
-        "luacheck",
-        "selene",
+    treesitter = {
+        "bash",
+        "cmake",
+        "css",
+        "dockerfile",
+        "go",
+        "hcl",
+        "html",
+        "javascript",
+        "json",
+        "jsonc",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "query",
+        "python",
+        "regex",
+        "toml",
+        "vim",
+        "yaml",
     },
 
     debuggers = {
