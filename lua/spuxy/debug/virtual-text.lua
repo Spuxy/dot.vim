@@ -1,9 +1,9 @@
 local M = {
-  'theHamsta/nvim-dap-virtual-text'
+  'theHamsta/nvim-dap-virtual-text',
+  opts = {
+    commented = true,
+    show_stop_reason = false,
+  },
 }
-
-function M.config()
-  require("nvim-dap-virtual-text").setup()
-end
 
 return M

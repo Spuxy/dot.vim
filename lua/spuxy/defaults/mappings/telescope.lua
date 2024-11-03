@@ -20,6 +20,8 @@ M = {
         ["<leader>sl"] = { "<cmd>Telescope resume<cr>", "Resume last search" },
 
         ["<leader>sZ"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" }, -- because of treesitter selection
+
+        ["<leader>sY"] = { "<cmd>:Telescope yaml_schema<cr>", "+ Yaml Schema store" },
     },
 
     default = {

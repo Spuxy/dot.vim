@@ -41,4 +41,34 @@ M.get_neopywal = function()
 	return neopywal_lualine
 end
 
+M.mason_install = function(tools)
+
+	local has_mason_registry, mason_registry = pcall(require, "mason-registry")
+	if not has_mason_registry then
+		return
+	end
+
+	local function install_ensured()
+	  for _, tool in ipairs(tools) do
+		local p = mason_registry.get_package(tool)
+		if not p:is_installed() then
+		  p:install()
+		end
+	  end
+	end
+	if mason_registry.refresh then
+	  mason_registry.refresh(install_ensured)
+	else
+	  install_ensured()
+	end
+end
+
+M.notify = function(message, level, title)
+	local notify_options = {
+	  title = title,
+	  timeout = 2000,
+	}
+	vim.api.nvim_notify(message, level, notify_options)
+end
+
 return M

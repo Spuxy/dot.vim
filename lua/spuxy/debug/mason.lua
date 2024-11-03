@@ -1,12 +1,13 @@
+local defaults = require("spuxy.defaults.tools")
 local M = {
-  "williamboman/mason.nvim",
-  "mfussenegger/nvim-dap",
   "jay-babu/mason-nvim-dap.nvim",
+  opts = {
+    ensure_installed = defaults.debuggers,
+  },
+  config = function(_, opts)
+    require("mason-nvim-dap").setup(opts)
+  end
 }
 
-function M.config()
-  require("mason").setup()
-  require("mason-nvim-dap").setup()
-end
 
 return M

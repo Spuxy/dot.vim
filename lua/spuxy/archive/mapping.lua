@@ -7,7 +7,7 @@ function M.config()
   require("which-key").register({
     d = {
       name = "Debug",
-      t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+      t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpointik" },
       b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
       c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
       C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },

@@ -41,6 +41,10 @@ local options = {
   sidescrolloff = 8,
   guifont = "monospace:h17", -- the font used in graphical neovim applications
   title = false,
+  foldcolumn = '1', -- '0' is not bad
+  foldlevel = 99, -- Using ufo provider need a large value, feel free to decrease the value
+  foldlevelstart = 99,
+  foldenable = true,
   -- colorcolumn = "80",
   -- colorcolumn = "120",
   --

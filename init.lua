@@ -33,6 +33,7 @@ spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
 spec("spuxy.spectre")
 spec("spuxy.smart-splits") -- spliting and moving cursor and buffers
+spec("spuxy.ufo") -- spliting and moving cursor and buffers
 
 -- FILESYSTEM
 spec("spuxy.neotree") -- own keymaps
@@ -46,15 +47,16 @@ spec("spuxy.harpoon")
 spec("spuxy.navic")
 spec("spuxy.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
 spec("spuxy.neodev")
-spec("spuxy.lspconfig")
-spec("spuxy.lsp.none-ls")
+spec("spuxy.lsp.lspconfig")
+-- spec("spuxy.lsp.none-ls")
 spec("spuxy.lsp.mason")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
-spec("spuxy.navigator")
+-- spec("spuxy.navigator")
 spec("spuxy.symbol-usage")
 spec("spuxy.luasnip")
+spec("spuxy.conform")
 
 -- GIT
 spec("spuxy.gitsigns")
