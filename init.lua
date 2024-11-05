@@ -17,9 +17,10 @@ spec("spuxy.treesj")
 spec("spuxy.markdown")
 
 -- COLORSCHEMES
--- spec("spuxy.colorschemes.gruvbox-nvim")
--- spec("spuxy.colorschemes.pywal-nvim")
--- spec("spuxy.colorschemes.flow")
+spec("spuxy.colorschemes.gruvbox-nvim")
+spec("spuxy.colorschemes.pywal-nvim")
+spec("spuxy.colorschemes.flow")
+spec("spuxy.colorschemes.miasma")
 spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
@@ -53,7 +54,7 @@ spec("spuxy.lsp.mason")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
-spec("spuxy.navigator")
+-- spec("spuxy.navigator")
 spec("spuxy.symbol-usage")
 spec("spuxy.luasnip")
 spec("spuxy.conform")

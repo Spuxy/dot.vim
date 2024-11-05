@@ -7,7 +7,7 @@ require("which-key").register({
     [ "<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
     -- [ "<leader>lI"] = { "<cmd>Mason<cr>", "Mason Info" },
     [ "<leader>lI"] = { "<cmd>lua require('spuxy.lsp.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
-    [ "<leader>lJ"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+    [ "<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
     [ "<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
     [ "<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     [ "<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
