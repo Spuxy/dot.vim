@@ -15,6 +15,7 @@ spec("spuxy.noice")
 spec("spuxy.trouble")
 spec("spuxy.treesj")
 spec("spuxy.markdown")
+spec("spuxy.auto-session")
 
 -- COLORSCHEMES
 spec("spuxy.colorschemes.gruvbox-nvim")

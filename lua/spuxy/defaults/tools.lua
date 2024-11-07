@@ -47,7 +47,8 @@ return {
         yaml = { "yamllint" },
         puppet = { "puppet-lint"},
         python = { "pylint", "pydocstyle", "pycodestyle" },
-        markdown = {'write-good', "markdownlint"}
+        markdown = {'write-good', "markdownlint"},
+        rst = { "rstcheck" }
     },
 
     treesitter = {

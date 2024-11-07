@@ -1,11 +1,11 @@
 local M = {
-  'kevinhwang91/nvim-bqf',
+  "kevinhwang91/nvim-bqf",
   ft = "qf",
   opts = {
     auto_enable = true,
     auto_resize_height = true,
     func_map = {
-      split = '<C-h>',
+      split = "<C-h>",
     },
     preview = {
       win_height = 12,
@@ -28,8 +28,16 @@ local M = {
     },
   },
   dependencies = {
-    'junegunn/fzf',
-  }
+    "junegunn/fzf",
+  },
+  config = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "qf",
+      callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "q", ":cclose<CR>", { noremap = true, silent = true })
+      end,
+    })
+  end,
 }
 
 return M

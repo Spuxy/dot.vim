@@ -1,6 +1,12 @@
+local icons = require("spuxy.icons")
 local M = {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", "AndreM222/copilot-lualine", "RedsXDD/neopywal.nvim" },
+	dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    "AndreM222/copilot-lualine",
+    "RedsXDD/neopywal.nvim",
+    "rmagatti/auto-session",
+  },
 	-- https://github.com/folke/trouble.nvim?tab=readme-ov-file#statusline-component
 	opts = {
 		options = {
@@ -26,7 +32,15 @@ local M = {
 			lualine_a = { "mode" },
 			lualine_b = { "branch", "diff" },
 			lualine_c = { "diagnostics" },
-			lualine_x = { "copilot", "encoding", "fileformat", "filetype" },
+			lualine_x = {
+        function()
+          return string.format("%s%s", icons.misc.Session, require("auto-session.lib").current_session_name(true))
+        end,
+        "copilot",
+        "encoding",
+        "fileformat",
+        "filetype"
+      },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},
