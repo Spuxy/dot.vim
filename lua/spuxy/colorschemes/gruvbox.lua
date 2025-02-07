@@ -1,7 +1,6 @@
 local M = {
-  'morhetz/gruvbox'
+  "morhetz/gruvbox",
 }
-
 
 function M.config()
   vim.cmd.colorscheme("gruvbox")
