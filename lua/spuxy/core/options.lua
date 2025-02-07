@@ -41,7 +41,7 @@ local options = {
   sidescrolloff = 8,
   guifont = "monospace:h17", -- the font used in graphical neovim applications
   title = false,
-  foldcolumn = '1', -- '0' is not bad
+  foldcolumn = "1", -- '0' is not bad
   foldlevel = 99, -- Using ufo provider need a large value, feel free to decrease the value
   foldlevelstart = 99,
   foldenable = true,
@@ -55,14 +55,14 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
+vim.opt.fillchars:append({
+  stl = " ",
+})
+vim.opt.shortmess:append("c")
 
-vim.opt.fillchars:append {
-	stl = " ",
-}
-vim.opt.shortmess:append "c"
-
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]] -- treats the word with dash as a word -> test-test is one word
+vim.cmd("set whichwrap+=<,>,[,],h,l")
+vim.cmd([[set iskeyword+=-]]) -- treats the word with dash as a word -> test-test is one word
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
+vim.g.disable_autoformat = false
