@@ -8,10 +8,9 @@ local M = {
     -- language specific tests
     "marilari88/neotest-vitest",
     "nvim-neotest/neotest-python",
-    "nvim-neotest/neotest-plenary",
     "rouge8/neotest-rust",
-    "lawrence-laz/neotest-zig",
     "rcasia/neotest-bash",
+    "fredrikaverpil/neotest-golang",
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
@@ -32,6 +31,14 @@ function M.config()
   ---@diagnostic disable: missing-fields
   ---require "neotest-zig",
   require("neotest").setup {
+    output = {
+      enabled = true,
+      open_on_run = "short"
+    },
+    output_panel = {
+      enabled = true,
+      open = "botright split | resize 15"
+    },
     adapters = {
       require "neotest-python" {
         dap = { justMyCode = false },
@@ -40,6 +47,9 @@ function M.config()
       require "neotest-vim-test" {
         ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
       },
+      require("neotest-bash"),
+      require("neotest-rust"),
+      require("neotest-golang"),
     },
   }
 end

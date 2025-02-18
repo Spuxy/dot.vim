@@ -10,6 +10,26 @@ M.isNeovimVersionsatisfied = function(version)
 	return version <= tonumber(vim.version().minor)
 end
 
+M.getOS = function()
+  local handle = io.popen("uname -s")
+  if handle == nil then
+    vim.notify("Error while opening handler", vim.log.levels.ERROR)
+    return ""
+  end
+  local uname = handle:read("*a")
+  handle:close()
+  uname = uname:gsub("%s+", "")
+  if uname == "Darwin" then
+    return "Darwin"
+  elseif uname == "NixOS" then
+    return "NixOS"
+  elseif uname == "Linux" then
+    return "Linux"
+  else
+    return ""
+  end
+end
+
 M.get_buf_size = function()
 	local cbuf = vim.api.nvim_get_current_buf()
 	local bufinfo = vim.tbl_filter(function(buf)

@@ -2,6 +2,11 @@ local defaults = require("spuxy.defaults.tools")
 local M = {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPost", "BufNewFile" },
+  dependencies = {
+    "RRethy/nvim-treesitter-endwise",
+    "mfussenegger/nvim-ts-hint-textobject",
+    "windwp/nvim-ts-autotag",
+  },
   build = ":TSUpdate",
   opts = {
     ignore_install = {},
@@ -12,7 +17,7 @@ local M = {
     highlight = { enable = true },
     indent = {
       enable = true,
-      disable = { "yaml" },
+      -- disable = { "yaml" },
     },
     incremental_selection = {
       enable = true,
@@ -25,6 +30,7 @@ local M = {
     },
   },
   config = function(_, opts)
+    require("nvim-ts-autotag").setup()
     require("nvim-treesitter.configs").setup(opts)
   end,
 }

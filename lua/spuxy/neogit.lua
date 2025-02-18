@@ -2,24 +2,17 @@ local M = {
   "neogitorg/neogit",
   event = "VeryLazy",
   dependencies = {
-    "nvim-lua/plenary.nvim",         -- required
-    "sindrets/diffview.nvim",        -- optional - Diff integration
+    "nvim-lua/plenary.nvim",  -- required
+    "sindrets/diffview.nvim", -- optional - Diff integration
 
     -- Only one of these is needed, not both.
     "nvim-telescope/telescope.nvim", -- optional
     "ibhagwan/fzf-lua",              -- optional
   },
-  config = true
-}
-
-function M.config()
-  local icons = require("spuxy.icons")
-  local wk = require "which-key"
-  wk.register {
-    ["<leader>gg"] = { "<cmd>Neogit<CR>", "Neogit" },
-  }
-
-  require("neogit").setup {
+  keys = {
+    { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit" },
+  },
+  opts = {
     auto_refresh = true,
     disable_builtin_notifications = false,
     use_magit_keybindings = false,
@@ -36,11 +29,12 @@ function M.config()
     -- customize displayed signs
     signs = {
       -- { CLOSED, OPENED }
-      section = { icons.ui.ChevronRight, icons.ui.ChevronShortDown },
-      item = { icons.ui.ChevronRight, icons.ui.ChevronShortDown },
+      section = { require("spuxy.icons").ui.ChevronRight, require("spuxy.icons").ui.ChevronShortDown },
+      item = { require("spuxy.icons").ui.ChevronRight, require("spuxy.icons").ui.ChevronShortDown },
       hunk = { "", "" },
     },
-  }
-end
+  },
+  config = true
+}
 
 return M
