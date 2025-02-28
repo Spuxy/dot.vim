@@ -1,5 +1,5 @@
 local M = {
-  url = 'HiPhish/rainbow-delimiters.nvim',
+  "HiPhish/rainbow-delimiters.nvim",
   event = "VeryLazy",
 }
 

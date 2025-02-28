@@ -1,5 +1,5 @@
 local M = {
-  url = "b0o/schemastore.nvim",
+  "b0o/schemastore.nvim",
   lazy = true,
 }
 

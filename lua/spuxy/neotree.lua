@@ -1,5 +1,5 @@
 local M = {
-  url = "nvim-neo-tree/neo-tree.nvim",
+  "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -21,7 +21,7 @@ local M = {
     enable_git_status = true,
     filesystem = {
       follow_current_file = {
-        enabled = true,          -- This will find and focus the file in the active buffer every time
+        enabled = true, -- This will find and focus the file in the active buffer every time
         --               -- the current file is changed while the tree is open.
         leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
       },
@@ -56,7 +56,7 @@ local M = {
       },
       mappings = {
         ["o"] = "system_open",
-        ["d"] = "noop",    -- unbind delete
+        ["d"] = "noop", -- unbind delete
         ["dd"] = "delete", -- bind delete to new mapping
 
         ["C"] = "close_node",
@@ -106,7 +106,7 @@ local M = {
     vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
     require("neo-tree").setup(opts)
-  end
+  end,
 }
 
 return M

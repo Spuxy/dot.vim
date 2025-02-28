@@ -1,15 +1,15 @@
 local M = {
-  url = "folke/noice.nvim",
+  "folke/noice.nvim",
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
   },
   keys = {
-    { "<leader>mnn", "",                      desc = "Noice" },
-    { "<leader>mnn", "<cmd>Noice all<cr>",    desc = "Open Noice" },
+    { "<leader>mnn", "", desc = "Noice" },
+    { "<leader>mnn", "<cmd>Noice all<cr>", desc = "Open Noice" },
     { "<leader>mne", "<cmd>Noice errors<cr>", desc = "Open Noice Errors" },
-    { "<leader>mnn", "<cmd>Noice fzf<cr>",    desc = "Open Noice with fzf-lua" },
+    { "<leader>mnn", "<cmd>Noice fzf<cr>", desc = "Open Noice with fzf-lua" },
   },
   opts = {
     lsp = {
@@ -31,13 +31,13 @@ local M = {
     },
     -- you can enable a preset for easier configuration
     presets = {
-      bottom_search = true,         -- use a classic bottom cmdline for search
-      command_palette = true,       -- position the cmdline and popupmenu together
+      bottom_search = true, -- use a classic bottom cmdline for search
+      command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
-      inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false,       -- add a border to hover docs and signature help
+      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      lsp_doc_border = false, -- add a border to hover docs and signature help
     },
-  }
+  },
 }
 
 return M
