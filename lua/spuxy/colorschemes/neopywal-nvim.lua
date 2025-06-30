@@ -7,7 +7,9 @@ local M = {
 
 
 function M.config()
-  require("neopywal").setup()
+  require("neopywal").setup({
+    use_wallust = false,
+  })
   vim.cmd.colorscheme("neopywal")
 end
 

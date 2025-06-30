@@ -23,10 +23,10 @@ spec("spuxy.transparent")
 
 -- COLORSCHEMES
 -- spec("spuxy.colorschemes.gruvbox-nvim")
-spec("spuxy.colorschemes.gruvbox")
--- spec("spuxy.colorschemes.pywal-nvim")
+-- spec("spuxy.colorschemes.gruvbox")
+--spec("spuxy.colorschemes.pywal-nvim")
 -- spec("spuxy.colorschemes.flow")
--- spec("spuxy.colorschemes.miasma")
+spec("spuxy.colorschemes.miasma")
 -- spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS

@@ -15,7 +15,7 @@ return {
     "yamlls",
     "ansiblels",
     -- go
-    "gopls",
+    -- "gopls",  this showed me the same result twice ! on linux but on mac was fine
     -- python
     "pyright",
     -- lua

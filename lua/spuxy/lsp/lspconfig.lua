@@ -42,7 +42,7 @@ end
 
 function M.config()
   require("spuxy.lsp.mappings")
-  require("spuxy.lsp.go.settings")
+  -- require("spuxy.lsp.go.settings")  this showed me the same result twice ! on linux but on mac was fine
   require("spuxy.lsp.yaml.settings")
   require("spuxy.lsp.lua.settings")
   require("spuxy.lsp.json.settings")
