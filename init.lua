@@ -67,8 +67,8 @@ spec("spuxy.luasnip")
 spec("spuxy.conform")
 
 -- GIT
-spec("spuxy.gitsigns")
-spec("spuxy.neogit")
+spec("spuxy.git.gitsigns")
+spec("spuxy.git.neogit")
 
 -- UI
 spec("spuxy.bqf")

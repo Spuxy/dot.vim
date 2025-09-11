@@ -22,6 +22,7 @@ M.config = function()
     ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
     ["<leader>gC"] = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)" },
+    ["<leader>tb"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Inline Blame" },
   }
 
   require("gitsigns").setup {
