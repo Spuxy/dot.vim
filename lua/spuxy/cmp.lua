@@ -54,6 +54,10 @@ function M.config()
 
 	local icons = require("spuxy.icons")
 
+  cmp.event:on("menu_opened", function()
+    vim.b.copilot_suggestion_hidden = true
+  end)
+
 	cmp.setup({
 		snippet = {
 			expand = function(args)

@@ -3,9 +3,13 @@ require("spuxy.core.launch")
 require("spuxy.core.options")
 require("spuxy.core.functions")
 
+spec("spuxy.whichkey")
+
 -- AI
 spec("spuxy.ai.copilot")
 spec("spuxy.ai.tabnine")
+spec("spuxy.ai.copilotchat")
+-- spec("spuxy.ai.chatgpt") i dont use it atm, i need openai token which requires my creditcard ^^
 
 -- MISC
 spec("spuxy.alpha")
@@ -23,10 +27,11 @@ spec("spuxy.transparent")
 
 -- COLORSCHEMES
 -- spec("spuxy.colorschemes.gruvbox-nvim")
-spec("spuxy.colorschemes.gruvbox")
+-- spec("spuxy.colorschemes.gruvbox")
 -- spec("spuxy.colorschemes.pywal-nvim")
 -- spec("spuxy.colorschemes.flow")
 -- spec("spuxy.colorschemes.miasma")
+spec("spuxy.colorschemes.tokyonight")
 -- spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
@@ -35,7 +40,6 @@ spec("spuxy.comment") -- own keymaps
 spec("spuxy.indentline")
 spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
-spec("spuxy.whichkey")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
 spec("spuxy.spectre")
@@ -94,6 +98,7 @@ spec("spuxy.debug.python")
 
 -- Languages
 spec("spuxy.lsp.go.go-nvim")
+spec("spuxy.lsp.c.clangd-nvim")
 
 spec("spuxy.lint")
 

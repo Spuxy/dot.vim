@@ -20,8 +20,8 @@ return {
       "ansible",
       "ansiblels",
       -- go
-      "go",
-      "gopls",
+      -- "go",
+      -- "gopls",
       -- python
       "python",
       "pyright",

@@ -3,8 +3,8 @@ local M = {
 	cmd = "Copilot",
 	event = "InsertEnter",
   keys = {
-    { "<leader>mc", "", desc = "Copilot" },
-    { "<leader>mct", function () require('copilot.suggestion').toggle_auto_trigger() end, desc = "Copilot deattche" },
+    { "<leader>mac", "", desc = "Copilot" },
+    { "<leader>mact", function () require('copilot.suggestion').toggle_auto_trigger() end, desc = "Copilot deattche" },
   },
 	dependencies = {
 		"zbirenbaum/copilot-cmp",

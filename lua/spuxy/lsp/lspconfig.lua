@@ -42,10 +42,11 @@ end
 
 function M.config()
   require("spuxy.lsp.mappings")
-  require("spuxy.lsp.go.settings")
-  require("spuxy.lsp.yaml.settings")
-  require("spuxy.lsp.lua.settings")
-  require("spuxy.lsp.json.settings")
+  -- require("spuxy.lsp.go.settings")
+  -- require("spuxy.lsp.yaml.settings")
+  -- require("spuxy.lsp.lua.settings")
+  -- require("spuxy.lsp.json.settings")
+  -- require("spuxy.lsp.c.settings")
 
   local lspconfig = require("lspconfig")
 
@@ -91,8 +92,12 @@ function M.config()
       capabilities = M.common_capabilities(),
     }
 
-    local require_ok, settings = pcall(require, "spuxy.lspsettings." .. server)
+    -- local require_ok, settings = pcall(require, "spuxy.lspsettings." .. server)
+    local require_ok, settings = pcall(require, "spuxy.lsp." .. server .. ".settings")
     if require_ok then
+      print(server)
+      print(require_ok)
+      print(settings)
       opts = vim.tbl_deep_extend("force", settings, opts)
     end
 

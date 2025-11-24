@@ -1,7 +1,3 @@
--- local opts = {
--- mode = "n",   -- NORMAL mode
--- prefix = "<leader>",
--- }
 local M = {}
 function M.config()
   require("which-key").register({
@@ -25,3 +21,5 @@ function M.config()
     },
   }, { mode = "n", prefix = "<leader>" })
 end
+
+return M

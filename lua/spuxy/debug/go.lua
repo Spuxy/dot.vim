@@ -6,11 +6,12 @@ local M = {
 function M.config()
   require("dap-go").setup()
 
+  local home = os.getenv("HOME")
   local dap = require("dap")
   dap.adapters.go = {
     type = "executable",
     command = "node",
-    args = { "/Users/filip.boye.kofi/Upstreams/vscode-go/extension/dist/debugAdapter.js" },
+    args = { home .. "/Upstreams/github.com/golang/vscode-go/extension/dist/debugAdapter.js" },
   }
   dap.configurations.go = {
     {
