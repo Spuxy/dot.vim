@@ -1,9 +1,7 @@
-require("lspconfig").clangd.setup({
-  settings = {
-    clangd = {
-      init_options = {
-        fallbackFlags = { '--std=c23' }
-      },
+return {
+  clangd = {
+    init_options = {
+      fallbackFlags = { "--std=c23" },
     },
   },
-})
+}
