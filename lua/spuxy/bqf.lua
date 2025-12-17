@@ -1,3 +1,5 @@
+-- Better quickfix window in Neovim, polish old quickfix window.
+--    github.com/kevinhwang91/nvim-bqf
 local M = {
   "kevinhwang91/nvim-bqf",
   ft = "qf",

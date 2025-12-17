@@ -1,3 +1,5 @@
+-- markdown preview plugin for (neo)vim
+--    github.com/iamcco/markdown-preview.nvim
 local M = {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -7,7 +9,7 @@ local M = {
   end,
   ft = { "markdown" },
   keys = {
-    { "<leader>mm",  "",                               desc = "Markdown" },
+    { "<leader>mm", "", desc = "Markdown" },
     { "<leader>mmp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Preview Toggle" },
   },
 }

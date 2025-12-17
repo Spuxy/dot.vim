@@ -1,3 +1,5 @@
+-- Add/change/delete surrounding delimiter pairs with ease. Written with ❤️ in Lua.
+--  github.com/kylechui/nvim-surround
 local M = {
   "kylechui/nvim-surround",
   version = "*", -- Use for stability; omit to use `main` branch for the latest features
