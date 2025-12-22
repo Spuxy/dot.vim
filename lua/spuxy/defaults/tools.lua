@@ -2,27 +2,18 @@
 -- LSPs that should be installed by Mason-lspconfig
 return {
   lsp_servers = {
-    -- html
     "cssls",
     "html",
-    -- shells
     "bashls",
-    -- containers
     "dockerls",
-    -- declerative
     "jsonls",
     "helm_ls",
     "yamlls",
     "ansiblels",
-    -- go
     "gopls",
-    -- python
     "pyright",
-    -- lua
     "lua_ls",
-    -- rust
     "rust_analyzer",
-    -- c
     "clangd",
   },
 
