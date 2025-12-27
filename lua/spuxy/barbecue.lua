@@ -1,3 +1,5 @@
+-- Visual Studio Code inspired breadcrumbs plugin for the Neovim editor
+--    github.com/utilyre/barbecue.nvim
 local utils = require("spuxy.core.functions")
 local M = {
     "utilyre/barbecue.nvim",

@@ -19,7 +19,7 @@ spec("spuxy.noice")
 spec("spuxy.notify")
 spec("spuxy.trouble")
 spec("spuxy.treesj")
--- spec("spuxy.auto-session")
+spec("spuxy.auto-session")
 spec("spuxy.transparent")
 
 spec("spuxy.markdown")
@@ -58,9 +58,9 @@ spec("spuxy.project")
 spec("spuxy.harpoon")
 
 -- COMPLETIONS
-spec("spuxy.completions.blink") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
-spec("spuxy.completions.lazydev")
--- spec("spuxy.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
+-- spec("spuxy.completions.blink") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
+-- spec("spuxy.completions.lazydev")
+spec("spuxy.completions.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
 
 -- LSP
 spec("spuxy.navic")
@@ -110,7 +110,8 @@ spec("spuxy.lsp.go.godoc")
 
 spec("spuxy.lsp.c.clangd-nvim")
 
-spec("spuxy.lint")
+-- LINTERS
+spec("spuxy.linters.nvim-lint")
 
 -- TERM
 spec("spuxy.toggleterm")

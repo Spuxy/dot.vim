@@ -50,6 +50,11 @@ keymap("n", "<leader>wj", "<cmd>resize -5<cr>", { desc = "Down" })
 keymap("n", "<leader>wh", "<cmd>vertical resize +3<cr>", { desc = "Left" })
 keymap("n", "<leader>wl", "<cmd>vertical resize -3<cr>", { desc = "Right" })
 
+keymap("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Up" })
+keymap("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Down" })
+keymap("n", "<C-Left>", "<cmd>vertical resize +3<cr>", { desc = "Left" })
+keymap("n", "<C-Right>", "<cmd>vertical resize -3<cr>", { desc = "Right" })
+
 -- buffers
 keymap("n", "<tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 keymap("n", "<S-tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })

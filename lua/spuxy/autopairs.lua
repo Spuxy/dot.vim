@@ -1,4 +1,5 @@
--- https://github.com/windwp/nvim-autopairs
+-- autopairs for neovim written in lua
+--    https://github.com/windwp/nvim-autopairs
 local M = {
   "windwp/nvim-autopairs",
   dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" },
