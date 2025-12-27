@@ -3,7 +3,7 @@ local M = {
 }
 
 function M.config()
-  local icons = require("spuxy.icons")
+  local icons = require("spuxy.core.icons")
   require("nvim-navic").setup {
     icons = icons.kind,
     highlight = true,

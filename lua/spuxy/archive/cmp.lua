@@ -52,7 +52,7 @@ function M.config()
 		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 	end
 
-	local icons = require("spuxy.icons")
+	local icons = require("spuxy.core.icons")
 
   cmp.event:on("menu_opened", function()
     vim.b.copilot_suggestion_hidden = true

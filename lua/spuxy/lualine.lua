@@ -1,4 +1,4 @@
-local icons = require("spuxy.icons")
+local icons = require("spuxy.core.icons")
 local M = {
   "nvim-lualine/lualine.nvim",
   dependencies = {

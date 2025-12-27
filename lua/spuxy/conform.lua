@@ -1,6 +1,7 @@
 local utils = require("spuxy.core.functions")
 local tools = require("spuxy.defaults.tools")
-return {
+
+local M = {
   "stevearc/conform.nvim",
   event = { "BufReadPre", "BufNewFile", "InsertLeave" },
   opts = {
@@ -43,3 +44,4 @@ return {
   end,
 }
 
+return M

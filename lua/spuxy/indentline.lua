@@ -1,13 +1,13 @@
 local M = {
   "lukas-reineke/indent-blankline.nvim",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
   main = "ibl",
 }
 
 function M.config()
-  local icons = require("spuxy.icons")
+  local icons = require("spuxy.core.icons")
 
-  require("indent_blankline").setup {
+  require("indent_blankline").setup({
     buftype_exclude = { "terminal", "nofile" },
     filetype_exclude = {
       "help",
@@ -27,7 +27,7 @@ function M.config()
     show_first_indent_level = true,
     use_treesitter = true,
     show_current_context = true,
-  }
+  })
 
   -- indent = { char = icons.ui.LineMiddle },
   -- whitespace = {

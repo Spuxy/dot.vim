@@ -15,31 +15,33 @@ return {
     "lua_ls",
     "rust_analyzer",
     "clangd",
+    "ltex-ls-plus",
+    "puppet-editor-services"
   },
 
   formatters = {
-    go = { "goimports", "gofmt" },
+    go = { "goimports", "gofumpt" },
     rust = { "rustfmt" },
     javascript = { "prettier" },
     json = { "prettier" },
     lua = { "stylua" },
     markdown = { "prettier" },
-    python = { "isort", "ruff_format", "black" },
+    python = { "isort", "ruff", "black" },
     sh = { "shfmt" },
     yaml = { "yamlfmt" },
-    rst = { "rstfmt" },
   },
 
   linters = {
     dockerfile = { "hadolint" },
-    go = { "revive", "golangcilint" },
+    -- go = { "revive", "golangci-lint" },
+    go = { "revive" },
     lua = { "selene" },
     sh = { "shellcheck" },
     yaml = { "yamllint" },
-    puppet = { "puppet-lint" },
-    python = { "pylint", "pydocstyle", "pycodestyle" },
-    markdown = { "write_good", "markdownlint" },
-    rst = { "rstcheck" },
+    python = { "pylint" },
+    markdown = { "write-good", "markdownlint", "markdownlint-cli2" },
+    rst = { "rstcheck", "sphinx-lint" },
+    rust = { "snyk", "bacon" }
   },
 
   treesitter = {

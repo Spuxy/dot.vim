@@ -5,7 +5,7 @@ local M = {
 }
 
 M.config = function()
-  local icons = require "spuxy.icons"
+  local icons = require "spuxy.core.icons"
 
   local wk = require "which-key"
   wk.register {

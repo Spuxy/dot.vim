@@ -17,7 +17,8 @@ function M.config()
 			},
 		},
 	})
-	require("lspconfig")["yamlls"].setup(cfg)
+  vim.lsp.enable("yamlls")
+  vim.lsp.config("yamlls", cfg)
 end
 
 return M

@@ -65,7 +65,7 @@ keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- move over a closing element in insert mode
 keymap("i", "<C-l>", function()
-  return require("utils.functions").escapePair()
+  return require("spuxy.core.functions").escapePair()
 end)
 
 -- save like your are used to

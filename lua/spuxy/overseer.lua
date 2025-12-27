@@ -1,8 +1,8 @@
 local M = {
   "stevearc/overseer.nvim",
   keys = {
-    { "<leader>r", "<cmd>OverseerRun<cr>", desc = "Overseer Run" },
-    { "<leader>tr", "<cmd>OverseerToggle<cr>", desc = "Overseer" },
+    -- { "<leader>r", "<cmd>OverseerRun<cr>", desc = "Overseer Run" },
+    -- { "<leader>tr", "<cmd>OverseerToggle<cr>", desc = "Overseer" },
   },
   opts = {
     task_list = {

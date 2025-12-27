@@ -1,14 +1,18 @@
+local icons = require("spuxy.core.icons")
 local M = {
   "neogitorg/neogit",
   event = "VeryLazy",
   dependencies = {
-    "nvim-lua/plenary.nvim",  -- required
-    "sindrets/diffview.nvim", -- optional - Diff integration
+    "nvim-lua/plenary.nvim",         -- required
+    "sindrets/diffview.nvim",        -- optional - Diff integration
 
-    -- Only one of these is needed, not both.
+    -- Only one of these is needed.
     "nvim-telescope/telescope.nvim", -- optional
     "ibhagwan/fzf-lua",              -- optional
+    "nvim-mini/mini.pick",           -- optional
+    "folke/snacks.nvim",             -- optional
   },
+  cmd = "Neogit",
   keys = {
     { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit" },
   },
@@ -29,8 +33,8 @@ local M = {
     -- customize displayed signs
     signs = {
       -- { CLOSED, OPENED }
-      section = { require("spuxy.icons").ui.ChevronRight, require("spuxy.icons").ui.ChevronShortDown },
-      item = { require("spuxy.icons").ui.ChevronRight, require("spuxy.icons").ui.ChevronShortDown },
+      section = { icons.ui.ChevronRight, icons.ui.ChevronShortDown },
+      item = { icons.ui.ChevronRight, icons.ui.ChevronShortDown },
       hunk = { "", "" },
     },
   },

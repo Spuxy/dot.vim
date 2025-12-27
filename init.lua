@@ -1,7 +1,6 @@
 require("spuxy.core.keymaps")
 require("spuxy.core.launch")
 require("spuxy.core.options")
-require("spuxy.core.functions")
 
 spec("spuxy.whichkey")
 
@@ -20,15 +19,18 @@ spec("spuxy.noice")
 spec("spuxy.notify")
 spec("spuxy.trouble")
 spec("spuxy.treesj")
-spec("spuxy.markdown")
-spec("spuxy.markdown-preview")
 -- spec("spuxy.auto-session")
 spec("spuxy.transparent")
+
+spec("spuxy.markdown")
+spec("spuxy.markdown-preview")
+-- spec("spuxy.markview") It can be used as alternative to 'markdown'
 
 -- COLORSCHEMES
 -- spec("spuxy.colorschemes.gruvbox-nvim")
 -- spec("spuxy.colorschemes.gruvbox")
 -- spec("spuxy.colorschemes.pywal-nvim")
+-- spec("spuxy.colorschemes.pywal16-nvim")
 -- spec("spuxy.colorschemes.flow")
 -- spec("spuxy.colorschemes.miasma")
 spec("spuxy.colorschemes.tokyonight")
@@ -37,7 +39,7 @@ spec("spuxy.colorschemes.tokyonight")
 -- MOVEMENTS
 spec("spuxy.autopairs") -- own keymaps
 spec("spuxy.comment") -- own keymaps
-spec("spuxy.indentline")
+-- spec("spuxy.indentline")
 spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.telescope")
 spec("spuxy.surround") -- own keymaps
@@ -55,13 +57,18 @@ spec("spuxy.lualine")
 spec("spuxy.project")
 spec("spuxy.harpoon")
 
+-- COMPLETIONS
+spec("spuxy.completions.blink") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
+spec("spuxy.completions.lazydev")
+-- spec("spuxy.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
+
 -- LSP
 spec("spuxy.navic")
-spec("spuxy.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
 -- spec("spuxy.neodev") -- delet because of lazdyev
 spec("spuxy.lsp.lspconfig")
 -- spec("spuxy.lsp.none-ls")
 spec("spuxy.lsp.mason")
+spec("spuxy.lsp.mason-lspconfig")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 spec("spuxy.yamlcompanion")
@@ -76,6 +83,7 @@ spec("spuxy.git.neogit")
 
 -- UI
 spec("spuxy.bqf")
+-- spec("spuxy.menu")
 spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
 spec("spuxy.lsp_signature")
@@ -98,6 +106,8 @@ spec("spuxy.debug.python")
 
 -- Languages
 spec("spuxy.lsp.go.go-nvim")
+spec("spuxy.lsp.go.godoc")
+
 spec("spuxy.lsp.c.clangd-nvim")
 
 spec("spuxy.lint")
@@ -105,3 +115,10 @@ spec("spuxy.lint")
 -- TERM
 spec("spuxy.toggleterm")
 require("spuxy.lazy")
+
+require("spuxy.core.functions")
+
+local commands = require("spuxy.core.commands")
+commands.load(commands.defaults)
+
+require("spuxy.core.health")

@@ -41,6 +41,7 @@ local M = {
       bashls = {
         settings = bash_settings,
       },
+      jsonls = {},
       dockerls = {},
       gopls = {
         settings = go_settings,
@@ -62,9 +63,7 @@ local M = {
         settings = c_settings,
       },
       marksman = {},
-      pyright = {
-        settings = python_settings,
-      },
+      pyright = python_settings,
       rust_analyzer = {
         settings = rust_settings,
       },

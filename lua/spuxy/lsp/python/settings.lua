@@ -1,9 +1,13 @@
 return {
-  python = {
-    analysis = {
-      typeCheckingMode = "off",
-      autoSearchPaths = true,
-      useLibraryCodeForTypes = true,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace",
+        autoImportCompletions = true,
+      },
     },
   },
 }

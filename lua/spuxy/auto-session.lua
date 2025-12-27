@@ -39,5 +39,8 @@ local M = {
       },
     },
   },
+  config = function(_, opts)
+    require("auto-session").setup(opts)
+  end,
 }
 return M

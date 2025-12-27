@@ -31,7 +31,7 @@ local M = {
     install_root_dir = join_paths(vim.fn.stdpath "data", "mason"),
 
     -- NOTE: already handled in the bootstrap stage
-    PATH = "skip",
+    -- PATH = "skip", some kind of shit...
 
     pip = {
       upgrade_pip = false,

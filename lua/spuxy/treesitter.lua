@@ -6,6 +6,7 @@ local M = {
     "RRethy/nvim-treesitter-endwise",
     "mfussenegger/nvim-ts-hint-textobject",
     "windwp/nvim-ts-autotag",
+    { "nvim-mini/mini.ai", event = { "BufReadPre", "BufNewFile" }, opts = {} },
   },
   build = ":TSUpdate",
   opts = {
