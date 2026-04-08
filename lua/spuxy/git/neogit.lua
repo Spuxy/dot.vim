@@ -13,9 +13,6 @@ local M = {
     "folke/snacks.nvim",             -- optional
   },
   cmd = "Neogit",
-  keys = {
-    { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit" },
-  },
   opts = {
     auto_refresh = true,
     disable_builtin_notifications = false,

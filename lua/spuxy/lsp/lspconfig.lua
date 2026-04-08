@@ -12,29 +12,6 @@ local bash_settings = require("spuxy.lsp.sh.settings")
 local M = {
   "neovim/nvim-lspconfig",
   dependencies = { 'saghen/blink.cmp' },
-  keys = {
-    { "<leader>lsa", "<cmd>:Lspsaga code_action<cr>", desc = "Code Action" },
-    { "<leader>ld", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-    { "<leader>lw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-    { "<leader>lI", "<cmd>lua require('spuxy.lsp.lspconfig').toggle_inlay_hints()<cr>", desc = "Hints" },
-    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
-    { "<leader>le", "<cmd>Telescope quickfix<cr>", desc = "Telescope Quickfix" },
-    { "<leader>lh", "<cmd>:Lspsaga hover_doc<cr>", desc = "Hover Doc" },
-    { "<leader>lH", "<cmd>:Lspsaga hover_doc ++keep<cr>", desc = "Hover Doc + Keep" },
-    { "<leader>lO", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Workspace Symbols" },
-    { "<leader>lo", "<cmd>:Lspsaga outline<cr>", desc = "Outline Symbols" },
-
-    { "<leader>ldi", "<cmd>LspInfo<cr>", desc = "Info" },
-    { "<leader>ldI", "<cmd>Mason<cr>", desc = "Mason Info" },
-
-    { "<leader>lpp", "<cmd>:Lspsaga peek_definition<cr>", desc = "Preview" },
-    { "<leader>lpd", function() require('lvim.lsp.peek').Peek('definition') end, desc = "Definition" },
-    { "<leader>lpf", ":Lspsaga finder<CR>", desc = "Finder" },
-    -- { "<leader>lpi", "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", desc = "Implementation" },
-
-    { "<leader>lgfs", "<cmd>:GoFillStruct<cr>", desc = "Struct" },
-    { "<leader>lgfe", "<cmd>:GoFillErr<cr>", desc = "Errors" },
-  },
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     servers = {
@@ -107,50 +84,17 @@ local M = {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
-        local map = function(keys, func, desc, mode)
-          mode = mode or "n"
-          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
+        -- Attach navic if available
+        local navic_ok, navic = pcall(require, "nvim-navic")
+        if navic_ok then
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, event.buf)
+          end
         end
 
-        map("<leader>lf", function() vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})end, "Format")
-        map("<leader>lh", vim.lsp.buf.hover, "Hover")
-        map("<leader>lr", vim.lsp.buf.rename, "Rename")
-        map("<leader>la", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
-        map("<leader>lD", vim.lsp.buf.declaration, "Declaration")
-
-        map("<leader>lj", vim.diagnostic.goto_next, "Next Diagnostic")
-        map("<leader>lk", vim.diagnostic.goto_prev, "Prev Diagnostic")
-        map("<leader>ll", vim.lsp.codelens.run, "CodeLens Action")
-        map("<leader>lq", vim.diagnostic.setloclist, "Quickfix")
-
-        map("gH", vim.lsp.buf.hover, "Hover")
-        map("gD", vim.lsp.buf.declaration, "Declaration")
-        map("gd", vim.lsp.buf.definition, "Definition")
-        map("gI", vim.lsp.buf.implementation, "Implementation")
-        map("gr", vim.lsp.buf.references, "References")
-        map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-        map("gs", vim.lsp.buf.signature_help, "Show Signature Help")
-
-        -- local opts = { buffer = bufnr, noremap = true, silent = true }
-        -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        -- vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-        -- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-        -- vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-        -- vim.keymap.set("n", "<space>wl", function()
-        --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        -- end, opts)
-        -- vim.keymap.set("n", "<space>lD", vim.lsp.buf.type_definition, opts)
-        -- vim.keymap.set("n", "<space>lr", vim.lsp.buf.rename, opts)
-        -- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        -- vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-        -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-        -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-        -- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
-        -- vim.keymap.set("n", "<space>li", "<cmd>LspInfo<CR>", opts)
-        -- vim.keymap.set("n", "<space>lI", "<cmd>Mason<CR>", opts)
+        -- Setup buffer-local keymaps
+        require("spuxy.lsp.keymaps").setup(event.buf)
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 

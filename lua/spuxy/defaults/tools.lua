@@ -16,7 +16,7 @@ return {
     "rust_analyzer",
     "clangd",
     "ltex-ls-plus",
-    "puppet-editor-services"
+    "puppet-editor-services",
   },
 
   formatters = {
@@ -39,9 +39,9 @@ return {
     sh = { "shellcheck" },
     yaml = { "yamllint" },
     python = { "pylint" },
-    markdown = { "write-good", "markdownlint", "markdownlint-cli2" },
+    markdown = { "markdownlint", "markdownlint-cli2" },
     rst = { "rstcheck", "sphinx-lint" },
-    rust = { "snyk", "bacon" }
+    rust = { "snyk", "bacon" },
   },
 
   treesitter = {

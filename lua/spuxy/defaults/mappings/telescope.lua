@@ -45,14 +45,28 @@ M = {
             ["<C-t>"] = actions.select_tab,
             ["<C-?>"] = actions.which_key,
 
+            ["<C-c>"] = actions.close,
+
+            ["<C-q>"] = function(...)
+              actions.smart_send_to_qflist(...)
+              actions.open_qflist(...)
+            end,
+
             -- ["<C-P>"] = action_layout.toggle_preview,
             -- ["<C-M>"] = action_layout.toggle_mirror,
         },
         n = {
             ["<esc>"] = actions.close,
+            ["<C-c>"] = actions.close,
+
             ["j"] = actions.move_selection_next,
             ["k"] = actions.move_selection_previous,
             ["q"] = actions.close,
+
+            ["<C-q>"] = function(...)
+              actions.smart_send_to_qflist(...)
+              actions.open_qflist(...)
+            end,
         },
     },
 

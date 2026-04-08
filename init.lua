@@ -10,42 +10,34 @@ spec("spuxy.ai.tabnine")
 spec("spuxy.ai.copilotchat")
 -- spec("spuxy.ai.chatgpt") i dont use it atm, i need openai token which requires my creditcard ^^
 
--- MISC
+-- UI
 spec("spuxy.alpha")
 spec("spuxy.devicons")
 spec("spuxy.mini-icon")
-spec("spuxy.barbecue")
 spec("spuxy.noice")
 spec("spuxy.notify")
+
+-- MISC
 spec("spuxy.trouble")
 spec("spuxy.treesj")
 spec("spuxy.auto-session")
 spec("spuxy.transparent")
 
+-- Markdown
 spec("spuxy.markdown")
 spec("spuxy.markdown-preview")
--- spec("spuxy.markview") It can be used as alternative to 'markdown'
 
 -- COLORSCHEMES
--- spec("spuxy.colorschemes.gruvbox-nvim")
--- spec("spuxy.colorschemes.gruvbox")
--- spec("spuxy.colorschemes.pywal-nvim")
--- spec("spuxy.colorschemes.pywal16-nvim")
--- spec("spuxy.colorschemes.flow")
--- spec("spuxy.colorschemes.miasma")
 spec("spuxy.colorschemes.tokyonight")
--- spec("spuxy.colorschemes.neopywal-nvim")
 
 -- MOVEMENTS
 spec("spuxy.autopairs") -- own keymaps
 spec("spuxy.comment") -- own keymaps
--- spec("spuxy.indentline")
-spec("spuxy.bufferline") -- own keymaps
+spec("spuxy.indentline")
 spec("spuxy.telescope")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
 spec("spuxy.spectre")
-spec("spuxy.smart-splits") -- spliting and moving cursor and buffers
 spec("spuxy.ufo") -- spliting and moving cursor and buffers
 spec("spuxy.substitute") -- spliting and moving cursor and buffers
 
@@ -63,10 +55,10 @@ spec("spuxy.harpoon")
 spec("spuxy.completions.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
 
 -- LSP
+-- breadcrumbs in the top of the window
 spec("spuxy.navic")
--- spec("spuxy.neodev") -- delet because of lazdyev
+spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.lsp.lspconfig")
--- spec("spuxy.lsp.none-ls")
 spec("spuxy.lsp.mason")
 spec("spuxy.lsp.mason-lspconfig")
 spec("spuxy.treesitter")
@@ -88,7 +80,6 @@ spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
 spec("spuxy.lsp_signature")
 spec("spuxy.rainbow")
-spec("spuxy.dressing")
 spec("spuxy.overseer")
 
 spec("spuxy.illuminate")
@@ -101,12 +92,13 @@ spec("spuxy.debug.ui")
 spec("spuxy.debug.telescope")
 spec("spuxy.debug.virtual-text")
 spec("spuxy.debug.mason")
-spec("spuxy.debug.go")
-spec("spuxy.debug.python")
+spec("spuxy.debug.go.settings")
+spec("spuxy.debug.python.settings")
 
 -- Languages
 spec("spuxy.lsp.go.go-nvim")
 spec("spuxy.lsp.go.godoc")
+spec("spuxy.lsp.go.gopher")
 
 spec("spuxy.lsp.c.clangd-nvim")
 
@@ -115,6 +107,10 @@ spec("spuxy.linters.nvim-lint")
 
 -- TERM
 spec("spuxy.toggleterm")
+
+-- Notes
+spec("spuxy.obsidian")
+
 require("spuxy.lazy")
 
 require("spuxy.core.functions")
@@ -123,3 +119,21 @@ local commands = require("spuxy.core.commands")
 commands.load(commands.defaults)
 
 require("spuxy.core.health")
+
+-- ARCHIVE
+-- spec("spuxy.dressing")
+-- spec("spuxy.barbecue")
+-- spec("spuxy.colorschemes.gruvbox-nvim")
+-- spec("spuxy.colorschemes.gruvbox")
+-- spec("spuxy.colorschemes.pywal-nvim")
+-- spec("spuxy.colorschemes.pywal16-nvim")
+-- spec("spuxy.colorschemes.flow")
+-- spec("spuxy.colorschemes.miasma")
+-- spec("spuxy.colorschemes.neopywal-nvim")
+-- spec("spuxy.markview") It can be used as alternative to 'markdown'
+
+-- spec("spuxy.lsp.none-ls")
+-- spec("spuxy.neodev") -- delet because of lazdyev
+-- spec("spuxy.barbecue")
+
+-- spec("spuxy.smart-splits") -- spliting and moving cursor and buffers

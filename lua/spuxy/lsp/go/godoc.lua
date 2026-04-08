@@ -1,3 +1,5 @@
+--  Fuzzy search Go packages/symbols and view docs from within Neovim
+--    github.com/fredrikaverpil/godoc.nvim
 local M = {
   {
     "fredrikaverpil/godoc.nvim",

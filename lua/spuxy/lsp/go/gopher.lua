@@ -1,3 +1,5 @@
+-- Enhance your golang experience
+--    github.com/olexsmir/gopher.nvim
 local M = {
   "olexsmir/gopher.nvim",
   ft = "go",
@@ -8,10 +10,7 @@ local M = {
     "nvim-treesitter/nvim-treesitter",
     "mfussenegger/nvim-dap", -- (optional) only if you use `gopher.dap`
   },
-}
-
-function M.config()
-  require("gopher").setup {
+  opts = {
     commands = {
       go = "go",
       gomodifytags = "gomodifytags",
@@ -32,7 +31,10 @@ function M.config()
     gotag = {
       transform = "snakecase",
     },
-  }
-end
+  },
+  config = function (_, opts)
+    require("gopher").setup(opts)
+  end
+}
 
 return M

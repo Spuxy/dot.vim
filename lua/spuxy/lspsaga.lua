@@ -1,20 +1,13 @@
 local M = {
-  'nvimdev/lspsaga.nvim',
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter', -- optional
-    'nvim-tree/nvim-web-devicons'      -- optional
-  }
-}
-
-function M.config()
-  require('lspsaga').setup({
+  "nvimdev/lspsaga.nvim",
+  opts = {
     symbols_in_winbar = { enable = true },
     finder = {
       keys = {
         shuttle = "o",
         toggle_or_open = "<CR>",
       },
-      right_width = 0.7
+      right_width = 0.7,
     },
     implement = {
       enable = true,
@@ -23,9 +16,35 @@ function M.config()
       priority = 100,
     },
     hover = {
-      open_link = "<CR>"
-    }
-  })
-end
+      open_link = "<CR>",
+    },
+  },
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter", -- optional
+    "nvim-tree/nvim-web-devicons", -- optional
+  },
+}
+
+-- function M.config()
+--   require('lspsaga').setup({
+--     symbols_in_winbar = { enable = true },
+--     finder = {
+--       keys = {
+--         shuttle = "o",
+--         toggle_or_open = "<CR>",
+--       },
+--       right_width = 0.7
+--     },
+--     implement = {
+--       enable = true,
+--       sign = true,
+--       virtual_text = true,
+--       priority = 100,
+--     },
+--     hover = {
+--       open_link = "<CR>"
+--     }
+--   })
+-- end
 
 return M
