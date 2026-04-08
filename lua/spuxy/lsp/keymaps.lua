@@ -22,7 +22,7 @@ function M.setup(bufnr)
     { "<leader>lH", "<cmd>:Lspsaga hover_doc ++keep<cr>", desc = "Hover Doc + Keep" },
     { "<leader>lo", "<cmd>:Lspsaga outline<cr>", desc = "Outline Symbols" },
     { "<leader>lpp", "<cmd>:Lspsaga peek_definition<cr>", desc = "Preview Definition" },
-    { "<leader>lpd", function() require('lvim.lsp.peek').Peek('definition') end, desc = "Peek Definition" },
+    { "<leader>lpd", vim.lsp.buf.definition, desc = "Peek Definition" },
     { "<leader>lpf", ":Lspsaga finder<CR>", desc = "Finder" },
 
     -- Trouble diagnostics

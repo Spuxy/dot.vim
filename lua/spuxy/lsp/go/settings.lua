@@ -33,9 +33,7 @@ return {
       staticcheck = true,
       directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
       semanticTokens = true,
-      -- Add documentation links to resolve imports faster
       linksInHover = true,
-      -- Enable more aggressive completion
       matcher = "Fuzzy",
       experimentalPostfixCompletions = true,
     },

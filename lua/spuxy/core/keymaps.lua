@@ -128,8 +128,7 @@ keymap("n", "<leader>zk", "[s", { desc = "Previous error" })
 keymap("n", "<leader>za", "zg", { desc = "Add word" })
 
 -- Reload snippets folder
--- TODO make path system independent
-keymap("n", "<leader>ms", "<cmd>source ~/.config/nvim/snippets/*<cr>", { desc = "Reload snippets" })
+keymap("n", "<leader>ms", "<cmd>source " .. vim.fn.stdpath("config") .. "/snippets/*<cr>", { desc = "Reload snippets" })
 
 -- Quickfix
 keymap("n", "<leader>qj", "<cmd>cnext<cr>", { desc = "Next entry" })
@@ -147,10 +146,6 @@ keymap("n", "*", "*zz", opts)
 keymap("n", "#", "#zz", opts)
 keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
-
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
 
 keymap("x", "p", [["_dP]])
 
@@ -175,14 +170,19 @@ end, {})
 keymap({ "n", "o", "x" }, "<s-h>", "^", opts)
 keymap({ "n", "o", "x" }, "<s-l>", "g_", opts)
 
--- tailwind bearable to work with
-keymap({ "n", "x" }, "j", "gj", opts)
-keymap({ "n", "x" }, "k", "gk", opts)
-keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", opts)
-
 vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 
 
+
+-- Diagnostic navigation (error/warning severity)
+keymap("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end, { desc = "Previous error" })
+keymap("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end, { desc = "Next error" })
+keymap("n", "[w", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN }) end, { desc = "Previous warning" })
+keymap("n", "]w", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN }) end, { desc = "Next warning" })
+
+-- Add a commented line below/above (AstroNvim style, requires comment plugin)
+keymap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment below" })
+keymap("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment above" })
 
 -- Simple tree
 keymap("n", "<leader>pv", vim.cmd.Ex, opts)

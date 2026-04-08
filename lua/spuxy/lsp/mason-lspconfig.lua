@@ -7,12 +7,6 @@ local M = {
 		"WhoIsSethDaniel/mason-tool-installer.nvim"
 	},
   config = function ()
-    require("mason").setup({
-      ui = {
-        border = "rounded",
-      },
-    })
-
     -- Flatten linters and formatters into single arrays
     local function flatten(t)
       local result = {}

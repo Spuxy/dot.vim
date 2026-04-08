@@ -1,12 +1,11 @@
 return {
   settings = {
-    format = {
-      enable = false, -- let conform handle the formatting
-    },
-    diagnostics = { globals = { "vim" } },
-    telemetry = { enable = false },
-    hint = { enable = true },
     Lua = {
+      format = {
+        enable = false, -- let conform handle formatting
+      },
+      diagnostics = { globals = { "vim" } },
+      telemetry = { enable = false },
       workspace = {
         checkThirdParty = false,
       },
@@ -27,8 +26,6 @@ return {
       completion = {
         callSnippet = "Replace",
       },
-      -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
 }

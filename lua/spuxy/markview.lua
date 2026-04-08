@@ -1,10 +1,13 @@
--- A hackable markdown, Typst, latex, html(inline) & YAML previewer for Neovim
---    github.com/OXY2DEV/markview.nvim?tab=readme-ov-file#-installation
+-- Markdown renderer — active replacement for render-markdown.nvim
+--    github.com/OXY2DEV/markview.nvim
 local M = {
   "OXY2DEV/markview.nvim",
-  lazy = false,
-  -- Completion for `blink.cmp`
-  dependencies = { "saghen/blink.cmp" },
+  ft = { "markdown" },
+  opts = {
+    preview = {
+      filetypes = { "markdown" },
+    },
+  },
 }
 
 return M

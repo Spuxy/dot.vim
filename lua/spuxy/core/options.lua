@@ -10,7 +10,7 @@ local options = {
   -- vim.opt.fileencoding = "utf-8" -- the encoding written to a file
   hlsearch = true, -- highlight all matches on previous search pattern
   ignorecase = true, -- ignore case in search patterns
-  mouse = "a", -- allow the mouse to be used in neovim
+  mouse = "nv", -- mouse in normal/visual but not insert mode
   pumheight = 10, -- pop up menu height
   pumblend = 10,
   showmode = false, -- we don't need to see things like -- INSERT -- anymore
@@ -22,9 +22,17 @@ local options = {
   swapfile = false, -- creates a swapfile
   termguicolors = true, -- set term gui colors (most terminals support this)
   timeoutlen = 1000, -- time to wait for a mapped sequence to complete (in milliseconds)
+  ttimeoutlen = 0, -- instant escape from insert mode / key code sequences
   undofile = true, -- enable persistent undo
+  undolevels = 1000, -- maximum number of undo changes
   updatetime = 100, -- faster completion (4000ms default)
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+  breakindent = true, -- wrapped lines keep visual indentation
+  linebreak = true, -- wrap at word boundaries (respects breakat)
+  confirm = true, -- raise a dialog instead of failing for unsaved changes
+  infercase = true, -- smarter keyword completion case inference
+  shiftround = true, -- round indent to multiple of shiftwidth with </>/<<
+  virtualedit = "block", -- allow cursor past EOL in visual block mode
   expandtab = true, -- convert tabs to spaces
   shiftwidth = 2, -- the number of spaces inserted for each indentation
   tabstop = 2, -- insert 2 spaces for a tab
@@ -37,12 +45,12 @@ local options = {
   numberwidth = 4, -- set number column width to 2 {default 4}
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   wrap = false, -- display lines as one long line
-  scrolloff = 0,
+  scrolloff = 10, -- keep 10 lines of context above/below cursor
   sidescrolloff = 8,
   guifont = "monospace:h17", -- the font used in graphical neovim applications
   title = false,
-  foldcolumn = '1', -- "1", -- '0' is not bad
-  foldlevel = 99, -- Using ufo provider need a large value, feel free to decrease the value
+  foldcolumn = '0', -- snacks.statuscolumn draws the fold indicator itself
+  foldlevel = 99, -- ufo needs a large value so all folds start open
   foldlevelstart = 99,
   foldenable = true,
   -- colorcolumn = "80",
@@ -60,6 +68,16 @@ vim.opt.fillchars:append({
   stl = " ",
 })
 vim.opt.shortmess:append("c")
+vim.opt.diffopt:append("linematch:60") -- better diff alignment for lines up to 60 chars apart
+vim.opt.diffopt:append("algorithm:histogram") -- histogram diff gives more readable hunks
+
+-- Global floating window border (Neovim 0.11+)
+if vim.fn.has("nvim-0.11") == 1 then
+  vim.opt.winborder = "rounded"
+end
+
+-- Show invisible chars when :set list is toggled
+vim.opt.listchars = { tab = "» ", trail = "·", extends = "›", precedes = "‹", nbsp = "␣" }
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]]) -- treats the word with dash as a word -> test-test is one word

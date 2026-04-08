@@ -1,5 +1,69 @@
 local api = vim.api
 
+-- Auto-create parent directories when saving a file to a new path
+api.nvim_create_autocmd("BufWritePre", {
+  callback = function(args)
+    local file = args.match
+    -- Skip URL-like paths (e.g. scp://, fugitive://)
+    if file:match("^%w+://") then return end
+    local dir = vim.fn.fnamemodify(vim.uv.fs_realpath(file) or file, ":p:h")
+    if dir ~= "" and not vim.uv.fs_stat(dir) then
+      vim.fn.mkdir(dir, "p")
+    end
+  end,
+  desc = "Auto-create parent directories on save",
+})
+
+-- Refresh buffers when Neovim regains focus (catches external git checkouts etc.)
+api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  callback = function()
+    -- Don't checktime on scratch/nofile buffers
+    if vim.bo.buftype ~= "nofile" then vim.cmd("checktime") end
+  end,
+  desc = "Refresh buffers on focus regain",
+})
+
+-- Quit when only sidebar windows remain (neo-tree, aerial)
+local sidebar_fts = { ["neo-tree"] = true, aerial = true }
+api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    -- If only one window left, let neo-tree handle its own auto-close
+    if #wins == 1 and vim.bo[vim.api.nvim_win_get_buf(wins[1])].filetype ~= "aerial" then
+      return
+    end
+    local remaining = vim.tbl_filter(function(w)
+      if not vim.api.nvim_win_is_valid(w) then return false end
+      local ft = vim.bo[vim.api.nvim_win_get_buf(w)].filetype
+      return not sidebar_fts[ft]
+    end, wins)
+    if #remaining == 0 then
+      if #vim.api.nvim_list_tabpages() > 1 then
+        vim.cmd.tabclose()
+      else
+        vim.cmd.qall()
+      end
+    end
+  end,
+  desc = "Quit when only sidebar windows remain",
+})
+
+-- Make gf understand require() / dofile() / loadfile() in Lua files (LunarVim approach)
+api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    vim.opt_local.include = [[\v<((do|load)file|require|reload)[^'"]*['"\zs[^'"]+]]
+    vim.opt_local.includeexpr = "substitute(v:fname,'\\.','/','g')"
+    vim.opt_local.suffixesadd:prepend(".lua")
+    vim.opt_local.suffixesadd:prepend("/init.lua")
+    for _, p in ipairs(vim.api.nvim_list_runtime_paths()) do
+      vim.opt_local.path:append(p .. "/lua")
+    end
+  end,
+  desc = "gf understands require() paths in Lua",
+})
+
 api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
@@ -15,9 +79,12 @@ api.nvim_create_autocmd("BufEnter", {
 })
 
 api.nvim_create_autocmd("BufReadPost", {
-  callback = function()
-    local mark = api.nvim_buf_get_mark(0, '"')
-    local lcount = api.nvim_buf_line_count(0)
+  callback = function(args)
+    local buf = args.buf
+    -- Don't restore in gitcommit buffers (would land on stale line)
+    if vim.tbl_contains({ "gitcommit" }, vim.bo[buf].filetype) then return end
+    local mark = api.nvim_buf_get_mark(buf, '"')
+    local lcount = api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(api.nvim_win_set_cursor, 0, mark)
     end
@@ -48,6 +115,27 @@ api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "ZQ", { buffer = event.buf, silent = true })
   end,
   desc = "quit man page Neovim",
+})
+
+-- Equalize window sizes when terminal is resized
+api.nvim_create_autocmd("VimResized", {
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+  desc = "Equalize window sizes on terminal resize",
+})
+
+-- Ensure editorconfig settings take precedence after FileType detection
+api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    if vim.F.if_nil(vim.b.editorconfig, vim.g.editorconfig) then
+      local ok, editorconfig = pcall(require, "editorconfig")
+      if ok then editorconfig.config(args.buf) end
+    end
+  end,
+  desc = "Re-apply editorconfig after FileType",
 })
 
 local chezmoi_path = vim.fn.resolve(vim.fn.expand("~/.local/share/chezmoi"))

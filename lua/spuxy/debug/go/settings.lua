@@ -5,7 +5,13 @@ local M = {
   "leoluz/nvim-dap-go",
 }
 function M.config()
-  require("dap-go").setup()
+  require("dap-go").setup({
+    delve = {
+      -- Suppress Go version check: Mason's delve may lag behind the installed
+      -- Go release but still works in practice
+      args = { "--check-go-version=false" },
+    },
+  })
 end
 
 return M

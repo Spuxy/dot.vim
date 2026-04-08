@@ -2,7 +2,7 @@ local M = {
   "mfussenegger/nvim-dap-python",
   keys = {
     {
-      "<leader>dpt",
+      "<leader>dPt",
       function()
         require("dap-python").test_method()
       end,
@@ -10,7 +10,7 @@ local M = {
       ft = "python",
     },
     {
-      "<leader>dpc",
+      "<leader>dPc",
       function()
         require("dap-python").test_class()
       end,
@@ -18,7 +18,7 @@ local M = {
       ft = "python",
     },
     {
-      "<leader>dps",
+      "<leader>dPs",
       function()
         require("dap-python").debug_selection()
       end,
@@ -29,9 +29,6 @@ local M = {
   config = function()
     local path = require("mason-registry").get_package("debugpy"):get_install_path()
     require("dap-python").setup(path .. "/venv/bin/python")
-
-    local dap = require("dap")
-    dap.configuration.python({})
   end,
 }
 

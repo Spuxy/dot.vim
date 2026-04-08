@@ -185,7 +185,6 @@ end
 
 function M.config(_, opts)
   local navic_ok, navic = pcall(require, "nvim-navic")
-  print(navic_ok)
   if not navic_ok then
     return
   end

@@ -14,7 +14,7 @@ M.defaults = {
   {
     name = "BufferKill",
     fn = function()
-      require("spuxy.core.functions").buf_kill "bd"
+      require("spuxy.bufferline").buf_kill("bd")
     end,
   },
   {
@@ -26,22 +26,12 @@ M.defaults = {
   {
     name = "ToggleFormatOnSave",
     fn = function()
-      require("lvim.core.autocmds").toggle_format_on_save()
-    end,
-  },
-  {
-    name = "LvimDocs",
-    fn = function()
-      local documentation_url = "https://www.lunarvim.org/docs/beginners-guide"
-      if vim.fn.has "mac" == 1 or vim.fn.has "macunix" == 1 then
-        vim.fn.execute("!open " .. documentation_url)
-      elseif vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1 then
-        vim.fn.execute("!start " .. documentation_url)
-      elseif vim.fn.has "unix" == 1 then
-        vim.fn.execute("!xdg-open " .. documentation_url)
-      else
-        vim.notify "Opening docs in a browser is not supported on your OS"
-      end
+      vim.g.disable_autoformat = not vim.g.disable_autoformat
+      vim.notify(
+        string.format("Format on save %s", vim.g.disable_autoformat and "disabled" or "enabled"),
+        vim.log.levels.INFO,
+        { title = "conform.nvim" }
+      )
     end,
   },
 }

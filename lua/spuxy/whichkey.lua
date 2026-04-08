@@ -56,7 +56,8 @@ local M = {
     require("which-key").setup(opts)
     require("which-key").add({
       { "<leader>b", group = "Buffers", icon = "󰓩" },
-      { "<leader>d", group = "Debug", icon = icons.ui.DebugConsole },
+      { "<leader>d",  group = "Debug",  icon = icons.ui.DebugConsole },
+        { "<leader>dP", group = "Python", icon = icons.language.python },
       { "<leader>f", group = "Find", icon = icons.ui.Telescope },
       { "<leader>g", group = "Git", icon = icons.git.Octoface },
       { "<leader>n", group = "Todos", icon = icons.ui.List },

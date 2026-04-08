@@ -17,7 +17,13 @@ local M = {
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
-    statuscolumn = { enabled = true },
+    statuscolumn = {
+      enabled = true,
+      folds = {
+        open = true,  -- show chevron on open folds (VSCode-style)
+        git_hl = true, -- colour the fold indicator with git diff colours
+      },
+    },
     words = { enabled = true },
   },
 }

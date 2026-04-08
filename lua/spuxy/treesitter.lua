@@ -4,7 +4,6 @@ local M = {
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "RRethy/nvim-treesitter-endwise",
-    "mfussenegger/nvim-ts-hint-textobject",
     "windwp/nvim-ts-autotag",
     { "nvim-mini/mini.ai", event = { "BufReadPre", "BufNewFile" }, opts = {} },
   },
@@ -13,7 +12,6 @@ local M = {
     ignore_install = {},
     auto_install = true,
     sync_install = false,
-    autopairs = { enable = true },
     ensure_installed = defaults.treesitter,
     highlight = { enable = true },
     indent = {
@@ -33,6 +31,11 @@ local M = {
   config = function(_, opts)
     require("nvim-ts-autotag").setup()
     require("nvim-treesitter.configs").setup(opts)
+    -- Workaround: nvim-treesitter's set-lang-from-info-string! predicate crashes
+    -- in Neovim 0.11+ when processing markdown injection queries (fenced code
+    -- block language detection). Clear the query until nvim-treesitter is updated.
+    -- Remove this once `:Lazy update nvim-treesitter` fixes the issue.
+    vim.treesitter.query.set("markdown", "injections", "")
   end,
 }
 

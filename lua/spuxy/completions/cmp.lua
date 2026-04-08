@@ -44,7 +44,6 @@ function M.config()
 	local luasnip = require("luasnip")
 
 	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-	vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
 	vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 
 	local check_backspace = function()
@@ -111,28 +110,20 @@ function M.config()
 			}),
 		}),
 		formatting = {
-			fields = { "kind", "abbr", "menu" },
+			fields = { "abbr", "menu" },
 			format = function(entry, vim_item)
-				vim_item.kind = icons.kind[vim_item.kind]
-				vim_item.menu = ({
-					nvim_lsp = "",
-					nvim_lua = "",
-					luasnip = "",
-					buffer = "",
-					path = "",
-					emoji = "",
-				})[entry.source.name]
+				local kind_name = vim_item.kind
+				local kind_icon = icons.kind[kind_name] or ""
 
 				if entry.source.name == "emoji" then
-					vim_item.kind = icons.misc.Smiley
-					vim_item.kind_hl_group = "CmpItemKindEmoji"
+					vim_item.menu = icons.misc.Smiley .. " Emoji"
+					vim_item.menu_hl_group = "CmpItemKindEmoji"
+				else
+					vim_item.menu = kind_icon .. " " .. kind_name
+					vim_item.menu_hl_group = "CmpItemKind" .. kind_name
 				end
 
-				if entry.source.name == "cmp_tabnine" then
-					vim_item.kind = icons.misc.Robot
-					vim_item.kind_hl_group = "CmpItemKindTabnine"
-				end
-
+				vim_item.kind = ""
 				return vim_item
 			end,
 		},
@@ -140,7 +131,6 @@ function M.config()
 			{ name = "copilot" },
 			{ name = "nvim_lsp" },
 			{ name = "luasnip" },
-			{ name = "cmp_tabnine" },
 			{ name = "nvim_lua" },
 			{ name = "buffer" },
 			{ name = "path" },

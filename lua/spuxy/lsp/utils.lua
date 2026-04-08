@@ -38,28 +38,26 @@ end
 ---Force a specific language for ltex-ls
 ---@param lang string
 M.set_ltex_lang = function(lang)
-  local clients = vim.lsp.buf_get_clients(0)
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
 
   for _, client in ipairs(clients) do
     if client.name == "ltex" then
       utils.notify("Set ltex-ls lang to " .. lang, vim.log.levels.INFO, "utils.functions")
       client.config.settings.ltex.language = lang
-      vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
+      client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
       return
     end
   end
 end
 
----Join path segments that were passed as input
+---Join path segments
 ---@return string
 M.join_paths = function(...)
-  local result = table.concat({ ... }, path_sep)
-  print(result)
-  return result
+  return vim.fs.joinpath(...)
 end
 
 M.get_LSP_clients = function()
-  return vim.lsp.buf_get_clients(0)
+  return vim.lsp.get_clients({ bufnr = 0 })
 end
 
 return M

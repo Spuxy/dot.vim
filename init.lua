@@ -1,18 +1,19 @@
 require("spuxy.core.keymaps")
 require("spuxy.core.launch")
 require("spuxy.core.options")
+require("spuxy.core.autocmds")
 
 spec("spuxy.whichkey")
 
 -- AI
 spec("spuxy.ai.copilot")
-spec("spuxy.ai.tabnine")
+-- tabnine removed: empty config(), copilot.vim is the active AI completion
 spec("spuxy.ai.copilotchat")
 -- spec("spuxy.ai.chatgpt") i dont use it atm, i need openai token which requires my creditcard ^^
 
 -- UI
 spec("spuxy.alpha")
-spec("spuxy.devicons")
+-- devicons removed: mini-icon.lua already mocks nvim-web-devicons API via package.preload
 spec("spuxy.mini-icon")
 spec("spuxy.noice")
 spec("spuxy.notify")
@@ -22,9 +23,12 @@ spec("spuxy.trouble")
 spec("spuxy.treesj")
 spec("spuxy.auto-session")
 spec("spuxy.transparent")
+-- overseer removed: all keymaps were commented out — no way to invoke the plugin
 
 -- Markdown
-spec("spuxy.markdown")
+-- render-markdown disabled: treesitter injection crash (set-lang-from-info-string! / nil node:range())
+-- spec("spuxy.markdown")
+spec("spuxy.markview")
 spec("spuxy.markdown-preview")
 
 -- COLORSCHEMES
@@ -37,9 +41,12 @@ spec("spuxy.indentline")
 spec("spuxy.telescope")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
+spec("spuxy.flash")
 spec("spuxy.spectre")
+spec("spuxy.grug-far")
+spec("spuxy.mini-align")
 spec("spuxy.ufo") -- spliting and moving cursor and buffers
-spec("spuxy.substitute") -- spliting and moving cursor and buffers
+-- substitute removed: opts = {}, no keymaps configured — does nothing
 
 -- FILESYSTEM
 spec("spuxy.neotree") -- own keymaps
@@ -55,8 +62,7 @@ spec("spuxy.harpoon")
 spec("spuxy.completions.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
 
 -- LSP
--- breadcrumbs in the top of the window
-spec("spuxy.navic")
+-- navic removed: lspsaga provides symbols_in_winbar with more features
 spec("spuxy.bufferline") -- own keymaps
 spec("spuxy.lsp.lspconfig")
 spec("spuxy.lsp.mason")
@@ -72,6 +78,7 @@ spec("spuxy.conform")
 -- GIT
 spec("spuxy.git.gitsigns")
 spec("spuxy.git.neogit")
+spec("spuxy.git.fugitive")
 
 -- UI
 spec("spuxy.bqf")
@@ -80,7 +87,6 @@ spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
 spec("spuxy.lsp_signature")
 spec("spuxy.rainbow")
-spec("spuxy.overseer")
 
 spec("spuxy.illuminate")
 spec("spuxy.schemastore")

@@ -1,68 +1,209 @@
-local icons = require("spuxy.core.icons")
+-- Eviline config for lualine
+-- Credit: shadmansaleh & glepnir
 local M = {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "AndreM222/copilot-lualine",
-    "RedsXDD/neopywal.nvim",
-    "uZer/pywal16.nvim",
     "rmagatti/auto-session",
   },
-  -- https://github.com/folke/trouble.nvim?tab=readme-ov-file#statusline-component
-  opts = {
-    options = {
-      ignore_focus = { "NvimTree" },
-      icons_enabled = true,
-      theme = "pywal-nvim",
-      component_separators = { left = "", right = "" },
-      section_separators = { left = "", right = "" },
-      disabled_filetypes = {
-        statusline = {},
-        winbar = {},
+  config = function()
+    local lualine = require("lualine")
+
+    local colors = {
+      bg       = "#202328",
+      fg       = "#bbc2cf",
+      yellow   = "#ECBE7B",
+      cyan     = "#008080",
+      darkblue = "#081633",
+      green    = "#98be65",
+      orange   = "#FF8800",
+      violet   = "#a9a1e1",
+      magenta  = "#c678dd",
+      blue     = "#51afef",
+      red      = "#ec5f67",
+    }
+
+    local conditions = {
+      buffer_not_empty = function()
+        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+      end,
+      hide_in_width = function()
+        return vim.fn.winwidth(0) > 80
+      end,
+      check_git_workspace = function()
+        local filepath = vim.fn.expand("%:p:h")
+        local gitdir = vim.fn.finddir(".git", filepath .. ";")
+        return gitdir and #gitdir > 0 and #gitdir < #filepath
+      end,
+    }
+
+    local config = {
+      options = {
+        component_separators = "",
+        section_separators = "",
+        globalstatus = true,
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "neo-tree" } },
+        theme = {
+          normal   = { c = { fg = colors.fg, bg = colors.bg } },
+          inactive = { c = { fg = colors.fg, bg = colors.bg } },
+        },
       },
-      -- ignore_focus = {},
-      always_divide_middle = true,
-      globalstatus = false,
-      refresh = {
-        statusline = 1000,
-        tabline = 1000,
-        winbar = 1000,
+      sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_c = {},
+        lualine_x = {},
       },
-    },
-    sections = {
-      lualine_a = { "mode" },
-      lualine_b = { "branch", "diff" },
-      lualine_c = { "diagnostics" },
-      lualine_x = {
-        function()
-          return string.format("%s%s", icons.misc.Session, require("auto-session.lib").current_session_name(true))
-        end,
-        "copilot",
-        "encoding",
-        "fileformat",
-        "filetype",
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_c = {},
+        lualine_x = {},
       },
-      lualine_y = { "progress" },
-      lualine_z = { "location" },
-    },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = { "filename" },
-      lualine_x = { "location" },
-      lualine_y = {},
-      lualine_z = {},
-    },
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
-    extensions = { "quickfix", "man", "fugitive" },
-  },
-  config = function(_, opts)
-    require("neopywal.theme.plugins.lualine").setup()
-    -- opts.options.theme = "neopywal"
-    opts.options.theme = "pywal16-nvim"
-    require("lualine").setup(opts)
+    }
+
+    local function ins_left(component)
+      table.insert(config.sections.lualine_c, component)
+    end
+
+    local function ins_right(component)
+      table.insert(config.sections.lualine_x, component)
+    end
+
+    -- ┤ Left side ├ --
+
+    ins_left {
+      function() return "▊" end,
+      color = { fg = colors.blue },
+      padding = { left = 0, right = 1 },
+    }
+
+    ins_left {
+      function() return "" end,
+      color = function()
+        local mode_color = {
+          n  = colors.red,    i  = colors.green,  v  = colors.blue,
+          V  = colors.blue,  ["\22"] = colors.blue,
+          c  = colors.magenta, no = colors.red,   s  = colors.orange,
+          S  = colors.orange, ["\19"] = colors.orange,
+          ic = colors.yellow, R  = colors.violet, Rv = colors.violet,
+          cv = colors.red,   ce = colors.red,    r  = colors.cyan,
+          rm = colors.cyan,  ["r?"] = colors.cyan,
+          ["!"] = colors.red, t  = colors.red,
+        }
+        return { fg = mode_color[vim.fn.mode()] or colors.fg }
+      end,
+      padding = { right = 1 },
+    }
+
+    ins_left {
+      "filesize",
+      cond = conditions.buffer_not_empty,
+    }
+
+    ins_left {
+      "filename",
+      cond = conditions.buffer_not_empty,
+      color = { fg = colors.magenta, gui = "bold" },
+    }
+
+    ins_left { "location" }
+
+    ins_left { "progress", color = { fg = colors.fg, gui = "bold" } }
+
+    ins_left {
+      "diagnostics",
+      sources = { "nvim_diagnostic" },
+      symbols = { error = " ", warn = " ", info = " " },
+      diagnostics_color = {
+        error = { fg = colors.red },
+        warn  = { fg = colors.yellow },
+        info  = { fg = colors.cyan },
+      },
+    }
+
+    -- mid separator
+    ins_left { function() return "%=" end }
+
+    ins_left {
+      function()
+        local buf_ft  = vim.bo.filetype
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        for _, client in ipairs(clients) do
+          local ft = client.config.filetypes
+          if ft and vim.fn.index(ft, buf_ft) ~= -1 then
+            return client.name
+          end
+        end
+        return "No LSP"
+      end,
+      icon  = " LSP:",
+      color = { fg = "#ffffff", gui = "bold" },
+    }
+
+    -- ┤ Right side ├ --
+
+    ins_right {
+      "o:encoding",
+      fmt  = string.upper,
+      cond = conditions.hide_in_width,
+      color = { fg = colors.green, gui = "bold" },
+    }
+
+    ins_right {
+      "fileformat",
+      fmt           = string.upper,
+      icons_enabled = false,
+      color         = { fg = colors.green, gui = "bold" },
+    }
+
+    ins_right {
+      function()
+        local ok, lib = pcall(require, "auto-session.lib")
+        if ok then
+          local name = lib.current_session_name(true)
+          if name and name ~= "" then return "󱑿 " .. name end
+        end
+        return ""
+      end,
+      color = { fg = colors.cyan, gui = "bold" },
+    }
+
+    ins_right {
+      "branch",
+      icon  = "",
+      color = { fg = colors.violet, gui = "bold" },
+    }
+
+    ins_right {
+      "diff",
+      symbols = { added = " ", modified = " ", removed = " " },
+      diff_color = {
+        added    = { fg = colors.green },
+        modified = { fg = colors.orange },
+        removed  = { fg = colors.red },
+      },
+      cond = conditions.hide_in_width,
+    }
+
+    ins_right {
+      "copilot",
+      show_colors = true,
+      padding = { left = 1, right = 0 },
+    }
+
+    ins_right {
+      function() return "▊" end,
+      color   = { fg = colors.blue },
+      padding = { left = 1 },
+    }
+
+    lualine.setup(config)
   end,
 }
 

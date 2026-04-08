@@ -64,12 +64,12 @@ end
 ---@param path string
 ---@return boolean
 M.path_exists = function(path)
-  return vim.loop.fs_stat(path)
+  return vim.uv.fs_stat(path)
 end
 
 -- Return telescope files command
 M.project_files = function()
-  local path = vim.loop.cwd() .. "/.git"
+  local path = vim.uv.cwd() .. "/.git"
   if M.path_exists(path) then
     local show_untracked = vim.g.config.plugins.telescope.show_untracked_files
     return "lua require('telescope.builtin').git_files({ show_untracked = " .. tostring(show_untracked) .. " })"
@@ -310,8 +310,6 @@ end
 M.find_project_files = function(opts)
   opts = opts or {}
   local ok = pcall(builtin.git_files, opts)
-
-  print(builtin)
   if not ok then
     builtin.find_files(opts)
   end
