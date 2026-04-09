@@ -31,11 +31,16 @@ local M = {
   config = function(_, opts)
     require("nvim-ts-autotag").setup()
     require("nvim-treesitter.configs").setup(opts)
-    -- Workaround: nvim-treesitter's set-lang-from-info-string! predicate crashes
-    -- in Neovim 0.11+ when processing markdown injection queries (fenced code
-    -- block language detection). Clear the query until nvim-treesitter is updated.
-    -- Remove this once `:Lazy update nvim-treesitter` fixes the issue.
-    vim.treesitter.query.set("markdown", "injections", "")
+    -- Replace nvim-treesitter's markdown injection query with a safe version that
+    -- avoids the set-lang-from-info-string! predicate (crashes Neovim 0.11+ on nil
+    -- nodes). Uses explicit @injection.language capture instead.
+    vim.treesitter.query.set("markdown", "injections", [[
+      (fenced_code_block
+        (info_string
+          (language) @injection.language)
+        (code_fence_content) @injection.content
+        (#set! injection.include-children))
+    ]])
   end,
 }
 

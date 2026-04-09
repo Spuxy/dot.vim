@@ -48,7 +48,10 @@ local M = {
 
     { "<leader>an", "<cmd>$tabnew<cr>",                        desc = "New Empty Tab" },
     { "<leader>aN", "<cmd>tabnew %<cr>",                       desc = "New Tab" },
-    { "<leader>ao", "<cmd>tabonly<cr>",                        desc = "Only" },
+    { "<leader>ac", "<cmd>tabclose<cr>",                       desc = "Close Tab" },
+    { "<leader>ao", "<cmd>tabonly<cr>",                        desc = "Close Others" },
+    { "<leader>aj", "<cmd>tabnext<cr>",                        desc = "Next Tab" },
+    { "<leader>ak", "<cmd>tabprevious<cr>",                    desc = "Prev Tab" },
     { "<leader>ah", "<cmd>-tabmove<cr>",                       desc = "Move Left" },
     { "<leader>al", "<cmd>+tabmove<cr>",                       desc = "Move Right" },
   },

@@ -22,11 +22,11 @@ keymap("v", ">", ">gv")
 keymap("v", "p", '"_dp')
 keymap("v", "P", '"_dP')
 
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- Window navigation — superseded by smart-splits.nvim (see lua/spuxy/smart-splits.lua)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<C-tab>", "<c-6>", opts)
 
 -- Close current window
@@ -36,11 +36,11 @@ keymap("n", "<leader>wc", "<cmd>close<cr>", { desc = "Close" })
 keymap("n", "<leader>wr", "<cmd>wincmd r<cr>", { desc = "rotate down/right" })
 keymap("n", "<leader>wR", "<cmd>wincmd R<cr>", { desc = "rotate up/left" })
 
--- Window moving
-keymap("n", "<leader>wH", "<cmd>wincmd H<cr>", { desc = "Move left" })
-keymap("n", "<leader>wJ", "<cmd>wincmd J<cr>", { desc = "Move down" })
-keymap("n", "<leader>wK", "<cmd>wincmd K<cr>", { desc = "Move up" })
-keymap("n", "<leader>wL", "<cmd>wincmd L<cr>", { desc = "Move right" })
+-- Window moving — superseded by smart-splits swap_buf (see lua/spuxy/smart-splits.lua)
+-- keymap("n", "<leader>wH", "<cmd>wincmd H<cr>", { desc = "Move left" })
+-- keymap("n", "<leader>wJ", "<cmd>wincmd J<cr>", { desc = "Move down" })
+-- keymap("n", "<leader>wK", "<cmd>wincmd K<cr>", { desc = "Move up" })
+-- keymap("n", "<leader>wL", "<cmd>wincmd L<cr>", { desc = "Move right" })
 
 -- Window resizing
 keymap("n", "<leader>wm", "<cmd>WindowsMaximize<cr>", { desc = "Maximize" })

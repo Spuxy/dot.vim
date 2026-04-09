@@ -26,9 +26,9 @@ spec("spuxy.transparent")
 -- overseer removed: all keymaps were commented out — no way to invoke the plugin
 
 -- Markdown
--- render-markdown disabled: treesitter injection crash (set-lang-from-info-string! / nil node:range())
--- spec("spuxy.markdown")
-spec("spuxy.markview")
+-- crash fixed: custom injection query replaces set-lang-from-info-string! predicate (see treesitter.lua)
+spec("spuxy.markdown")
+-- spec("spuxy.markview") -- kept as archive/alternative
 spec("spuxy.markdown-preview")
 
 -- COLORSCHEMES
@@ -142,4 +142,4 @@ require("spuxy.core.health")
 -- spec("spuxy.neodev") -- delet because of lazdyev
 -- spec("spuxy.barbecue")
 
--- spec("spuxy.smart-splits") -- spliting and moving cursor and buffers
+spec("spuxy.smart-splits")

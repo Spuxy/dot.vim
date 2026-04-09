@@ -32,6 +32,19 @@ local M = {
   config = function(_, opts)
     local lint = require("lint")
     lint.linters_by_ft = opts.linters_by_ft
+
+    -- Neovim 0.11 rejects diagnostics with end_lnum/end_col = -1 (no end pos).
+    -- Clamp to the start position so the diagnostic is still shown.
+    local orig_set = vim.diagnostic.set
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.diagnostic.set = function(ns, bufnr, diagnostics, diag_opts)
+      for _, d in ipairs(diagnostics) do
+        if d.end_lnum == nil or d.end_lnum < 0 then d.end_lnum = d.lnum end
+        if d.end_col == nil or d.end_col < 0 then d.end_col = d.col end
+      end
+      orig_set(ns, bufnr, diagnostics, diag_opts)
+    end
+
     local lint_augroup = vim.api.nvim_create_augroup("linting", { clear = true })
     vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
       group = lint_augroup,
