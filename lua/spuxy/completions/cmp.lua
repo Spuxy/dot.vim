@@ -51,7 +51,8 @@ function M.config()
 		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 	end
 
-	local icons = require("spuxy.core.icons")
+	local icons      = require("spuxy.core.icons")
+	local mini_icons = require("mini.icons")
 
   cmp.event:on("menu_opened", function()
     vim.b.copilot_suggestion_hidden = true
@@ -113,12 +114,12 @@ function M.config()
 			fields = { "abbr", "menu" },
 			format = function(entry, vim_item)
 				local kind_name = vim_item.kind
-				local kind_icon = icons.kind[kind_name] or ""
 
 				if entry.source.name == "emoji" then
 					vim_item.menu = icons.misc.Smiley .. " Emoji"
 					vim_item.menu_hl_group = "CmpItemKindEmoji"
 				else
+					local kind_icon = mini_icons.get("lsp", kind_name:lower())
 					vim_item.menu = kind_icon .. " " .. kind_name
 					vim_item.menu_hl_group = "CmpItemKind" .. kind_name
 				end

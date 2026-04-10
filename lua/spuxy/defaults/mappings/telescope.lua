@@ -8,7 +8,6 @@ M = {
         ["<leader>sf"] = { "<cmd>Telescope find_files<cr>", "Find File" },
         ["<leader>sH"] = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
         ["<leader>st"] = { "<cmd>Telescope live_grep<cr>", "Text" },
-        ["<leader>sT"] = { "<cmd>Telescope grep_string<cr>", "Find (grep)" },
 
         ["<leader>sh"] = { "<cmd>Telescope help_tags<cr>", "Find Help" },
         ["<leader>sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },

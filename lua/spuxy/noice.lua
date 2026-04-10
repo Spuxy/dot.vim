@@ -6,10 +6,8 @@ local M = {
     "rcarriga/nvim-notify",
   },
   keys = {
-    { "<leader>mnn", "", desc = "Noice" },
-    { "<leader>mnn", "<cmd>Noice all<cr>", desc = "Open Noice" },
-    { "<leader>mne", "<cmd>Noice errors<cr>", desc = "Open Noice Errors" },
-    { "<leader>mnn", "<cmd>Noice fzf<cr>", desc = "Open Noice with fzf-lua" },
+    { "<leader>mna", "<cmd>Noice all<cr>",    desc = "All messages" },
+    { "<leader>mne", "<cmd>Noice errors<cr>", desc = "Errors" },
   },
   opts = {
     lsp = {

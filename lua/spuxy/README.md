@@ -206,6 +206,53 @@ Remove this shim once nvim-lint releases a fix (`:Lazy update nvim-lint` to chec
 
 ---
 
+## Window keymaps (`<leader>w`)
+
+`<leader>w` follows the industry standard (LazyVim, AstroNvim, LunarVim all use it for windows).
+`<leader>ws` is a subgroup for split-specific actions.
+
+| Key | Action |
+|-----|--------|
+| `<leader>wc` | Close current window |
+| `<leader>wm` | Maximize window |
+| `<leader>w=` | Equalize all window sizes |
+| `<leader>wv` | Vertical split |
+| `<leader>wh` | Horizontal split |
+| `<leader>wsr` | Rotate split down/right |
+| `<leader>wsR` | Rotate split up/left |
+| `<leader>wsk` | Resize up |
+| `<leader>wsj` | Resize down |
+| `<leader>wsl` | Resize right |
+| `<leader>wsh` | Resize left |
+| `<leader>wH/J/K/L` | Swap buffer with adjacent split (smart-splits) |
+
+> Quick shortcuts `<leader>v` and `<leader>h` also open vertical/horizontal splits directly.
+> `<A-h/j/k/l>` resize splits without a leader key (smart-splits).
+
+---
+
+## smart-splits.nvim — window navigation + WezTerm integration
+
+Replaces plain `<C-w>hjkl` with smart-splits for seamless Neovim ↔ WezTerm pane navigation.
+
+| Key | Action |
+|-----|--------|
+| `<C-h/j/k/l>` | Move cursor between splits (or WezTerm panes when configured) |
+| `<A-h/j/k/l>` | Resize current split directionally |
+| `<leader>wH/J/K/L` | Swap buffer with adjacent split |
+
+**WezTerm integration (one-time setup)** — add to `wezterm.lua`:
+```lua
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+smart_splits.apply_to_config(config)
+```
+Then uncomment `multiplexer_integration = "wezterm"` in `lua/spuxy/smart-splits.lua`.
+
+**Important:** `spec("spuxy.smart-splits")` must appear **before** `require("spuxy.lazy")` in
+`init.lua` — specs registered after lazy initializes are silently ignored.
+
+---
+
 ## Bufferline — `buf_kill` timing issue
 
 `buf_kill` is defined as `local function buf_kill(...)` **before** the `M` table in `bufferline.lua`.

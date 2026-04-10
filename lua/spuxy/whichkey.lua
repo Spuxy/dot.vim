@@ -23,8 +23,8 @@ local M = {
     sort = { "alphanum" },
     icons = {
       breadcrumb = icons.ui.DoubleChevronRight, -- symbol used in the command line area that shows your active key combo
-      separator = icons.ui.BoldArrowRight,      -- symbol used between a key and it's label
-      group = icons.ui.Plus,                    -- symbol prepended to a group
+      separator = icons.ui.BoldArrowRight, -- symbol used between a key and it's label
+      group = icons.ui.Plus, -- symbol prepended to a group
     },
     win = {
       padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
@@ -33,47 +33,54 @@ local M = {
   },
   keys = {
     -- Direct mappings
-    { "<leader>q",  "<cmd>confirm q<CR>",                      desc = "Quit" },
-    { "<leader>e",  "<cmd>NvimTreeToggle<CR>",                 desc = "Explore" },
-    { "<leader>H",  "<cmd>nohlsearch<CR>",                     desc = "No Highlight" },
+    { "<leader>q", "<cmd>confirm q<CR>", desc = "Quit" },
+    { "<leader>H", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
     -- { "<leader>;", "<cmd>tabnew | terminal<CR>", desc = "Term" },
-    { "<leader>;",  "<cmd>Alpha<CR>",                          desc = "Dashboard" },
-    { "<leader>v",  "<cmd>vsplit<CR>",                         desc = "Vertical Split" },
-    { "<leader>h",  "<cmd>split<CR>",                          desc = "Horizontal Split" },
-    { "<leader>y",  "<cmd>Telescope projects<CR>",             desc = "Projects" },
+    { "<leader>;", "<cmd>Alpha<CR>", desc = "Dashboard" },
+    { "<leader>v", "<cmd>vsplit<CR>", desc = "Vertical Split" },
+    { "<leader>h", "<cmd>split<CR>", desc = "Horizontal Split" },
+    { "<leader>y", "<cmd>Telescope projects<CR>", desc = "Projects" },
 
-    { "<leader>/",  "<Plug>(comment_toggle_linewise_current)", desc = "Comment toggle current line" },
-    { "<leader>c",  "<cmd>BufferKill<CR>",                     desc = "Close Buffer" },
-    { "<leader>f",  "<cmd>CustomFinder<CR>",                   desc = "Find File" },
+    { "<leader>/", "<Plug>(comment_toggle_linewise_current)", desc = "Comment toggle current line" },
+    { "<leader>c", "<cmd>BufferKill<CR>", desc = "Close Buffer" },
 
-    { "<leader>an", "<cmd>$tabnew<cr>",                        desc = "New Empty Tab" },
-    { "<leader>aN", "<cmd>tabnew %<cr>",                       desc = "New Tab" },
-    { "<leader>ac", "<cmd>tabclose<cr>",                       desc = "Close Tab" },
-    { "<leader>ao", "<cmd>tabonly<cr>",                        desc = "Close Others" },
-    { "<leader>aj", "<cmd>tabnext<cr>",                        desc = "Next Tab" },
-    { "<leader>ak", "<cmd>tabprevious<cr>",                    desc = "Prev Tab" },
-    { "<leader>ah", "<cmd>-tabmove<cr>",                       desc = "Move Left" },
-    { "<leader>al", "<cmd>+tabmove<cr>",                       desc = "Move Right" },
+    { "<leader>an", "<cmd>$tabnew<cr>", desc = "New Empty Tab" },
+    { "<leader>aN", "<cmd>tabnew %<cr>", desc = "New Tab" },
+    { "<leader>ac", "<cmd>tabclose<cr>", desc = "Close Tab" },
+    { "<leader>ao", "<cmd>tabonly<cr>", desc = "Close Others" },
+    { "<leader>aj", "<cmd>tabnext<cr>", desc = "Next Tab" },
+    { "<leader>ak", "<cmd>tabprevious<cr>", desc = "Prev Tab" },
+    { "<leader>ah", "<cmd>-tabmove<cr>", desc = "Move Left" },
+    { "<leader>al", "<cmd>+tabmove<cr>", desc = "Move Right" },
   },
   config = function(_, opts)
     require("which-key").setup(opts)
     require("which-key").add({
       { "<leader>b", group = "Buffers", icon = "󰓩" },
-      { "<leader>d",  group = "Debug",  icon = icons.ui.DebugConsole },
-        { "<leader>dP", group = "Python", icon = icons.language.python },
-      { "<leader>f", group = "Find", icon = icons.ui.Telescope },
+      { "<leader>w", group = "Windows", icon = "󰖯" },
+      { "<leader>ws", group = "Splits", icon = "󰤿" },
+      { "<leader>d", group = "Debug", icon = icons.ui.DebugConsole },
+      { "<leader>dP", group = "Python", icon = icons.language.python },
       { "<leader>g", group = "Git", icon = icons.git.Octoface },
       { "<leader>n", group = "Todos", icon = icons.ui.List },
       { "<leader>p", group = "Plugins", icon = "󰏖" },
       { "<leader>t", group = "Test", icon = icons.ui.BoxChecked },
       { "<leader>l", group = "LSP", icon = icons.ui.Code },
-        { "<leader>ld", group = "Debugging", icon = icons.ui.Bug },
-        { "<leader>lp", group = "Peek", icon = icons.ui.EmptyFolder },
-        { "<leader>lg", group = "Go", icon = icons.language.go },
-        { "<leader>lgf", group = "Fill", icon = icons.ui.EmptyFolder },
+      { "<leader>ld", group = "Debugging", icon = icons.ui.Bug },
+      { "<leader>lp", group = "Peek", icon = icons.ui.EmptyFolder },
+      { "<leader>lg", group = "Go", icon = icons.language.go },
+      { "<leader>lgf", group = "Fill", icon = icons.ui.EmptyFolder },
       { "<leader>a", group = "Tab", icon = icons.ui.File },
-      { "<leader>T", group = "Treesitter", icon = "🌲 " },
-      { "<leader>m", group = "Misc", icon = icons.ui.Gear },
+      { "<leader>T", group = "Toggle", icon = "󰔡" },
+      { "<leader>m",   group = "Misc",           icon = icons.ui.Gear },
+        { "<leader>mS", group = "Sessions",       icon = icons.misc.Session },
+        { "<leader>mn", group = "Noice",          icon = icons.ui.List },
+        { "<leader>mx", group = "Trouble",        icon = icons.diagnostics.BoldError },
+        { "<leader>mT", group = "Transparency",   icon = "󰇄" },
+        { "<leader>mm", group = "Markdown",       icon = "󰍔" },
+        { "<leader>mt", group = "Todo",           icon = icons.ui.Note },
+        { "<leader>ms", group = "TreeSJ",         icon = "󰓡" },
+        { "<leader>mac", group = "Copilot",       icon = icons.git.Copilot },
       { "<leader>s", group = "Search", icon = "🔍" },
     })
   end,

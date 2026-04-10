@@ -54,6 +54,9 @@ return {
     Branch = "",
   },
   ui = {
+    Cog = "󰒓",
+    RootDir = "󰉖",
+    Storage = "󰋊",
     ArrowCircleDown = "",
     ArrowCircleLeft = "",
     ArrowCircleRight = "",

@@ -25,7 +25,6 @@ function M.config()
       "DiffviewFiles",
       "Outline",
       "Jaq",
-      "spectre_panel",
       "toggleterm",
       "DressingSelect",
       "TelescopePrompt",

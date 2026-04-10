@@ -42,10 +42,10 @@ spec("spuxy.telescope")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
 spec("spuxy.flash")
-spec("spuxy.spectre")
 spec("spuxy.grug-far")
 spec("spuxy.mini-align")
 spec("spuxy.ufo") -- spliting and moving cursor and buffers
+spec("spuxy.smart-splits")
 -- substitute removed: opts = {}, no keymaps configured — does nothing
 
 -- FILESYSTEM
@@ -69,7 +69,7 @@ spec("spuxy.lsp.mason")
 spec("spuxy.lsp.mason-lspconfig")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
-spec("spuxy.yamlcompanion")
+-- spec("spuxy.yamlcompanion")
 -- spec("spuxy.navigator")
 spec("spuxy.symbol-usage")
 spec("spuxy.luasnip")
@@ -141,5 +141,3 @@ require("spuxy.core.health")
 -- spec("spuxy.lsp.none-ls")
 -- spec("spuxy.neodev") -- delet because of lazdyev
 -- spec("spuxy.barbecue")
-
-spec("spuxy.smart-splits")

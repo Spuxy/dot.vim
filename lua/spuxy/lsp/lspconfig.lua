@@ -1,18 +1,18 @@
 local icons = require("spuxy.core.icons")
 
-local go_settings = require("spuxy.lsp.go.settings")
-local lua_settings = require("spuxy.lsp.lua.settings")
-local yaml_settings = require("spuxy.lsp.yaml.settings")
-local rust_settings = require("spuxy.lsp.rust.settings")
-local c_settings = require("spuxy.lsp.c.settings")
+local go_settings     = require("spuxy.lsp.go.settings")
+local lua_settings    = require("spuxy.lsp.lua.settings")
+local rust_settings   = require("spuxy.lsp.rust.settings")
+local c_settings      = require("spuxy.lsp.c.settings")
 local python_settings = require("spuxy.lsp.python.settings")
-local bash_settings = require("spuxy.lsp.sh.settings")
+local bash_settings   = require("spuxy.lsp.sh.settings")
 local puppet_settings = require("spuxy.lsp.puppet.settings")
-local ruby_settings = require("spuxy.lsp.ruby.settings")
+local ruby_settings   = require("spuxy.lsp.ruby.settings")
+-- yaml settings are built inside config() to ensure schemastore.nvim is loaded first
 
 local M = {
   "neovim/nvim-lspconfig",
-  dependencies = { "hrsh7th/cmp-nvim-lsp" },
+  dependencies = { "hrsh7th/cmp-nvim-lsp", "b0o/schemastore.nvim" },
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     servers = {
@@ -41,7 +41,7 @@ local M = {
       },
       tinymist = {},
       ts_ls = {},
-      yamlls = yaml_settings,
+      -- yamlls built in config() below
       puppet = puppet_settings,
       ruby_lsp = ruby_settings,
     },
@@ -110,6 +110,12 @@ local M = {
         end
       end,
     })
+
+    -- Build yamlls settings here so schemastore.nvim (a dependency) is guaranteed loaded
+    opts.servers.yamlls = require("spuxy.lsp.yaml.settings")
+
+    -- Content-based schema detection (apiVersion → schema URL → yamlls notify)
+    require("spuxy.lsp.yaml.detect").setup()
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

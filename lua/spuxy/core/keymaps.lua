@@ -29,26 +29,28 @@ keymap("v", "P", '"_dP')
 -- keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<C-tab>", "<c-6>", opts)
 
--- Close current window
-keymap("n", "<leader>wc", "<cmd>close<cr>", { desc = "Close" })
+-- Windows (<leader>w)
+keymap("n", "<leader>wc", "<cmd>close<cr>",    { desc = "Close" })
+keymap("n", "<leader>wm", "<cmd>WindowsMaximize<cr>", { desc = "Maximize" })
+keymap("n", "<leader>w=", "<cmd>wincmd =<cr>", { desc = "Equalize" })
+keymap("n", "<leader>wv", "<cmd>vsplit<cr>",   { desc = "Vertical split" })
+keymap("n", "<leader>wh", "<cmd>split<cr>",    { desc = "Horizontal split" })
 
--- Window rotate
-keymap("n", "<leader>wr", "<cmd>wincmd r<cr>", { desc = "rotate down/right" })
-keymap("n", "<leader>wR", "<cmd>wincmd R<cr>", { desc = "rotate up/left" })
+-- Splits subgroup (<leader>ws) — rotate + resize
+keymap("n", "<leader>wsr", "<cmd>wincmd r<cr>",         { desc = "Rotate down/right" })
+keymap("n", "<leader>wsR", "<cmd>wincmd R<cr>",         { desc = "Rotate up/left" })
+keymap("n", "<leader>wsk", "<cmd>resize +5<cr>",        { desc = "Resize up" })
+keymap("n", "<leader>wsj", "<cmd>resize -5<cr>",        { desc = "Resize down" })
+keymap("n", "<leader>wsl", "<cmd>vertical resize +5<cr>", { desc = "Resize right" })
+keymap("n", "<leader>wsh", "<cmd>vertical resize -5<cr>", { desc = "Resize left" })
+-- Swap buffers between splits (smart-splits — see lua/spuxy/smart-splits.lua)
+-- <leader>wH / wJ / wK / wL
 
 -- Window moving — superseded by smart-splits swap_buf (see lua/spuxy/smart-splits.lua)
 -- keymap("n", "<leader>wH", "<cmd>wincmd H<cr>", { desc = "Move left" })
 -- keymap("n", "<leader>wJ", "<cmd>wincmd J<cr>", { desc = "Move down" })
 -- keymap("n", "<leader>wK", "<cmd>wincmd K<cr>", { desc = "Move up" })
 -- keymap("n", "<leader>wL", "<cmd>wincmd L<cr>", { desc = "Move right" })
-
--- Window resizing
-keymap("n", "<leader>wm", "<cmd>WindowsMaximize<cr>", { desc = "Maximize" })
-keymap("n", "<leader>w=", "<cmd>wincmd =<cr>", { desc = "Equalize size" })
-keymap("n", "<leader>wk", "<cmd>resize +5<cr>", { desc = "Up" })
-keymap("n", "<leader>wj", "<cmd>resize -5<cr>", { desc = "Down" })
-keymap("n", "<leader>wh", "<cmd>vertical resize +3<cr>", { desc = "Left" })
-keymap("n", "<leader>wl", "<cmd>vertical resize -3<cr>", { desc = "Right" })
 
 keymap("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Up" })
 keymap("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Down" })
@@ -84,32 +86,32 @@ keymap({ "v", "n" }, "<leader>r", ":%s/", { desc = "Buffer search and replace" }
 
 -- toggles
 keymap("n", "<leader>Tn", function()
-  vim.o.number = vim.o.number == false and true or false
-  vim.o.relativenumber = vim.o.relativenumber == false and true or false
+  vim.o.number         = not vim.o.number
+  vim.o.relativenumber = not vim.o.relativenumber
 end, { desc = "Toggle relative number" })
 keymap("n", "<leader>Th", function()
-  utils.notify("Toggling hidden chars", vim.log.levels.INFO, "core.mappings")
-  vim.o.list = vim.o.list == false and true or false
+  vim.o.list = not vim.o.list
+  utils.notify("Hidden chars: " .. tostring(vim.o.list), vim.log.levels.INFO, "core.mappings")
 end, { desc = "Toggle hidden chars" })
 keymap("n", "<leader>Tl", function()
-  utils.notify("Toggling signcolumn", vim.log.levels.INFO, "core.mappings")
   vim.o.signcolumn = vim.o.signcolumn == "yes" and "no" or "yes"
+  utils.notify("Sign column: " .. vim.o.signcolumn, vim.log.levels.INFO, "core.mappings")
 end, { desc = "Toggle signcolumn" })
 keymap("n", "<leader>Tv", function()
-  utils.notify("Toggling virtualedit", vim.log.levels.INFO, "core.mappings")
   vim.o.virtualedit = vim.o.virtualedit == "all" and "block" or "all"
+  utils.notify("Virtual edit: " .. vim.o.virtualedit, vim.log.levels.INFO, "core.mappings")
 end, { desc = "Toggle virtualedit" })
 keymap("n", "<leader>Ts", function()
-  utils.notify("Toggling spell", vim.log.levels.INFO, "core.mappings")
-  vim.o.spell = vim.o.spell == false and true or false
+  vim.o.spell = not vim.o.spell
+  utils.notify("Spell check: " .. tostring(vim.o.spell), vim.log.levels.INFO, "core.mappings")
 end, { desc = "Toggle spell" })
 keymap("n", "<leader>Tw", function()
-  utils.notify("Toggling wrap", vim.log.levels.INFO, "core.mappings")
-  vim.o.wrap = vim.o.wrap == false and true or false
+  vim.o.wrap = not vim.o.wrap
+  utils.notify("Word wrap: " .. tostring(vim.o.wrap), vim.log.levels.INFO, "core.mappings")
 end, { desc = "Toggle wrap" })
 keymap("n", "<leader>Tc", function()
-  utils.notify("Toggling cursorline", vim.log.levels.INFO, "core.mappings")
-  vim.o.cursorline = vim.o.cursorline == false and true or false
+  vim.o.cursorline = not vim.o.cursorline
+  utils.notify("Cursor line: " .. tostring(vim.o.cursorline), vim.log.levels.INFO, "core.mappings")
 end, { desc = "Toggle cursorline" })
 keymap("n", "<leader>TO", "<cmd>lua require('spuxy.core.functions').toggle_colorcolumn()<cr>", { desc = "Toggle colorcolumn" })
 keymap(
@@ -128,7 +130,7 @@ keymap("n", "<leader>zk", "[s", { desc = "Previous error" })
 keymap("n", "<leader>za", "zg", { desc = "Add word" })
 
 -- Reload snippets folder
-keymap("n", "<leader>ms", "<cmd>source " .. vim.fn.stdpath("config") .. "/snippets/*<cr>", { desc = "Reload snippets" })
+keymap("n", "<leader>mr", "<cmd>source " .. vim.fn.stdpath("config") .. "/snippets/*<cr>", { desc = "Reload snippets" })
 
 -- Quickfix
 keymap("n", "<leader>qj", "<cmd>cnext<cr>", { desc = "Next entry" })

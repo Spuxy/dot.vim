@@ -16,8 +16,10 @@ local M = {
     default_amount = 3,
     -- Stop at edges rather than wrapping to the other side
     at_edge = "stop",
-    -- WezTerm: seamless navigation between Neovim splits and WezTerm panes
-    multiplexer_integration = "wezterm",
+    -- WezTerm integration (enable after adding smart-splits plugin to wezterm.lua):
+    --   local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+    --   smart_splits.apply_to_config(config)
+    -- multiplexer_integration = "wezterm",
     -- Don't interfere with these buffer types when resizing
     ignored_buftypes = { "nofile", "quickfix", "prompt" },
     ignored_filetypes = { "neo-tree" },

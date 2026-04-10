@@ -23,7 +23,7 @@ local M = {
       javascript = { "string", "template_string" },
       java = false,
     },
-    disable_filetype = { "TelescopePrompt", "spectre_panel" },
+    disable_filetype = { "TelescopePrompt" },
     ---@usage disable when recording or executing a macro
     disable_in_macro = false,
     ---@usage disable  when insert after visual block mode

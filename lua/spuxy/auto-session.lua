@@ -8,7 +8,7 @@ local M = {
   },
   keys = {
     { "<leader>mS",  "",                               desc = "Sessions" },
-    { "<leader>mSs", "<cmd>SessionSearch<CR>",         desc = "Session search" },
+    { "<leader>mSs", "<cmd>Autosession search<CR>",     desc = "Session search" },
     { "<leader>mSw", "<cmd>SessionSave<CR>",           desc = "Save session" },
     { "<leader>mSa", "<cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave" },
   },
@@ -16,8 +16,7 @@ local M = {
   ---@module "auto-session"
   ---@type AutoSession.Config
   opts = {
-    -- ⚠️ This will only work if Telescope.nvim is installed
-    -- The following are already the default values, no need to provide them if these are already the settings you want.
+    auto_restore = false, -- never auto-restore; use SessionSearch from alpha or <leader>mSs
     suppressed_dirs = { "~/", "~/Projects", "~/Programming", "~/Working", "~/Downloads", "/" },
   },
 }
