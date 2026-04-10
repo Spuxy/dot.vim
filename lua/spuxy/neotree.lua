@@ -105,6 +105,24 @@ local M = {
     vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
     vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
+    -- Notify LSP clients when files are renamed/moved via neo-tree
+    local events = require("neo-tree.events")
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      {
+        event = events.FILE_RENAMED,
+        handler = function(args)
+          Snacks.rename.on_rename_file(args.source, args.destination)
+        end,
+      },
+      {
+        event = events.FILE_MOVED,
+        handler = function(args)
+          Snacks.rename.on_rename_file(args.source, args.destination)
+        end,
+      },
+    })
+
     require("neo-tree").setup(opts)
   end,
 }

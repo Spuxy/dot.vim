@@ -19,8 +19,8 @@ keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 
 -- paste over currently selected text without yanking it
-keymap("v", "p", '"_dp')
-keymap("v", "P", '"_dP')
+keymap("v", "p", "\"_dp")
+keymap("v", "P", "\"_dP")
 
 -- Window navigation — superseded by smart-splits.nvim (see lua/spuxy/smart-splits.lua)
 -- keymap("n", "<C-h>", "<C-w>h", opts)
@@ -30,17 +30,17 @@ keymap("v", "P", '"_dP')
 keymap("n", "<C-tab>", "<c-6>", opts)
 
 -- Windows (<leader>w)
-keymap("n", "<leader>wc", "<cmd>close<cr>",    { desc = "Close" })
+keymap("n", "<leader>wc", "<cmd>close<cr>", { desc = "Close" })
 keymap("n", "<leader>wm", "<cmd>WindowsMaximize<cr>", { desc = "Maximize" })
 keymap("n", "<leader>w=", "<cmd>wincmd =<cr>", { desc = "Equalize" })
-keymap("n", "<leader>wv", "<cmd>vsplit<cr>",   { desc = "Vertical split" })
-keymap("n", "<leader>wh", "<cmd>split<cr>",    { desc = "Horizontal split" })
+keymap("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Vertical split" })
+keymap("n", "<leader>wh", "<cmd>split<cr>", { desc = "Horizontal split" })
 
 -- Splits subgroup (<leader>ws) — rotate + resize
-keymap("n", "<leader>wsr", "<cmd>wincmd r<cr>",         { desc = "Rotate down/right" })
-keymap("n", "<leader>wsR", "<cmd>wincmd R<cr>",         { desc = "Rotate up/left" })
-keymap("n", "<leader>wsk", "<cmd>resize +5<cr>",        { desc = "Resize up" })
-keymap("n", "<leader>wsj", "<cmd>resize -5<cr>",        { desc = "Resize down" })
+keymap("n", "<leader>wsr", "<cmd>wincmd r<cr>", { desc = "Rotate down/right" })
+keymap("n", "<leader>wsR", "<cmd>wincmd R<cr>", { desc = "Rotate up/left" })
+keymap("n", "<leader>wsk", "<cmd>resize +5<cr>", { desc = "Resize up" })
+keymap("n", "<leader>wsj", "<cmd>resize -5<cr>", { desc = "Resize down" })
 keymap("n", "<leader>wsl", "<cmd>vertical resize +5<cr>", { desc = "Resize right" })
 keymap("n", "<leader>wsh", "<cmd>vertical resize -5<cr>", { desc = "Resize left" })
 -- Swap buffers between splits (smart-splits — see lua/spuxy/smart-splits.lua)
@@ -84,43 +84,7 @@ keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
 -- search and replace is a pain with a German keyboard layout
 keymap({ "v", "n" }, "<leader>r", ":%s/", { desc = "Buffer search and replace" })
 
--- toggles
-keymap("n", "<leader>Tn", function()
-  vim.o.number         = not vim.o.number
-  vim.o.relativenumber = not vim.o.relativenumber
-end, { desc = "Toggle relative number" })
-keymap("n", "<leader>Th", function()
-  vim.o.list = not vim.o.list
-  utils.notify("Hidden chars: " .. tostring(vim.o.list), vim.log.levels.INFO, "core.mappings")
-end, { desc = "Toggle hidden chars" })
-keymap("n", "<leader>Tl", function()
-  vim.o.signcolumn = vim.o.signcolumn == "yes" and "no" or "yes"
-  utils.notify("Sign column: " .. vim.o.signcolumn, vim.log.levels.INFO, "core.mappings")
-end, { desc = "Toggle signcolumn" })
-keymap("n", "<leader>Tv", function()
-  vim.o.virtualedit = vim.o.virtualedit == "all" and "block" or "all"
-  utils.notify("Virtual edit: " .. vim.o.virtualedit, vim.log.levels.INFO, "core.mappings")
-end, { desc = "Toggle virtualedit" })
-keymap("n", "<leader>Ts", function()
-  vim.o.spell = not vim.o.spell
-  utils.notify("Spell check: " .. tostring(vim.o.spell), vim.log.levels.INFO, "core.mappings")
-end, { desc = "Toggle spell" })
-keymap("n", "<leader>Tw", function()
-  vim.o.wrap = not vim.o.wrap
-  utils.notify("Word wrap: " .. tostring(vim.o.wrap), vim.log.levels.INFO, "core.mappings")
-end, { desc = "Toggle wrap" })
-keymap("n", "<leader>Tc", function()
-  vim.o.cursorline = not vim.o.cursorline
-  utils.notify("Cursor line: " .. tostring(vim.o.cursorline), vim.log.levels.INFO, "core.mappings")
-end, { desc = "Toggle cursorline" })
-keymap("n", "<leader>TO", "<cmd>lua require('spuxy.core.functions').toggle_colorcolumn()<cr>", { desc = "Toggle colorcolumn" })
-keymap(
-  "n",
-  "<leader>Tt",
-  "<cmd>lua require('spuxy.lsp.utils').toggle_virtual_text()<cr>",
-  { desc = "Toggle Virtualtext" }
-)
-keymap("n", "<leader>TS", "<cmd>windo set scb!<cr>", { desc = "Toggle Scrollbind" })
+-- toggles (Tn/Th/Tl/Tv/Ts/Tw/Tc/TO/Tt/Tb/TI/Td/Ti/TW → snacks.lua init)
 
 -- Spelling
 keymap("n", "<leader>zl", "<cmd>Telescope spell_suggest<cr>", { desc = "List corrections" })
@@ -174,13 +138,19 @@ keymap({ "n", "o", "x" }, "<s-l>", "g_", opts)
 
 vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 
-
-
 -- Diagnostic navigation (error/warning severity)
-keymap("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end, { desc = "Previous error" })
-keymap("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end, { desc = "Next error" })
-keymap("n", "[w", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN }) end, { desc = "Previous warning" })
-keymap("n", "]w", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN }) end, { desc = "Next warning" })
+keymap("n", "[e", function()
+  vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Previous error" })
+keymap("n", "]e", function()
+  vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Next error" })
+keymap("n", "[w", function()
+  vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN })
+end, { desc = "Previous warning" })
+keymap("n", "]w", function()
+  vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN })
+end, { desc = "Next warning" })
 
 -- Add a commented line below/above (AstroNvim style, requires comment plugin)
 keymap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment below" })

@@ -12,12 +12,6 @@ vim.cmd [[
 
 M.defaults = {
   {
-    name = "BufferKill",
-    fn = function()
-      require("spuxy.bufferline").buf_kill("bd")
-    end,
-  },
-  {
     name = "CustomFinder",
     fn = function()
       require("spuxy.core.functions").find_project_files({ previewer = false })

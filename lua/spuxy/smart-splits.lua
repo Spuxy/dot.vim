@@ -25,11 +25,11 @@ local M = {
     ignored_filetypes = { "neo-tree" },
   },
   keys = {
-    -- Move cursor (replaces plain <C-w>hjkl — also works across WezTerm panes)
-    { "<C-h>", function() require("smart-splits").move_cursor_left()  end, desc = "Move to left split" },
-    { "<C-j>", function() require("smart-splits").move_cursor_down()  end, desc = "Move to lower split" },
-    { "<C-k>", function() require("smart-splits").move_cursor_up()    end, desc = "Move to upper split" },
-    { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" },
+    -- Move cursor (replaces plain <C-w>hjkl — also works across WezTerm panes + terminal mode)
+    { "<C-h>", function() require("smart-splits").move_cursor_left()  end, mode = { "n", "t" }, desc = "Move to left split" },
+    { "<C-j>", function() require("smart-splits").move_cursor_down()  end, mode = { "n", "t" }, desc = "Move to lower split" },
+    { "<C-k>", function() require("smart-splits").move_cursor_up()    end, mode = { "n", "t" }, desc = "Move to upper split" },
+    { "<C-l>", function() require("smart-splits").move_cursor_right() end, mode = { "n", "t" }, desc = "Move to right split" },
 
     -- Resize splits directionally
     { "<A-h>", function() require("smart-splits").resize_left()  end, desc = "Resize left" },

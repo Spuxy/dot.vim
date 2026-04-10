@@ -25,12 +25,14 @@ wk.add({
   -- Diff
   { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git Diff" },
 
+  -- Browse
+  { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
+  { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = "v" },
+
   -- Telescope integrations
   { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open Changed File" },
   { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout Branch" },
   { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout Commit" },
   { "<leader>gC", "<cmd>Telescope git_bcommits<cr>", desc = "Checkout Commit (Current File)" },
 
-  -- Toggles
-  { "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle Inline Blame" },
 })

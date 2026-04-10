@@ -1,20 +1,6 @@
 local utils = require("spuxy.core.functions")
 local M = {}
 
--- TODO: refactor
--- must be global or the initial state is not working
-VIRTUAL_TEXT_ACTIVE = true
--- toggle displaying virtual text
-M.toggle_virtual_text = function()
-  VIRTUAL_TEXT_ACTIVE = not VIRTUAL_TEXT_ACTIVE
-  utils.notify(
-    string.format("Virtualtext %s", VIRTUAL_TEXT_ACTIVE and "on" or "off"),
-    vim.log.levels.INFO,
-    "lsp/utils.lua"
-  )
-  vim.diagnostic.show(nil, 0, nil, { virtual_text = VIRTUAL_TEXT_ACTIVE })
-end
-
 -- detect python venv
 -- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-851247107
 M.get_python_path = function(workspace)

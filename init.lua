@@ -12,11 +12,13 @@ spec("spuxy.ai.copilotchat")
 -- spec("spuxy.ai.chatgpt") i dont use it atm, i need openai token which requires my creditcard ^^
 
 -- UI
-spec("spuxy.alpha")
 -- devicons removed: mini-icon.lua already mocks nvim-web-devicons API via package.preload
 spec("spuxy.mini-icon")
 spec("spuxy.noice")
-spec("spuxy.notify")
+-- notify removed: snacks.notifier handles vim.notify
+
+-- Collections of Libs
+spec("spuxy.snacks")
 
 -- MISC
 spec("spuxy.trouble")
@@ -37,7 +39,6 @@ spec("spuxy.colorschemes.tokyonight")
 -- MOVEMENTS
 spec("spuxy.autopairs") -- own keymaps
 spec("spuxy.comment") -- own keymaps
-spec("spuxy.indentline")
 spec("spuxy.telescope")
 spec("spuxy.surround") -- own keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
@@ -112,7 +113,7 @@ spec("spuxy.lsp.c.clangd-nvim")
 spec("spuxy.linters.nvim-lint")
 
 -- TERM
-spec("spuxy.toggleterm")
+-- toggleterm removed: snacks.terminal handles terminals
 
 -- Notes
 spec("spuxy.obsidian")

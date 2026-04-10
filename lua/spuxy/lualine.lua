@@ -45,7 +45,7 @@ local M = {
         component_separators = "",
         section_separators = "",
         globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "alpha", "neo-tree" } },
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "snacks_dashboard", "neo-tree" } },
         theme = {
           normal = { c = { fg = colors.fg, bg = colors.bg } },
           inactive = { c = { fg = colors.fg, bg = colors.bg } },

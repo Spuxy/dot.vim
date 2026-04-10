@@ -14,7 +14,6 @@ function M.setup(bufnr)
     { "<leader>lD", vim.lsp.buf.declaration, desc = "Declaration" },
     { "<leader>ll", vim.lsp.codelens.run, desc = "CodeLens Action" },
     { "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix" },
-    { "<leader>lI", "<cmd>lua require('spuxy.lsp.lspconfig').toggle_inlay_hints()<cr>", desc = "Inlay Hints" },
 
     -- Lspsaga actions
     { "<leader>lsa", "<cmd>:Lspsaga code_action<cr>", desc = "Code Action (Saga)" },
@@ -47,10 +46,11 @@ function M.setup(bufnr)
     { "gl", vim.diagnostic.open_float, desc = "Open Diagnostic Float" },
     { "gs", vim.lsp.buf.signature_help, desc = "Signature Help" },
 
-    -- Go-specific (gopls)
-    { "<leader>lgfs", "<cmd>:GoFillStruct<cr>", desc = "Fill Struct" },
-    { "<leader>lgfe", "<cmd>:GoFillErr<cr>", desc = "Fill Errors" },
   })
+
+  -- Go-specific keymaps (only when gopls is attached)
+  Snacks.keymap.set("n", "<leader>lgfs", "<cmd>GoFillStruct<cr>", { lsp = { name = "gopls" }, desc = "Fill Struct" })
+  Snacks.keymap.set("n", "<leader>lgfe", "<cmd>GoFillErr<cr>",    { lsp = { name = "gopls" }, desc = "Fill Errors" })
 end
 
 return M

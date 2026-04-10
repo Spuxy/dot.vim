@@ -52,13 +52,23 @@ local M = {
         lint.try_lint()
       end,
     })
-    vim.api.nvim_create_user_command("DisableLinting", function()
-      utils.notify("Disable Linting", vim.log.levels.INFO, "nvim-lint")
-      local ft = vim.filetype.match({ buf = 0 })
-      require("lint").linters_by_ft[ft] = {}
-      vim.diagnostic.hide()
-    end, { desc = "Disable linting for current filetype" })
-    vim.keymap.set("n", "<leader>lL", "<cmd>DisableLinting<cr>", { desc = "Toggle Linting" })
+
+    local disabled_fts = {}
+    vim.api.nvim_create_user_command("ToggleLinting", function()
+      local ft = vim.filetype.match({ buf = 0 }) or ""
+      if disabled_fts[ft] then
+        disabled_fts[ft] = false
+        lint.linters_by_ft[ft] = defaults.linters[ft] or {}
+        lint.try_lint()
+        utils.notify("Linting enabled for " .. ft, vim.log.levels.INFO, "nvim-lint")
+      else
+        disabled_fts[ft] = true
+        lint.linters_by_ft[ft] = {}
+        vim.diagnostic.reset(nil, 0)
+        utils.notify("Linting disabled for " .. ft, vim.log.levels.INFO, "nvim-lint")
+      end
+    end, { desc = "Toggle linting for current filetype" })
+    vim.keymap.set("n", "<leader>TL", "<cmd>ToggleLinting<cr>", { desc = "Linting" })
   end,
 }
 

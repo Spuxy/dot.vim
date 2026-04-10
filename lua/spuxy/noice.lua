@@ -3,13 +3,13 @@ local M = {
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
   },
   keys = {
     { "<leader>mna", "<cmd>Noice all<cr>",    desc = "All messages" },
     { "<leader>mne", "<cmd>Noice errors<cr>", desc = "Errors" },
   },
   opts = {
+    notify = { enabled = false }, -- snacks.notifier handles vim.notify
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {

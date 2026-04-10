@@ -1,7 +1,7 @@
 require("which-key").register({
     ["<leader>bb"] = { "<cmd>BufferLinePick<cr>", "Jump" },
     ["<leader>bf"] = { "<cmd>Telescope buffers<cr>", "Find" },
-    ["<leader>bd"] = { function() require("spuxy.bufferline").buf_kill("bd", 0, false) end, "Delete buffer" },
+    ["<leader>bd"] = { function() Snacks.bufdelete() end, "Delete buffer" },
     ["<leader>bj"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
     ["<leader>bk"] = { "<cmd>BufferLineCycleNext<cr>", "Next" },
     ["<leader>bp"] = { "<cmd>BufferLineTogglePin<cr>", "Pin" },
