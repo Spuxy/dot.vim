@@ -39,7 +39,7 @@ local M = {
     { "<leader>v", "<cmd>vsplit<CR>",                         desc = "Vertical Split" },
     { "<leader>h", "<cmd>split<CR>",                          desc = "Horizontal Split" },
     { "<leader>y", "<cmd>Telescope projects<CR>",             desc = "Projects" },
-    { "<leader>/", "<Plug>(comment_toggle_linewise_current)", desc = "Comment line" },
+    { "<leader>/", "gcc", desc = "Comment line", remap = true },
     { "<leader>c", function() Snacks.bufdelete() end,         desc = "Close Buffer" },
 
     -- Health
@@ -91,7 +91,7 @@ local M = {
       { "<leader>C",  group = "Copilot",    icon = { icon = icons.git.Copilot,       color = "grey" } },
       { "<leader>m",  group = "Misc",       icon = { icon = icons.ui.Gear,           color = "grey" } },
         { "<leader>mS",  group = "Sessions",   icon = { icon = "󰁯",                 color = "purple" } },
-        { "<leader>mn",  group = "Noice",      icon = { icon = icons.ui.List,        color = "grey" } },
+        { "<leader>mn",  group = "Notify",     icon = { icon = icons.ui.List,        color = "grey" } },
         { "<leader>mx",  group = "Trouble",    icon = { icon = icons.diagnostics.BoldError, color = "red" } },
         { "<leader>mT",  group = "Transparency", icon = { icon = "󰇄",              color = "grey" } },
         { "<leader>mm",  group = "Markdown",   icon = { icon = "󰍔",                color = "blue" } },

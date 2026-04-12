@@ -11,7 +11,8 @@ spec("spuxy.ai.copilotchat")
 
 -- UI
 spec("spuxy.mini.icon") -- mocks nvim-web-devicons API via package.preload
-spec("spuxy.noice")
+-- noice removed: only used for cmdline popup cosmetics, all LSP/notify/signature
+-- features were already disabled in favour of snacks + blink.cmp
 
 -- Collections of Libs
 spec("spuxy.snacks")
@@ -42,7 +43,7 @@ spec("spuxy.mini.move")
 spec("spuxy.mini.bracketed")
 spec("spuxy.mini.trailspace")
 spec("spuxy.mini.hipatterns")
-spec("spuxy.ufo")
+-- ufo removed: Neovim 0.12 has native vim.lsp.foldexpr() + vim.treesitter.foldexpr()
 spec("spuxy.smart-splits")
 
 -- FILESYSTEM

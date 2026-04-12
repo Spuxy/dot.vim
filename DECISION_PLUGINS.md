@@ -117,6 +117,24 @@ Architectural decision record for plugin choices — why something was added, re
 - **Why**: Part of mini.nvim ecosystem. Same toggle/split/join functionality.
 - **Files**: `mini/splitjoin.lua`
 
+### nvim-ufo removed — native treesitter folds
+
+- **Date**: 2026-04-12
+- **Old**: kevinhwang91/nvim-ufo + promise-async (2 plugins)
+- **New**: Native `vim.treesitter.foldexpr()` in `core/options.lua`
+- **Why**: Neovim 0.12 has `vim.treesitter.foldexpr()` and `vim.lsp.foldexpr()` built-in. ufo's treesitter+indent provider chain is now redundant. Native `foldtext = ""` (0.12+) shows first-line content in folds. `zR`/`zM` are native vim keymaps that work without ufo. snacks.statuscolumn already draws fold indicators. Lost features: fold preview popup (`zK` to peek inside a fold) — acceptable tradeoff for 2 fewer plugins.
+- **Revert**: archived at `archive/ufo.lua`, re-add `spec("spuxy.ufo")` to init.lua and remove foldmethod/foldexpr/foldtext from `core/options.lua`
+- **Files**: `core/options.lua`, `archive/ufo.lua`
+
+### noice.nvim removed — native cmdline
+
+- **Date**: 2026-04-12
+- **Old**: folke/noice.nvim + MunifTanjim/nui.nvim (2 plugins)
+- **New**: Native Neovim cmdline + snacks.notifier for notifications
+- **Why**: Almost all noice features were already disabled: `notify: false` (snacks.notifier), `signature: false` (blink.cmp), `hover: false`, `progress: false`. The only active feature was the cmdline popup preset (cosmetic `:` and `/` popups). The config also referenced `cmp.entry.get_documentation` (stale nvim-cmp reference). Not worth 2 plugin dependencies for cmdline cosmetics. Notification history keymaps (`<leader>mna`, `<leader>mnd`) moved to snacks.notifier in `snacks.lua`.
+- **Revert**: archived at `archive/noice.lua`, re-add `spec("spuxy.noice")` to init.lua
+- **Files**: `snacks.lua`, `whichkey.lua`, `archive/noice.lua`
+
 ### Treesitter-context added — sticky scroll
 
 - **Date**: 2026-04-12
@@ -201,7 +219,9 @@ Files moved to archive are not loaded. They exist as reference for possible futu
 | language settings | languages.lua | Restructured to lsp/<lang>/ |
 | lsp_signature | lsp_signature.lua | Replaced by blink.cmp signature.enabled |
 | old keymaps | mapping.lua, mappings.lua | Restructured to defaults/mappings/ |
+| noice.nvim | noice.lua | Cmdline popup only feature left; not worth nui.nvim dep |
 | none-ls | none-ls.lua | Replaced by conform + nvim-lint |
+| nvim-ufo | ufo.lua | Replaced by native vim.treesitter.foldexpr() in 0.12 |
 | nvim-notify | notify.lua | Replaced by snacks.notifier |
 | overseer.nvim | overseer.lua | No keymaps configured, no way to invoke |
 | nvim-dap-python (old) | python.lua | Restructured to debug/python/ |

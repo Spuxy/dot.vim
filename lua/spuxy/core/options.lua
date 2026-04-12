@@ -50,13 +50,16 @@ local options = {
   guifont = "monospace:h17", -- the font used in graphical neovim applications
   title = false,
   foldcolumn = '0', -- snacks.statuscolumn draws the fold indicator itself
-  foldlevel = 99, -- ufo needs a large value so all folds start open
+  foldmethod = "expr",
+  foldexpr = "v:lua.vim.treesitter.foldexpr()",
+  foldtext = "",  -- native foldtext: shows first line content (Neovim 0.12+)
+  foldlevel = 99, -- start with all folds open
   foldlevelstart = 99,
   foldenable = true,
   -- colorcolumn = "80",
   -- colorcolumn = "120",
   --
-  fillchars = vim.opt.fillchars + "eob: ",
+  fillchars = vim.opt.fillchars + "eob: ,fold: ,foldopen:▾,foldsep: ,foldclose:▸",
   sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 }
 

@@ -127,6 +127,14 @@ local M = {
     vim.keymap.set({ "n", "t" }, [[<C-\>]], function()
       Snacks.terminal.toggle(nil, { count = 2, win = { position = "float" } })
     end, { desc = "Float Terminal" })
+    -- Notification history (replaces Noice message keymaps)
+    vim.keymap.set("n", "<leader>mna", function()
+      Snacks.notifier.show_history()
+    end, { desc = "All notifications" })
+    vim.keymap.set("n", "<leader>mnd", function()
+      Snacks.notifier.hide()
+    end, { desc = "Dismiss all" })
+
     -- Scratch
     vim.keymap.set("n", "<leader>.", function()
       Snacks.scratch()
