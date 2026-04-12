@@ -8,6 +8,109 @@
 - **`spec(item)`** is a global helper (defined in `core/launch.lua`) that appends `{ import = item }` to `LAZY_PLUGIN_SPEC`, which lazy.nvim reads in `lazy.lua`
 - **Neovim version required:** 0.11+ (uses `vim.lsp.config()` / `vim.lsp.enable()` new API)
 
+### Directory layout
+
+```
+lua/spuxy/
+  core/           — keymaps, options, autocmds, functions, health
+  defaults/       — tools.lua (LSP/formatters/linters), mappings/
+  mini/           — mini.nvim modules (one file per module)
+  completions/    — blink.cmp, lazydev
+  lsp/            — lspconfig + per-language settings (go/, python/, c/, etc.)
+  debug/          — nvim-dap + per-language debug configs
+  git/            — gitsigns, neogit, fugitive, keymaps
+  linters/        — nvim-lint
+  colorschemes/   — tokyonight (active)
+  ai/             — copilot, copilotchat
+  snippets/       — custom luasnip snippets
+  archive/        — disabled plugins kept for reference
+```
+
+---
+
+## Requirements
+
+External tools that must be present on `$PATH` before opening Neovim.
+Mason auto-installs LSP servers, formatters, linters, and debuggers — but these
+system-level prerequisites must be bootstrapped by Ansible (or manually).
+
+<!-- BEGIN REQUIREMENTS — machine-readable, scraped by Ansible -->
+
+### required
+
+| tool | description | brew | apt |
+|------|-------------|------|-----|
+| neovim | Editor, version 0.11+ required | `neovim` | `neovim` |
+| git | Version control | `git` | `git` |
+| rg | Ripgrep — telescope, grug-far, live grep | `ripgrep` | `ripgrep` |
+| fd | Find alternative — telescope file finder | `fd` | `fd-find` |
+| fzf | Fuzzy finder — nvim-bqf dependency | `fzf` | `fzf` |
+| node | Node.js — Mason, copilot, markdown-preview | `node` | `nodejs` |
+| yarn | JS package manager — markdown-preview build | `yarn` | `yarn` |
+| trash | Trash CLI — neo-tree delete-to-trash | `trash` | `trash-cli` |
+| make | Build tool — telescope-fzf-native, luasnip jsregexp | `make` | `make` |
+| gcc | C compiler — treesitter parser compilation | `gcc` | `gcc` |
+| tree-sitter | Tree-sitter CLI >= 0.26.1 — parser compilation | | | `cargo install tree-sitter-cli` |
+| curl | HTTP client — plenary.curl, yaml schema detection | `curl` | `curl` |
+| unzip | Archive tool — Mason package extraction | `unzip` | `unzip` |
+| tar | Archive tool — Mason package extraction | pre-installed | `tar` |
+| gzip | Compression — Mason package extraction | pre-installed | `gzip` |
+
+### optional_languages
+
+| tool | description | brew | apt | install_cmd |
+|------|-------------|------|-----|-------------|
+| go | Go toolchain — gopls, delve, go.nvim | `go` | `golang` | |
+| python3 | Python runtime — pyright, debugpy, nvim-lint | `python` | `python3` | |
+| pip | Python packages — pylint, black, isort | included with python | `python3-pip` | |
+| cargo | Rust toolchain — rust-analyzer, blink.cmp build | `rustup` | `rustup` | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
+| rustfmt | Rust formatter — not in Mason | | | `rustup component add rustfmt` |
+| rust-analyzer | Rust LSP — not in Mason | | | `rustup component add rust-analyzer` |
+| ruby | Ruby runtime — ruby_lsp, rubocop | `ruby` | `ruby-full` | |
+| gem | Ruby packages — puppet-languageserver | included with ruby | included with ruby | |
+| lua | Lua runtime — selene linter | `lua` | `lua5.4` | |
+
+### optional_infra
+
+| tool | description | brew | apt | install_cmd |
+|------|-------------|------|-----|-------------|
+| kubectl | Kubernetes CLI — dashboard context display | `kubectl` | `kubectl` | |
+| kustomize | Kustomize CLI — kustomize.nvim build/list | `kustomize` | | |
+| kubeconform | K8s manifest validator — kustomize.nvim validate | `kubeconform` | | `go install github.com/yannh/kubeconform/cmd/kubeconform@latest` |
+| kubent | K8s deprecation checker — kustomize.nvim deprecations | | | `sh -c "$(curl -sSL https://git.io/install-kubent)"` |
+| helm | Helm CLI — helm_ls language server | `helm` | `helm` | |
+| terraform | Terraform CLI — terraformls language server | `terraform` | `terraform` | |
+| ansible | Ansible CLI — ansiblels language server | `ansible` | `ansible` | |
+| chezmoi | Dotfile manager — auto-apply on save | `chezmoi` | | `sh -c "$(curl -fsLS get.chezmoi.io)"` |
+
+### optional_tools
+
+| tool | description | brew | apt | install_cmd |
+|------|-------------|------|-----|-------------|
+| ipcalc | IP subnet calculator — :IPCalc command | `ipcalc` | `ipcalc` | |
+| puppet-languageserver | Puppet LSP — not in Mason | | | `gem install puppet-editor-services` |
+| ruby-debug-ide | Ruby debugger — not in Mason | | | `gem install ruby-debug-ide debase` |
+| bacon | Rust background compiler | | | `cargo install bacon` |
+| snyk | Security scanner | `snyk` | | `npm install -g snyk` |
+| sphinx-lint | RST linter | | | `pip install sphinx-lint` |
+
+### mason_auto_installed
+
+These are auto-installed by Mason on first launch — no manual action needed.
+Listed here for Ansible to verify they exist after bootstrap.
+
+**LSP servers:** cssls, html, bashls, dockerls, jsonls, helm_ls, yamlls, ansiblels, gopls, pyright, lua_ls, rust_analyzer, clangd, ruby_lsp
+
+**Formatters:** clang-format, goimports, gofumpt, prettier, stylua, shfmt, isort, ruff, black, rubocop, yamlfmt
+
+**Linters:** hadolint, revive, selene, shellcheck, yamllint, pylint, rubocop, markdownlint-cli2, rstcheck
+
+**Debuggers:** debugpy, delve, bash-debug-adapter, codelldb
+
+**Treesitter parsers:** bash, c, cmake, cpp, css, dockerfile, go, hcl, html, javascript, json, jsonc, lua, markdown, markdown_inline, query, python, regex, ruby, rust, terraform, toml, tsx, typescript, vim, yaml
+
+<!-- END REQUIREMENTS -->
+
 ---
 
 ## Single source of truth — `defaults/tools.lua`
@@ -136,6 +239,51 @@ All mini.* plugins use the **`nvim-mini`** GitHub org, NOT `echasnovski`:
 "nvim-mini/mini.ai"      -- correct
 "echasnovski/mini.icons" -- WRONG — old URL (redirects but causes issues)
 ```
+
+---
+
+## Treesitter-context — sticky scroll (VSCode-style)
+
+Pins the current function/class/block header at the top of the window so you always
+know where you are in deeply nested code. Exactly like VSCode's "sticky scroll" feature.
+
+- Shows up to 3 context lines at the top
+- Follows cursor position — updates as you move
+- Separated by a `─` line from the actual code
+- Hidden in small windows (< 20 lines)
+
+| Key | Action |
+|-----|--------|
+| `gC` | Jump up to the sticky context header |
+
+---
+
+## Treesitter textobjects — select, move, swap
+
+### Move — jump between code structures with `[`/`]`
+
+All move keymaps are **repeatable with `;` and `,`** (just like `f`/`t`).
+
+| Key | Action |
+|-----|--------|
+| `]f` / `[f` | Next / prev function start |
+| `]F` / `[F` | Next / prev function end |
+| `]a` / `[a` | Next / prev argument |
+| `]l` / `[l` | Next / prev loop |
+
+> These are added to the jumplist — use `<C-o>` to jump back.
+
+### Swap — reorder function parameters
+
+| Key | Action |
+|-----|--------|
+| `<leader>xp` | Swap parameter with next |
+| `<leader>xP` | Swap parameter with previous |
+
+### Repeatable motions
+
+`;` repeats the last treesitter move forward, `,` repeats backward.
+This also applies to native `f`/`t`/`F`/`T` — all use the same repeat keys.
 
 ---
 
@@ -514,3 +662,71 @@ Use buffers + bufferline for file switching. Use tabs for separate workspaces.
 | `<leader>ak` | Previous tab |
 | `<leader>ah` | Move tab left |
 | `<leader>al` | Move tab right |
+
+---
+
+## Harpoon 2 — fast file jumping
+
+Mark up to 4 files and jump to them instantly by number. No fuzzy finding, no tree — just
+muscle-memory jumps to the files you're actively working on.
+
+### Keymaps
+
+| Key | Action |
+|-----|--------|
+| `<S-m>` | Mark current file (add to harpoon list) |
+| `<leader>0` | Toggle harpoon quick menu |
+| `<leader>1` | Jump to harpoon file 1 |
+| `<leader>2` | Jump to harpoon file 2 |
+| `<leader>3` | Jump to harpoon file 3 |
+| `<leader>4` | Jump to harpoon file 4 |
+| `[h` / `]h` | Previous / next harpoon mark |
+
+> Marks persist per-project across sessions. The quick menu (`<leader>0`) lets you reorder
+> and remove marks.
+
+---
+
+## Oil.nvim — filesystem as a buffer
+
+Edit your filesystem using normal vim motions. Open a directory, rename files by editing text,
+delete by removing lines, create by adding lines. Save with `:w` to apply all changes.
+
+Coexists with neo-tree: use neo-tree as a sidebar tree browser, oil for quick bulk edits.
+
+### Keymaps
+
+| Key | Action |
+|-----|--------|
+| `-` | Open parent directory (oil) |
+| `<leader>fo` | Open oil in floating window |
+| `<CR>` | Open file / enter directory |
+| `<C-v>` | Open in vertical split |
+| `<C-s>` | Open in horizontal split |
+| `<C-p>` | Preview file |
+| `<C-c>` | Close oil |
+| `g.` | Toggle hidden files |
+| `g\` | Toggle trash |
+| `gs` | Change sort |
+
+> Oil replaces netrw as the default file explorer. `-` from any buffer goes up to the parent
+> directory — pure vim-vinegar workflow.
+
+---
+
+## Kustomize.nvim — Kubernetes Kustomize integration
+
+Build, validate, and navigate Kustomize resources directly in Neovim.
+
+**Requires in `$PATH`:** `kustomize`, `kubeconform` (validation), `kubent` (deprecation checks)
+
+### Keymaps (`<leader>k`)
+
+| Key | Action |
+|-----|--------|
+| `<leader>kb` | Build manifests |
+| `<leader>kk` | List kinds |
+| `<leader>kl` | List resources |
+| `<leader>kp` | Print resources |
+| `<leader>kv` | Validate manifests |
+| `<leader>kd` | Check deprecations |

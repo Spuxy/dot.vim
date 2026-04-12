@@ -7,19 +7,19 @@ local M = {}
 ---Return OS
 ---@return string
 M.getOS = function()
-  local handle = io.popen("uname -s")
-  if handle == nil then
-    vim.notify("Error while opening handler", vim.log.levels.ERROR)
-    return ""
-  end
-  local uname = handle:read("*a")
-  handle:close()
-  uname = uname:gsub("%s+", "")
-  if uname == "Darwin" then
+  local sysname = vim.uv.os_uname().sysname
+  if sysname == "Darwin" then
     return "Darwin"
-  elseif uname == "NixOS" then
-    return "NixOS"
-  elseif uname == "Linux" then
+  elseif sysname == "Linux" then
+    -- NixOS identifies as Linux; check /etc/os-release
+    local f = io.open("/etc/os-release", "r")
+    if f then
+      local content = f:read("*a")
+      f:close()
+      if content:find("NixOS") then
+        return "NixOS"
+      end
+    end
     return "Linux"
   else
     return ""

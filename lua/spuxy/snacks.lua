@@ -44,7 +44,7 @@ local M = {
     explorer = { enabled = false },
     indent = { enabled = true },
     input = { enabled = true },
-    picker = { enabled = true },
+    picker = { enabled = false }, -- keeping Telescope for now
     notifier = {
       enabled = true,
       style = "fancy",

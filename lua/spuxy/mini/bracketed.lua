@@ -10,5 +10,7 @@ return {
     treesitter = { suffix = "" },
     -- disable diagnostic jumps — already have [e/]e and [w/]w in keymaps
     diagnostic  = { suffix = "" },
+    -- disable file jumps — [f/]f owned by textobjects.move for function navigation
+    file = { suffix = "" },
   },
 }

@@ -1,22 +1,31 @@
 local M = {
-	"ThePrimeagen/harpoon",
-	event = "VeryLazy",
-	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-	},
+  "ThePrimeagen/harpoon",
+  branch = "harpoon2",
+  event = "VeryLazy",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
 }
 
 function M.config()
-	local keymap = vim.keymap.set
-	local opts = { noremap = true, silent = true }
+  local harpoon = require("harpoon")
+  harpoon:setup()
 
-	keymap("n", "<s-m>", "<cmd>lua require('spuxy.harpoon').mark_file()<cr>", opts)
-	-- keymap("n", "<TAB>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
-end
+  local keymap = vim.keymap.set
 
-function M.mark_file()
-	require("harpoon.mark").add_file()
-	vim.notify("󱡅  marked file")
+  -- Mark / menu
+  keymap("n", "<s-m>", function() harpoon:list():add() end, { desc = "Harpoon mark file" })
+  keymap("n", "<leader>0", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon menu" })
+
+  -- Jump to file by index
+  keymap("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
+  keymap("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
+  keymap("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
+  keymap("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
+
+  -- Cycle through marks
+  keymap("n", "[h", function() harpoon:list():prev() end, { desc = "Harpoon prev" })
+  keymap("n", "]h", function() harpoon:list():next() end, { desc = "Harpoon next" })
 end
 
 return M

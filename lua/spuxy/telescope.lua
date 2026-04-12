@@ -3,9 +3,9 @@ local icons = require("spuxy.core.icons")
 
 local M = {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.7",
-  requires = { { "nvim-lua/plenary.nvim" } },
+  branch = "master",
   dependencies = {
+    "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
     { "ahmedkhalf/project.nvim" },
   },
@@ -16,10 +16,10 @@ local M = {
       "<leader>]",
       function()
         local builtin = require("telescope.builtin")
-        opts = opts or {}
-        local ok = pcall(builtin.git_files, opts)
+        local local_opts = {}
+        local ok = pcall(builtin.git_files, local_opts)
         if not ok then
-          builtin.find_files(opts)
+          builtin.find_files(local_opts)
         end
       end,
       "lpl",
@@ -98,7 +98,11 @@ local M = {
   },
 }
 
-M.config = function()
+M.config = function(_, opts)
+  require("telescope").setup(opts)
+  require("telescope").load_extension("fzf")
+  require("telescope").load_extension("projects")
+
   require("project_nvim").setup({
     manual_mode = false,
     detection_methods = { "pattern" },
@@ -112,5 +116,4 @@ M.config = function()
   keys.whichkey()
 end
 
--- https://github.com/nvim-telescope/telescope.nvim/issues/3070
 return M

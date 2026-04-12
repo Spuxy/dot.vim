@@ -105,10 +105,8 @@ keymap("n", "<leader>mr", "<cmd>source " .. vim.fn.stdpath("config") .. "/snippe
 keymap("n", "<leader>qj", "<cmd>cnext<cr>", { desc = "Next entry" })
 keymap("n", "<leader>qk", "<cmd>cprevious<cr>", { desc = "Previous entry" })
 keymap("n", "<leader>qq", "<cmd>lua require('spuxy.core.functions').toggle_qf()<cr>", { desc = "Toggle Quickfix" })
--- Search for 'FIXME', 'HACK', 'TODO', 'NOTE'
-keymap("n", "<leader>qt", function()
-  utils.search_todos()
-end, { desc = "List TODOs" })
+-- Search for 'FIXME', 'HACK', 'TODO', 'NOTE' via todo-comments + Trouble
+keymap("n", "<leader>qt", "<cmd>Trouble todo<cr>", { desc = "List TODOs" })
 
 -- centered search results
 keymap("n", "n", "nzz", opts)

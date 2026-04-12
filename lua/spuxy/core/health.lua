@@ -54,8 +54,8 @@ M.check = function()
   vim.health.start("System configuration")
   local os = utils.getOS()
 
-  if not utils.isNeovimVersionsatisfied(10) then
-    _warn("This config probably won't work very well with Neovim < 0.10")
+  if not utils.isNeovimVersionsatisfied(11) then
+    _warn("This config requires Neovim 0.11+ (uses vim.lsp.config / vim.lsp.enable)")
   else
     _ok("This config will work with your Neovim version")
   end
@@ -104,22 +104,7 @@ M.check = function()
     end
   end
 
-  if lazy_ok and lazy.plugins["nvim-spectre"] then
-    if os == "Darwin" then
-      if not utils.isExecutableAvailable("gsed") then
-        _warn("gsed was not found - nvim-spectre (search and replace) might not work")
-      else
-        _ok(string.format(exec_found_template, "gsed"))
-      end
-    else
-      if not utils.isExecutableAvailable("sed") then
-        _warn("sed was not found - nvim-spectre (search and replace) might not work")
-      else
-        _ok(string.format(exec_found_template, "sed"))
-      end
-    end
-  end
-
+  -- nvim-spectre removed — replaced by grug-far.nvim (no gsed/sed dependency)
 
   if lazy_ok and lazy.plugins["telescope-fzf-native.nvim"] then
     if
