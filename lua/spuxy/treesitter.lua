@@ -5,7 +5,27 @@ local M = {
   dependencies = {
     "RRethy/nvim-treesitter-endwise",
     "windwp/nvim-ts-autotag",
-    { "nvim-mini/mini.ai", event = { "BufReadPre", "BufNewFile" }, opts = {} },
+    {
+      "nvim-mini/mini.ai",
+      event = { "BufReadPre", "BufNewFile" },
+      opts = function()
+        local ai = require("mini.ai")
+        return {
+          n_lines = 500, -- search up to 500 lines away for a text object
+          custom_textobjects = {
+            -- Function definition
+            F = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+            -- Class
+            c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+            -- Block (if/for/while/etc.)
+            o = ai.gen_spec.treesitter({
+              a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+              i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+            }),
+          },
+        }
+      end,
+    },
   },
   build = ":TSUpdate",
   opts = {

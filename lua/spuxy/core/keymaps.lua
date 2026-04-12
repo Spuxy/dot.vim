@@ -78,11 +78,16 @@ end)
 -- save like your are used to
 keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
--- new file
+-- Files (<leader>f)
 keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
+keymap("n", "<leader>fr", function() Snacks.rename.rename_file() end, { desc = "Rename file" })
+keymap("n", "<leader>fd", function() require("spuxy.core.functions").duplicate_file() end, { desc = "Duplicate file" })
+keymap("n", "<leader>fp", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+end, { desc = "Copy file path" })
 
--- search and replace is a pain with a German keyboard layout
-keymap({ "v", "n" }, "<leader>r", ":%s/", { desc = "Buffer search and replace" })
 
 -- toggles (Tn/Th/Tl/Tv/Ts/Tw/Tc/TO/Tt/Tb/TI/Td/Ti/TW → snacks.lua init)
 
@@ -127,7 +132,7 @@ keymap("n", "<RightMouse>", function()
 
   -- clicked buf
   local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
-  local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
+  local options = vim.bo[buf].ft == "neo-tree" and "nvimtree" or "default"
 
   require("menu").open(options, { mouse = true })
 end, {})
@@ -156,5 +161,3 @@ end, { desc = "Next warning" })
 keymap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment below" })
 keymap("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment above" })
 
--- Simple tree
-keymap("n", "<leader>pv", vim.cmd.Ex, opts)

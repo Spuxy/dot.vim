@@ -1,5 +1,1 @@
-require("which-key").register({
-    l = {
-        F = { "<cmd>ToggleAutoformat<cr>", "Toggle Format on Save" },
-    },
-}, { prefix = "<leader>" })
+vim.keymap.set("n", "<leader>lF", "<cmd>ToggleAutoformat<cr>", { desc = "Toggle Format on Save" })

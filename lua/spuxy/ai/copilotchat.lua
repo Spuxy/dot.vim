@@ -4,7 +4,7 @@ local M = {
     return vim.env.NO_COPILOT ~= "1"
   end,
   dependencies = {
-    { "github/copilot.vim" },
+    { "zbirenbaum/copilot.lua" },
     { "nvim-lua/plenary.nvim" },
   },
   keys = {

@@ -67,23 +67,32 @@ M.path_exists = function(path)
   return vim.uv.fs_stat(path)
 end
 
--- Return telescope files command
-M.project_files = function()
-  local path = vim.uv.cwd() .. "/.git"
-  if M.path_exists(path) then
-    local show_untracked = vim.g.config.plugins.telescope.show_untracked_files
-    return "lua require('telescope.builtin').git_files({ show_untracked = " .. tostring(show_untracked) .. " })"
-  else
-    return "Telescope find_files"
+--- Duplicate current file as copy-{filename} in the same directory and open it
+M.duplicate_file = function()
+  local src = vim.fn.expand("%:p")
+  if src == "" then
+    vim.notify("No file to duplicate", vim.log.levels.WARN)
+    return
   end
-end
 
--- Return file browser command
-M.file_browser = function()
-  if vim.g.config.plugins.lf.enable then
-    return "Lf"
+  local dir  = vim.fn.fnamemodify(src, ":h")
+  local name = vim.fn.fnamemodify(src, ":t")
+  local dst  = dir .. "/copy-" .. name
+
+  -- avoid overwriting an existing copy
+  if vim.uv.fs_stat(dst) then
+    vim.notify("Already exists: " .. dst, vim.log.levels.WARN)
+    return
   end
-  return "Telescope file_browser grouped=true"
+
+  local ok, err = vim.uv.fs_copyfile(src, dst)
+  if not ok then
+    vim.notify("Duplicate failed: " .. (err or "unknown error"), vim.log.levels.ERROR)
+    return
+  end
+
+  vim.cmd("edit " .. vim.fn.fnameescape(dst))
+  vim.notify("Duplicated → copy-" .. name, vim.log.levels.INFO)
 end
 
 -- toggle quickfixlist
@@ -129,27 +138,6 @@ M.escapePair = function()
   end
 end
 
--- @author kikito
--- @see https://codereview.stackexchange.com/questions/268130/get-list-of-buffers-from-current-neovim-instance
--- currently not used
-function M.get_listed_buffers()
-  local buffers = {}
-  local len = 0
-  for buffer = 1, vim.fn.bufnr("$") do
-    if vim.fn.buflisted(buffer) == 1 then
-      len = len + 1
-      buffers[len] = buffer
-    end
-  end
-
-  return buffers
-end
-
-function M.map(mode, l, r, opts)
-  opts = opts or {}
-  vim.keymap.set(mode, l, r, opts)
-end
-
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -160,19 +148,6 @@ function M.on_attach(on_attach)
     end,
   })
 end
-
---- Get current buffer size
-M.get_buf_size = function()
-	local cbuf = vim.api.nvim_get_current_buf()
-	local bufinfo = vim.tbl_filter(function(buf)
-		return buf.bufnr == cbuf
-	end, vim.fn.getwininfo(vim.api.nvim_get_current_win()))[1]
-	if bufinfo == nil then
-		return { width = -1, height = -1 }
-	end
-	return { width = bufinfo.width, height = bufinfo.height }
-end
-
 
 -- Get args from user input
 -- @param config table
@@ -186,39 +161,6 @@ M.get_args = function(config)
 	  return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
 	end
 	return config
-end
-
--- Get neopywal lualine theme if neopywal is installed
---- @return table|nil
-M.get_neopywal = function()
-	local has_neopywal, neopywal_lualine = pcall(require, "neopywal.theme.plugins.lualine")
-	if not has_neopywal then
-    M.notify("neopywal is not installed", vim.log.levels.WARN, "Spuxy")
-		return
-	end
-	return neopywal_lualine
-end
-
-M.mason_install = function(tools)
-
-	local has_mason_registry, mason_registry = pcall(require, "mason-registry")
-	if not has_mason_registry then
-		return
-	end
-
-	local function install_ensured()
-	  for _, tool in ipairs(tools) do
-		local p = mason_registry.get_package(tool)
-		if not p:is_installed() then
-		  p:install()
-		end
-	  end
-	end
-	if mason_registry.refresh then
-	  mason_registry.refresh(install_ensured)
-	else
-	  install_ensured()
-	end
 end
 
 -- Smartly opens either git_files or find_files, depending on whether the working directory is

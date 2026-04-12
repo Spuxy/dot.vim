@@ -1,16 +1,15 @@
-require("which-key").register({
-    ["<leader>bb"] = { "<cmd>BufferLinePick<cr>", "Jump" },
-    ["<leader>bf"] = { "<cmd>Telescope buffers<cr>", "Find" },
-    ["<leader>bd"] = { function() Snacks.bufdelete() end, "Delete buffer" },
-    ["<leader>bj"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-    ["<leader>bk"] = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-    ["<leader>bp"] = { "<cmd>BufferLineTogglePin<cr>", "Pin" },
-    ["<leader>bP"] = { "<cmd>BufferLineGroupClose ungrouped<cr>", "Delete non-pinned buffers" },
-    ["<leader>be"] = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
-    ["<leader>bo"] = { "<cmd>BufferLineCloseOthers<cr>", "Close others" },
-    ["<leader>bl"] = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
-    ["<leader>br"] = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
-    ["<leader>bW"] = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
-    ["<leader>bD"] = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
-    ["<leader>bL"] = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
-})
+local map = vim.keymap.set
+map("n", "<leader>bb", "<cmd>BufferLinePick<cr>",                         { desc = "Jump" })
+map("n", "<leader>bf", "<cmd>Telescope buffers<cr>",                      { desc = "Find" })
+map("n", "<leader>bd", function() Snacks.bufdelete() end,                 { desc = "Delete buffer" })
+map("n", "<leader>bj", "<cmd>BufferLineCyclePrev<cr>",                    { desc = "Previous" })
+map("n", "<leader>bk", "<cmd>BufferLineCycleNext<cr>",                    { desc = "Next" })
+map("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>",                    { desc = "Pin" })
+map("n", "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<cr>",         { desc = "Delete non-pinned buffers" })
+map("n", "<leader>be", "<cmd>BufferLinePickClose<cr>",                    { desc = "Pick which buffer to close" })
+map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>",                  { desc = "Close others" })
+map("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>",                    { desc = "Close all to the left" })
+map("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>",                   { desc = "Close all to the right" })
+map("n", "<leader>bW", "<cmd>noautocmd w<cr>",                            { desc = "Save without formatting" })
+map("n", "<leader>bD", "<cmd>BufferLineSortByDirectory<cr>",              { desc = "Sort by directory" })
+map("n", "<leader>bL", "<cmd>BufferLineSortByExtension<cr>",              { desc = "Sort by language" })

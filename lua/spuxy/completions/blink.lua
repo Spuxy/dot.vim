@@ -2,13 +2,8 @@ local M = {
   "saghen/blink.cmp",
   event = "InsertEnter",
   dependencies = {
-    { "allaman/emoji.nvim"},
-    { "saghen/blink.compat" },
-    {
-      "saghen/blink.compat",
-      optional = true,
-      opts = {},
-    },
+    { "L3MON4D3/LuaSnip" }, -- used via snippets.preset = 'luasnip'
+    { "giuxtaposition/blink-cmp-copilot" },
   },
   version = "v1.*",
   opts = {
@@ -43,20 +38,8 @@ local M = {
       per_filetype = {
         lua = { inherit_defaults = true, "lazydev" },
       },
-      default = { "lsp", "path", "snippets", "buffer", "lazydev", "emoji" },
+      default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
       providers = {
-        emoji = {
-          name = "emoji",
-          module = "blink.compat.source",
-          -- overwrite kind of suggestion
-          transform_items = function(ctx, items)
-            local kind = require("blink.cmp.types").CompletionItemKind.Text
-            for i = 1, #items do
-              items[i].kind = kind
-            end
-            return items
-          end,
-        },
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
@@ -64,7 +47,11 @@ local M = {
         },
         lsp = {
           min_keyword_length = function(ctx)
-            return ctx.trigger.kind == "manual" and 0 or 2 -- trigger when invoking with shortcut
+            -- trigger immediately on trigger characters (e.g. ".") or manual invoke
+            if ctx.trigger.kind == "trigger_character" or ctx.trigger.kind == "manual" then
+              return 0
+            end
+            return 1
           end,
           score_offset = 0,
         },
@@ -72,6 +59,7 @@ local M = {
           min_keyword_length = 0,
         },
         snippets = {
+          preset = "luasnip",
           min_keyword_length = 2,
           should_show_items = function(ctx)
             return ctx.trigger.initial_kind ~= "trigger_character" and not require("blink.cmp").snippet_active()
@@ -80,6 +68,12 @@ local M = {
         buffer = {
           min_keyword_length = 5,
           max_items = 5,
+        },
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
+          score_offset = 100,
+          async = true,
         },
       },
     },
@@ -103,8 +97,8 @@ local M = {
         selection = { preselect = false, auto_insert = true },
       },
       trigger = {
-        show_on_insert_on_trigger_character = false,
-        show_on_accept_on_trigger_character = false,
+        show_on_insert_on_trigger_character = true,
+        show_on_accept_on_trigger_character = true,
       },
       menu = {
         border = "rounded",
@@ -116,46 +110,13 @@ local M = {
     -- experimental auto-brackets support
     -- completion = { accept = { auto_brackets = { enabled = true } } },
 
-    -- experimental signature help support
-    -- signature = { enabled = true }
+    signature = {
+      enabled = true,
+      window = { border = "rounded" },
+    },
   },
-  opts_extend = {
-    "sources.default",
-    "sources.compat",
-  },
+  opts_extend = { "sources.default" },
   config = function(_, opts)
-    -- setup compat sources and provider
-    local enabled = opts.sources.default
-    for _, source in ipairs(opts.sources.compat or {}) do
-      opts.sources.providers[source] = vim.tbl_deep_extend(
-        "force",
-        { name = source, module = "blink.compat.source" },
-        opts.sources.providers[source] or {}
-      )
-      if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-        table.insert(enabled, source)
-      end
-    end
-
-    -- check if we need to override symbol kinds
-    for _, provider in pairs(opts.sources.providers or {}) do
-      ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
-      if provider.kind then
-        require("blink.cmp.types").CompletionItemKind[provider.kind] = provider.kind
-        ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
-        local transform_items = provider.transform_items
-        ---@param ctx blink.cmp.Context
-        ---@param items blink.cmp.CompletionItem[]
-        provider.transform_items = function(ctx, items)
-          items = transform_items and transform_items(ctx, items) or items
-          for _, item in ipairs(items) do
-            item.kind = provider.kind or item.kind
-          end
-          return items
-        end
-      end
-    end
-
     require("blink.cmp").setup(opts)
   end,
 }

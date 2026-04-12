@@ -1,5 +1,39 @@
 local api = vim.api
 
+-- Toggle window maximize: saves exact sizes of all windows, restores them on second press
+local _maximize_state = nil -- { win, sizes = { [winid] = {width, height} } }
+
+vim.api.nvim_create_user_command("WindowsMaximize", function()
+  local cur_win = vim.api.nvim_get_current_win()
+
+  -- If we have a saved state and the same window is still maximized, restore
+  if _maximize_state and _maximize_state.win == cur_win then
+    for winid, dims in pairs(_maximize_state.sizes) do
+      if vim.api.nvim_win_is_valid(winid) then
+        vim.api.nvim_win_set_width(winid, dims.width)
+        vim.api.nvim_win_set_height(winid, dims.height)
+      end
+    end
+    _maximize_state = nil
+    return
+  end
+
+  -- Save all window sizes before maximizing
+  local sizes = {}
+  for _, winid in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_is_valid(winid) then
+      sizes[winid] = {
+        width = vim.api.nvim_win_get_width(winid),
+        height = vim.api.nvim_win_get_height(winid),
+      }
+    end
+  end
+  _maximize_state = { win = cur_win, sizes = sizes }
+
+  vim.cmd("wincmd |")
+  vim.cmd("wincmd _")
+end, { desc = "Toggle maximize current window" })
+
 -- Auto-create parent directories when saving a file to a new path
 api.nvim_create_autocmd("BufWritePre", {
   callback = function(args)

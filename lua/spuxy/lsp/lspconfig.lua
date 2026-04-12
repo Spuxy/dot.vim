@@ -12,7 +12,7 @@ local ruby_settings   = require("spuxy.lsp.ruby.settings")
 
 local M = {
   "neovim/nvim-lspconfig",
-  dependencies = { "hrsh7th/cmp-nvim-lsp", "b0o/schemastore.nvim" },
+  dependencies = { "saghen/blink.cmp", "b0o/schemastore.nvim" },
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     servers = {
@@ -73,15 +73,6 @@ local M = {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
-        -- Attach navic if available
-        local navic_ok, navic = pcall(require, "nvim-navic")
-        if navic_ok then
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.server_capabilities.documentSymbolProvider then
-            navic.attach(client, event.buf)
-          end
-        end
-
         -- Setup buffer-local keymaps
         require("spuxy.lsp.keymaps").setup(event.buf)
 
@@ -117,11 +108,7 @@ local M = {
     -- Content-based schema detection (apiVersion → schema URL → yamlls notify)
     require("spuxy.lsp.yaml.detect").setup()
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    if ok then
-      capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
-    end
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     for server, server_opts in pairs(opts.servers) do
       server_opts = vim.tbl_deep_extend("force", {}, server_opts, {

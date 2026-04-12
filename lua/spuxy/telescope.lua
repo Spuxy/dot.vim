@@ -5,8 +5,12 @@ local M = {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.7",
   requires = { { "nvim-lua/plenary.nvim" } },
-  dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
+  dependencies = {
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    { "ahmedkhalf/project.nvim" },
+  },
   keys = {
+    { "<leader>y", "<cmd>Telescope projects<cr>", desc = "Projects" },
     { "<leader>[", "<cmd>CustomFinder<CR>", "lll" },
     {
       "<leader>]",
@@ -95,7 +99,17 @@ local M = {
 }
 
 M.config = function()
-  require("which-key").register(keys.whichkey)
+  require("project_nvim").setup({
+    manual_mode = false,
+    detection_methods = { "pattern" },
+    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
+    ignore_lsp = {},
+    exclude_dirs = {},
+    show_hidden = false,
+    silent_chdir = true,
+    scope_chdir = "global",
+  })
+  keys.whichkey()
 end
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/3070

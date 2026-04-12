@@ -22,7 +22,7 @@ spec("spuxy.snacks")
 
 -- MISC
 spec("spuxy.trouble")
-spec("spuxy.treesj")
+spec("spuxy.mini-splitjoin")
 spec("spuxy.auto-session")
 spec("spuxy.transparent")
 -- overseer removed: all keymaps were commented out — no way to invoke the plugin
@@ -37,14 +37,20 @@ spec("spuxy.markdown-preview")
 spec("spuxy.colorschemes.tokyonight")
 
 -- MOVEMENTS
-spec("spuxy.autopairs") -- own keymaps
-spec("spuxy.comment") -- own keymaps
+spec("spuxy.mini-pairs")
+-- autopairs removed: replaced by mini.pairs
+-- comment.nvim removed: Neovim 0.10+ has native gc/gb commenting built-in
 spec("spuxy.telescope")
-spec("spuxy.surround") -- own keymaps
+spec("spuxy.mini-surround") -- ys/ds/cs keymaps
 spec("spuxy.window-picker") -- pickign window - own keymaps
 spec("spuxy.flash")
 spec("spuxy.grug-far")
 spec("spuxy.mini-align")
+spec("spuxy.mini-indentscope")
+spec("spuxy.mini-move")
+spec("spuxy.mini-bracketed")
+spec("spuxy.mini-trailspace")
+spec("spuxy.mini-hipatterns")
 spec("spuxy.ufo") -- spliting and moving cursor and buffers
 spec("spuxy.smart-splits")
 -- substitute removed: opts = {}, no keymaps configured — does nothing
@@ -54,13 +60,11 @@ spec("spuxy.neotree") -- own keymaps
 spec("spuxy.lualine")
 
 -- Projects manipulation
-spec("spuxy.project")
 spec("spuxy.harpoon")
 
 -- COMPLETIONS
--- spec("spuxy.completions.blink") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
--- spec("spuxy.completions.lazydev")
-spec("spuxy.completions.cmp") -- when i write, it pops menu to pick function + with tab it will complete func call with arguments and i change thm easily
+spec("spuxy.completions.blink")
+spec("spuxy.completions.lazydev")
 
 -- LSP
 -- navic removed: lspsaga provides symbols_in_winbar with more features
@@ -71,7 +75,6 @@ spec("spuxy.lsp.mason-lspconfig")
 spec("spuxy.treesitter")
 spec("spuxy.treesitter-textobjects")
 -- spec("spuxy.yamlcompanion")
--- spec("spuxy.navigator")
 spec("spuxy.symbol-usage")
 spec("spuxy.luasnip")
 spec("spuxy.conform")
@@ -83,13 +86,13 @@ spec("spuxy.git.fugitive")
 
 -- UI
 spec("spuxy.bqf")
--- spec("spuxy.menu")
+spec("spuxy.menu")
 spec("spuxy.lspsaga")
 spec("spuxy.todo-comments")
-spec("spuxy.lsp_signature")
+-- spec("spuxy.lsp_signature") -- disabled: blink.cmp signature.enabled = true replaces this
 spec("spuxy.rainbow")
 
-spec("spuxy.illuminate")
+-- illuminate removed: snacks.words handles word highlighting (words = { enabled = true })
 spec("spuxy.schemastore")
 
 -- Debuging

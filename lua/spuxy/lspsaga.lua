@@ -21,7 +21,7 @@ local M = {
   },
   dependencies = {
     "nvim-treesitter/nvim-treesitter", -- optional
-    "nvim-tree/nvim-web-devicons", -- optional
+    "nvim-mini/mini.icons", -- optional
   },
 }
 

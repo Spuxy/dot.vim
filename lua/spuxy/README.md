@@ -87,21 +87,44 @@ gopls = { settings = go_settings }
 
 ---
 
-## Completion engine — nvim-cmp (active)
+## Completion engine — blink.cmp (active)
 
-blink.cmp spec exists (`completions/blink.lua`) but is **commented out** in `init.lua`.
-Active stack: `nvim-cmp` + `cmp-nvim-lsp` + `luasnip`.
+Rust-based completion engine, replacing nvim-cmp. Faster, built-in sources, actively maintained.
 
-`lspconfig.lua` uses `cmp_nvim_lsp.default_capabilities()` — if you switch to blink,
-change the `dependencies` and capabilities line in `lspconfig.lua` to:
-```lua
-dependencies = { "saghen/blink.cmp" },
--- and in config:
-capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
-```
+Active stack: `blink.cmp` + `blink.compat` + `luasnip` (for custom snippets).
 
-CMP menu format: `fields = { "abbr", "menu" }` — icon + kind name on the right, colorized
-per kind via `menu_hl_group = "CmpItemKind" .. kind_name`.
+### Sources
+
+| Source | What it provides |
+|--------|-----------------|
+| `lsp` | LSP completions (triggers after 2 chars, 0 on manual `<C-space>`) |
+| `path` | File path completions |
+| `snippets` | Built-in blink snippet engine |
+| `luasnip` | Custom luasnip snippets via blink.compat |
+| `buffer` | Words from open buffers (min 5 chars, max 5 items) |
+| `lazydev` | Neovim Lua API completions (lua ft only, priority +100) |
+| `emoji` | Emoji completions via blink.compat + allaman/emoji.nvim |
+
+### Keymaps
+
+| Key | Action |
+|-----|--------|
+| `<C-space>` | Show / toggle documentation |
+| `<C-e>` | Hide menu |
+| `<CR>` | Accept selected item |
+| `<Tab>` / `<S-Tab>` | Next / prev item, or jump snippet placeholder |
+| `<C-j>` / `<C-k>` | Next / prev item |
+| `<C-f>` / `<C-b>` | Scroll documentation up / down |
+
+### LSP capabilities
+
+`lspconfig.lua` uses `require("blink.cmp").get_lsp_capabilities()` — single call, no manual merging needed.
+
+### Cmdline completion
+
+Enabled with `preset = "cmdline"` — blink handles `:` command completion automatically.
+
+> **nvim-cmp** (`completions/cmp.lua`) is kept on disk but no longer loaded. Safe to delete if you are confident you won't switch back.
 
 ---
 
@@ -113,6 +136,134 @@ All mini.* plugins use the **`nvim-mini`** GitHub org, NOT `echasnovski`:
 "nvim-mini/mini.ai"      -- correct
 "echasnovski/mini.icons" -- WRONG — old URL (redirects but causes issues)
 ```
+
+---
+
+## mini.ai — Extended text objects
+
+Extends Neovim's built-in `a`/`i` system. All objects work with every operator (`d`, `c`, `y`, `v`, `=`, `gq`, etc.) and support **counts** (`d2a)` = delete 2nd outer parens).
+
+### Improved built-ins (work from anywhere inside, not just adjacent)
+
+| Key | Object |
+|-----|--------|
+| `i(`/`a(` `i[`/`a[` `i{`/`a{` | Inside/around brackets |
+| `ib`/`ab` | Any bracket — matches `()`, `[]`, `{}` (closest) |
+| `iq`/`aq` | Any quote — matches `"`, `'`, `` ` `` |
+
+### New objects
+
+| Key | Object |
+|-----|--------|
+| `if`/`af` | Function **call** — `daf` deletes `foo(args)` including the name |
+| `ia`/`aa` | **Argument** — `cia` changes one arg, handles commas cleanly |
+| `it`/`at` | HTML/XML **tag** — `dat` deletes `<div>...</div>` |
+| `i?`/`a?` | **Prompted** — asks which delimiter to use interactively |
+
+### Treesitter objects (wired up via `gen_spec.treesitter`)
+
+| Key | Object |
+|-----|--------|
+| `iF`/`aF` | Inside/around **function definition** |
+| `ic`/`ac` | Inside/around **class** |
+| `io`/`ao` | Inside/around **block / if / loop / conditional** |
+
+### Jumping
+
+Prefix any object with `[` or `]` to jump to the previous/next occurrence:
+
+| Key | Action |
+|-----|--------|
+| `]a` / `[a` | Next/prev argument |
+| `]f` / `[f` | Next/prev function call |
+| `]F` / `[F` | Next/prev function definition |
+| `]o` / `[o` | Next/prev block/conditional |
+
+---
+
+## mini.indentscope — Scope-aware indent highlighting
+
+Complements `snacks.indent` — they serve different purposes:
+
+| | snacks.indent | mini.indentscope |
+|---|---|---|
+| What | Static guide lines for **every** indent level | Highlighted line for **current scope only** |
+| When | Always visible | Follows cursor |
+
+### How it works
+
+- Draws a distinct `│` line along the scope your cursor is currently inside
+- `try_as_border = true` — scope includes the surrounding delimiter lines (e.g. `function`/`end`)
+- Auto-disabled in special buffers (lazy, mason, neo-tree, Trouble, etc.)
+- Animation is disabled for instant rendering (snacks already provides the ambient guide lines)
+
+### Keymaps (built-in)
+
+| Key | Action |
+|-----|--------|
+| `[i` | Jump to **top** of current scope |
+| `]i` | Jump to **bottom** of current scope |
+| `ii`/`ai` | Text object — inside/around current indent scope |
+
+> `vii` selects everything inside the current block. `dai` deletes it including the border lines.
+
+---
+
+## mini.move — Move lines and selections
+
+Moves the current line (normal mode) or visual selection in any direction without cut/paste.
+
+| Key | Action |
+|-----|--------|
+| `<M-h>` | Move left |
+| `<M-j>` | Move down |
+| `<M-k>` | Move up |
+| `<M-l>` | Move right |
+
+Works in both **normal** and **visual** mode. In visual mode, the entire selection moves and stays selected.
+
+---
+
+## mini.bracketed — `[`/`]` jumps for everything
+
+Adds consistent forward/backward navigation with `[` and `]` for many targets:
+
+| Key | Jumps between |
+|-----|---------------|
+| `[b` / `]b` | Buffers |
+| `[c` / `]c` | Comments |
+| `[x` / `]x` | Conflict markers |
+| `[f` / `]f` | Files in directory |
+| `[i` / `]i` | Indent level changes |
+| `[j` / `]j` | Jumplist entries |
+| `[l` / `]l` | Location list entries |
+| `[o` / `]o` | Oldfiles |
+| `[q` / `]q` | Quickfix entries |
+| `[u` / `]u` | Undo history states |
+| `[w` / `]w` | Windows |
+| `[y` / `]y` | Yank history |
+
+> Treesitter (`[t`/`]t`) and diagnostic (`[d`/`]d`) jumps are **disabled** — already covered by nvim-treesitter-textobjects and the custom `[e`/`]e`/`[w`/`]w` keymaps.
+
+---
+
+## mini.trailspace — Trailing whitespace
+
+- Highlights trailing whitespace in red while editing
+- Automatically trims trailing whitespace **and** blank lines at end of file on `BufWritePre`
+- Skips special buffers (terminals, scratch, etc.)
+
+No keymaps needed — fully automatic.
+
+---
+
+## mini.hipatterns — Inline pattern highlighting
+
+Highlights hex color codes inline with their actual color as the background.
+
+Examples: `#ff6600` `#00bfff` `#a8e6cf` — each renders with its color visible directly in the buffer.
+
+Active in all normal file buffers automatically on open. No keymaps needed.
 
 ---
 

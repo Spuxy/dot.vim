@@ -1,6 +1,6 @@
 local M = {}
 
-vim.cmd [[
+vim.cmd([[
   function! QuickFixToggle()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
       copen
@@ -8,7 +8,7 @@ vim.cmd [[
       cclose
     endif
   endfunction
-]]
+]])
 
 M.defaults = {
   {
@@ -29,16 +29,6 @@ M.defaults = {
     end,
   },
 }
---
--- function M.load(collection)
---   local common_opts = {}
---   local force = true
---   for _, cmd in pairs(collection) do
---     local opts = vim.tbl_deep_extend("force", common_opts, cmd.opts or {})
---     vim.api.nvim_create_user_command(cmd.name, cmd.fn, opts, force)
---   end
--- end
---
 function M.load(collection)
   for _, cmd in pairs(collection) do
     local opts = cmd.opts or {}
